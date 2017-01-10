@@ -15,9 +15,8 @@
 # in the templates via {{ site.myvariable }}.
 title: "blog.juanwolf.fr's draft"
 email: "jean-loup.adde@juanwolf.fr"
-description: > # this means to ignore newlines until "baseurl:"
-  You can find here all the draft I made in the markdown format before to
-  publish it into blog.juanwolf.fr
+description: "You can find here all the draft I made in the markdown format before to
+  publish it into blog.juanwolf.fr"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://blog.juanwolf.fr" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: juan__wolf
