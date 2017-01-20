@@ -36,7 +36,7 @@ Pour resumer:
 
 ## E-Sport
 
-J'ai commencé à jouer à Rocket League (football + voitures, plus con tu meures) assez fréquemment. (D'après Steam, j'aurai dépassé 180h en jeu, oups). Son gameplay est plutôt simple mais demande beaucoup de patience afin de maitriser complètement l'engin, je pense que j'écrirai un article a propos de ce jeu et de l'esport en general.
+J'ai commencé à jouer à Rocket League (football + voitures, plus con tu meurs) assez fréquemment. (D'après Steam, j'aurai dépassé 180h en jeu, oups). Son gameplay est plutôt simple mais demande beaucoup de patience afin de maitriser complètement l'engin, je pense que j'écrirai un article a propos de ce jeu et de l'esport en general.
 
 ## Conclusion (ou ou lire si vous êtes presses)
 
