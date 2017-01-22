@@ -13,7 +13,7 @@ Pas mal de choses se sont passées depuis que j'ai publié un article et ce n'es
 
 ## EXCUSES PERSONNELLES DE POURQUOI JE N'AI PAS PU TRAVAILLER SUR MON TEMPS LIBRE.
 
-Beaucoup de changement dans ma vie perso. J'ai changé de sex, d'identité, infiltré la NSA, et je ne peux pas vous dire plus pour le moment (Secret défense).
+Beaucoup de changement dans ma vie perso. J'ai changé d'identité, infiltré la NSA, et je ne peux pas vous dire plus pour le moment (Secret défense).
 Non sérieusement, j'ai passé la plupart de mon temps à chercher un travail dans la fabuleuse ville de Londres.
 Du coup,  je me suis un peu calmé niveau geekerie personnelle. Mais je suis de retour !
 J'ai aussi upgradé juanwolf.fr à sa version 2.0
@@ -37,6 +37,10 @@ Pour resumer:
 ## E-Sport
 
 J'ai commencé à jouer à Rocket League (football + voitures, plus con tu meurs) assez fréquemment. (D'après Steam, j'aurai dépassé 180h en jeu, oups). Son gameplay est plutôt simple mais demande beaucoup de patience afin de maitriser complètement l'engin, je pense que j'écrirai un article a propos de ce jeu et de l'esport en general.
+
+
+![Image in game of Rocket League](https://images-na.ssl-images-amazon.com/images/I/919ip%2B4zDsL.jpg)
+
 
 ## Conclusion (ou ou lire si vous êtes presses)
 
