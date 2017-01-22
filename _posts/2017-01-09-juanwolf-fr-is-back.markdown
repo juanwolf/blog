@@ -13,7 +13,7 @@ A lot of things happened since I published an article and that is for a lot of r
 
 ## PERSONAL DISCLAIM OF WHY I DID NOT WORK DURING MY FREE TIME.
 
-A lot of changes happened in my personal life. Changing of sex, Changing of city, changing completely of history, infiltrate the NSA, and I can't tell you more sadly (Universe topsecret defense).
+A lot of changes happened in my personal life. Changing of city, changing completely of history, infiltrate the NSA, and I can't tell you more sadly (Universe topsecret defense).
 No seriously, I mostly passed my time to look for a job in the fabulous city of London. Which I did (Houraaaaa (You can observe some autosatisfaction in the previous parenthesis)). So I've been a bit settling down.
 And now I am back. I upgraded juanwolf.fr to the version 2.0.
 
@@ -39,11 +39,13 @@ So to summarize:
 
 ## E-Sport
 
-I started to play to an awesome game called Rocket League (football + cars: more macho you die) quite intensively (Steam says that I played 180hours apparently (oups)).
+I started to play to an awesome game called Rocket League (football + cars: more dumb you die) quite intensively (Steam says that I played 180hours apparently (oups)).
 Its gameplay is quite simple but really tricky which makes the challenge incredibly high but rewards you for the time that you spent (or trained I would say).
 I think I will make an article in the future about it and the e-sport.
 
-## Conclusion (or where to read if you're scared of 423 words)
+![Image in game of Rocket League](https://images-na.ssl-images-amazon.com/images/I/919ip%2B4zDsL.jpg)
+
+## Conclusion (or where to read if you're scared of 487 words)
 
 So juanwolf.fr it's two brand new django applications running in Docker.
 I also installed Rocket.Chat on chat.juanwolf.fr so if you have any questions do not hesitate to log into it.

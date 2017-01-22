@@ -13,43 +13,40 @@ Pas mal de choses se sont passées depuis que j'ai publié un article et ce n'es
 
 ## EXCUSES PERSONNELLES DE POURQUOI JE N'AI PAS PU TRAVAILLER SUR MON TEMPS LIBRE.
 
-Beaucoup de changement dans ma vie perso. J'ai changé de sex, d'identité, infiltré la NSA, et je ne peux pas vous dire plus pour le moment (Secret défense).
+Beaucoup de changement dans ma vie perso. J'ai changé d'identité, infiltré la NSA, et je ne peux pas vous dire plus pour le moment (Secret défense).
 Non sérieusement, j'ai passé la plupart de mon temps à chercher un travail dans la fabuleuse ville de Londres.
-Du coup,  je me suis un peu calmé niveau geekerie personelle. Mais je suis de retour !
+Du coup,  je me suis un peu calmé niveau geekerie personnelle. Mais je suis de retour !
 J'ai aussi upgradé juanwolf.fr à sa version 2.0
 
 ## juanwolf.fr  2.0
 
-My good old website, juanwolf.fr, was running on a old box on OVH (2 cores, 2GB of RAM) and started to limit the experiences I wanted to do on it. So It was time to move on!
-If you realized the IP for juanwolf.fr changed.
-So to prepare the migrations, I decided to make brand new the old applications running on this little server. For that: DOCKER. It took me some time to get where I wanted with it.
-But now it's finally done. I moved as well of CI using gitlab-ci instead of jenkins (that I found so much easier for docker based builds but that will be a future subject).
+Mon bon vieux site internet, juanwolf.fr, tournait sur une vieille machine Kimsufi (2 coeur, 2GB de RAM) et commençait a me limiter dans ce que je voulais faire. Il était donc temps de tourner la page.
 
+Je ne sais pas si vous avez remarqué mais l'adresse IP pour juanwolf.fr a changée (j'ai changé de serveur pour une version bien plus véner). Pour préparer la migration, j'ai décidé de passer toutes les applications sous docker. Ca m'a pris plutôt du temps pour tout faire mais le résultat y est. De plus, j'ai changé de serveur d'intégration continue, gitlab-ci au lieu de Jenkins (Je trouve gitlab-ci bien plus pratique pour tout ce qui est intégration docker, mais je vous en parlerai dans un prochain article)
 
-Also, I wanted to move all the website into django to have a uniform ecosystem. So I made a new django app for the index, resume and about pages. But before that I blew my mind a bit
-and tried to create a "django-resume" app to build a CV platform on top of it. This idea was not so bad until I realise the amount of work it would need. So instead I chose the quickest way.
-Hard to realise that I don't have as much free time as before _sigh_
+De plus, je voulais supprimer des projets qui me semblaient superflu et garder une logique sur tout le site. J'ai désinstallé le routeur écrit en go, pour ajouter une app django. Plus de /en ou /fr.
 
-So to summarize:
+Pour resumer:
 
-* New Servers
-* New django application for static pages (index, resume and about page) - [juanwolf.fr_static](https://github.com/juanwolf/juanwolf.fr_static)
-* Remove old go proxy ["language-router"](https://github.com/juanwolf/language-router)
-* Installation of RocketChat the time I am building a chat with django-channels
-* Infrastructure provided with ansible - [playbooks](https://github.com/juanwolf/playbooks)
+* Nouveaux serveurs
+* Nouvelle application django pour l'index, le CV et la page a propos - [juanwolf.fr_static](https://github.com/juanwolf/juanwolf.fr_static)
+* Adieu bon vieux proxy - ["language-router"](https://github.com/juanwolf/language-router)
+* Installation de RocketChat le temps que je construise une app avec django-channels
+* Infrastructure provisionnée avec ansible - [playbooks](https://github.com/juanwolf/playbooks)
 
 ## E-Sport
 
-I started to play to an awesome game called Rocket League (football + cars: more macho you die) quite intensively (Steam says that I played 180hours apparently (oups)).
-Its gameplay is quite simple but really tricky which makes the challenge incredibly high but rewards you for the time that you spent (or trained I would say).
-I think I will make an article in the future about it and the e-sport.
+J'ai commencé à jouer à Rocket League (football + voitures, plus con tu meurs) assez fréquemment. (D'après Steam, j'aurai dépassé 180h en jeu, oups). Son gameplay est plutôt simple mais demande beaucoup de patience afin de maitriser complètement l'engin, je pense que j'écrirai un article a propos de ce jeu et de l'esport en general.
 
-## Conclusion (or where to read if you're scared of 423 words)
 
-So juanwolf.fr it's two brand new django applications running in Docker.
-I also installed Rocket.Chat on chat.juanwolf.fr so if you have any questions do not hesitate to log into it.
+![Image in game of Rocket League](https://images-na.ssl-images-amazon.com/images/I/919ip%2B4zDsL.jpg)
 
-When I will have finish the migration (so in a near future), you will find into this blog articles on:
+
+## Conclusion (ou ou lire si vous êtes presses)
+
+Donc juanwolf.fr 2.0 c'est deux applications django tournant avec docker, une application de chat (Rocketchat) utilisant meteor [chat.juanwolf.fr](https://chat.juanwolf.fr)
+
+Dans quelques temps, je vais recommencer a écrire des articles sur ces sujets :
 
 * Docker (and/or Django + Docker)
 * Ansible
@@ -57,9 +54,9 @@ When I will have finish the migration (so in a near future), you will find into 
 * E-Sport / Rocket League
 * Doom
 
-In a long time
+Dans un certains temps
 
-* Django Channels (I want to do chat app with it, so it might take a while)
+* Django Channels (Apres que j'ai code le fameux chat donc ca risque de pas être tout de suite)
 
 
-Time for me to sleep. Sur ce, codez-bien. Et bonne année.
+Bon allez, moi je suis parti. Sur ce, codez-bien. Et bonne année.
