@@ -24,9 +24,31 @@ Wow, big subject here. Docker. So what's docker? Docker will help you to deploy 
 
 ## Installation
 
-It's pretty straight forward. On ubuntu:
+It's pretty straight forward. On archlinux:
 
-`sudo apt-get install docker`
+`sudo pacman -S docker`
+
+For ubuntu, it is a bit harder:
+
+```
+sudo apt-get install apt-transport-https \
+  ca-certificates
+
+curl -fsSL https://yum.dockerproject.org/gpg | \
+sudo apt-key add - # We add the docker's official GPG key
+
+sudo add-apt-repository \
+"deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
+
+sudo apt-get update
+sudo apt-get -y install docker-engine
+```
+
+Now you can run docker commands as root but not as your current user, you need to add your user into the docker group.
+
+`usermod -a -G docker YourLocaUser`
+
+and you should be able to run any docker command. It is highly recommanded to add your user on the docker group. You will be able to use zsh plugins or others, so you will be able to have shell auto completion of the docker container.
 
 ## What is a container?
 
@@ -41,10 +63,30 @@ Now we could wonder what is the famous "building" hosting all our flats then? It
 which does not say anything, but at least we know that our docker host is running!
 
 ### Running a container
-Now that we have our docker host running, let's build some flat!
+
+Now that we have our docker host running, let's build some flat! For this example we will use a nice docker image: jess/hollywood, you will see it will be fun, especially if you always dreamt to be a hacker.
+
+`docker run -it jess/hollywood`
+
+So normally you should have a fancy terminal with a lot of shit happening, forget about that, that was just for fun.
+
+Now let's see what this command had actually done. If the jess/hollywood image did not existed on your docker host, the docker cli did a `docker pull jess/hollywood` first which retrieves the docker image on your docker host. Once the download is done, docker will execute run the container as a service but returning the stdout of the service on your stdout (really usefull for debug). You could run this container in detach mode and the container would run in the background (production then).
 
 ### Executing a command
 
+Ok let's do some serious stuff. Let's install a database on our docker host. Let's do it slowly this time.
+
+```
+docker pull mongo
+docker run -d mongo
+```
+
+If you execute `docker ps`, you should get something like:
+
+```
+
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                          NAMESf2a68c669eeb        mongo               "/entrypoint.sh mo..."   6 seconds ago       Up 4 seconds        27017/tcp                      amazing_turing
+```
 
 ### Linking a folder or a file from the host in the container
 
