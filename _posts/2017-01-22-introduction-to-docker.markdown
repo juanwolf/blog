@@ -18,9 +18,7 @@ Wow, big subject here. Docker. So what's docker? Docker will help you to deploy 
   * Executing a command
   * Linking a folder/file on the host in the container
   * Linking two containers together
-
 * Creating our own container
-* Orchestrating containers together
 
 ## Installation
 
@@ -127,7 +125,7 @@ So to summarize, what we just learned previously is that we can run commands ins
 if the binary exists (don't try to run vim in a container, it will never be installed) with the command
 `docker exec -it my_container my_command --m my_parameter`
 
-*Tip*: If you want to get inside a docker container to read logs or whatever, you can run
+**Tip**: If you want to get inside a docker container to read logs or whatever, you can run
 `docker exec -it my_container /bin/bash`.
 
 ### Linking a folder or a file from the host in the container
@@ -210,12 +208,120 @@ and you should get:
 `apero`
 
 
-Nice, it's now time for the apero: https://www.amazon.co.uk/d/Grocery/Ricard-Pastis-8712838324198-45-70cl/B0043A0B2U/ref=sr_1_1_a_it?ie=UTF8&qid=1485704879&sr=8-1&keywords=pastis
+Nice, it's now time for the apero: https://www.amazon.co.uk/d/Grocery/Ricard-Pastis-8712838324198-45-70cl/B0043A0B2U/ref=sr_1_1_a_it?ie=UTF8&qid=1485704879&sr=8-1&keywords=pastis . Fuck*** hell, the pastis is quite expensive in this bloody island.
 
-Bloody hell, the pastis is quite expensive in this bloody island. Anyway, we just linked two docker container together and that's quite cool. We just finished to cover all the important features to know with docker. Congrats :D. Now we will get into a more advanced usage, creating our own docker image.
-
+Anyway, we just linked two docker container together and that's quite cool. We just finished to cover all the important features to know with docker. Congrats :D. Now we will get into a more advanced usage, creating our own docker image.
 
 ## Creating our own container
-## Orchestrating containers
 
+Let's start and finish on the advanced stuff. When you will want to build a new application with your lovely framework and that you want to use it with docker, you will have to create a specific Dockerfile, to build a docker image for your application.
 
+Let's build a little application that print a string in the output. We gonna build step by step [this application](https://github.com/juanwolf/hello-cli).
+
+First, We need to code our cli.py file. Here's the code:
+
+```
+#!/bin/env python
+
+if __name__ == '__main__':
+    print("Hello world!")
+```
+
+Now, we can add a Dockerfile to build  an image for this application.
+
+We need to choose from which docker image we will base our one. We can start from an Ubuntu one, or directly using a python image. The last one will be easier, everything will be install by default and we will only need to do
+a python cli.py and the job is done :).
+
+Let's create the file `Dockerfile` where our cli.py lives with this content:
+
+```
+# The docker image we base our one from
+FROM python:3.6
+# Information of the maintainer of this file
+MAINTAINER "Who I am <HowTo@contact.me>"
+
+# We copy the content of the directory to /opt/app in the container
+COPY . /opt/app
+# We change of directory to /opt/app
+WORKDIR /opt/app
+
+# We execute by default the cli.py file
+ENTRYPOINT ["python", "cli.py"]
+```
+
+If you want more information about the syntax and the command you can execute on this file, the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/) is your friend.
+
+Now that we have our Dockerfile, we need to build our image. For that:
+
+`docker build -t hello_cli .`
+
+Which will build the docker image with the Dockerfile found in the `.` directory with the name hello_cli. If everything went well, you should have an output like this one:
+
+```
+Sending build context to Docker daemon 35.33 kB
+Step 1 : FROM python:3.6
+3.6: Pulling from library/python
+
+5040bd298390: Pull complete
+fce5728aad85: Pull complete
+76610ec20bf5: Pull complete
+52f3db4b5710: Pull complete
+45b2a7e03e44: Pull complete
+75ef15b2048b: Pull complete
+e41da2f0bac3: Pull complete
+Digest: sha256:cba517218b4342514e000557e6e9100018f980cda866420ff61bfa9628ced1dc
+Status: Downloaded newer image for python:3.6
+ ---> 775dae9b960e
+Step 2 : MAINTAINER "blablabla"
+ ---> Running in 67d47f331109
+ ---> 8f3a0e87ad1d
+Removing intermediate container 67d47f331109
+Step 3 : COPY . /opt/code
+ ---> e122d9d5f756
+Removing intermediate container de3056b06428
+Step 4 : WORKDIR /opt/code
+ ---> Running in 5b72d5c6e2c2
+ ---> 86224093a25a
+Removing intermediate container 5b72d5c6e2c2
+Step 5 : ENTRYPOINT python cli.py
+ ---> Running in 80db6a18e17e
+ ---> deee15fd090b
+Removing intermediate container 80db6a18e17e
+Successfully built deee15fd090
+```
+
+As you can see every command we made in the dockerfile equals to a step when building the image.
+It's important to know that when a build failed docker will cache all the successfull steps to make
+your next build quicker. Also, docker will detect if you changed a cached step and will make it again and all
+the next ones.
+
+To verify that everything went well, we can inspect which images we have on our docker host locally. Run:
+
+`docker images`
+
+You should have the hello_cli but also the mongo image we downloaded the previous chapter. Now we can run
+our docker image and see if everything works:
+
+`docker run -it --rm hello_cli`
+
+And you should see:
+`Hello world!`
+
+AWESOME!
+
+## Publishing our docker image
+
+If you are really proud of what we just accomplished, we can push this docker image to a registry (which is a "database" of docker image). Gitlab
+comes with one integrated but there's also the docker hub. As you wish. To push an image, you will need to login to the registry first with `docker login myregistry.com`
+and push your local image with `docker push hello_cli` and you are now able to download this image!
+
+The important point to remember using a custom registry is to login before trying to pull an image.
+
+## Conclusion
+
+And TADAM. We had a quick view on all the awesomeness of Docker in this little introduction. Of course this is just to show you quickly how it works but I
+invite you to play with it when you build a new application. You can use it as development environment or  even use it to deploy continuously applications without any
+fear (well if you app has bugs, that's not docker fault ;p). But for this last point it is heavily recommanded to use a software to orchestrate your containers such as
+nomad or ansible or kubernete, but little padawan, you will need to wait for an other article!
+
+Sur ce, codez bien! Ciao!
