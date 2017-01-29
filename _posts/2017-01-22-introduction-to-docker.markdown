@@ -50,25 +50,25 @@ and you should be able to run any docker command. It is highly recommanded to ad
 
 ## What is a container?
 
-A container is as said multiple time above, a really light VMs, so what's the difference with a VM? We can take the example of a House and a flat. The House is built from nothing and contains everything you would need and even more. A flat, not really, It is a piece of a building, where (for most of us) contains only what to live. So the container is the flat, and the house is the VM.
+A container is as said multiple time above, a really light VMs. So what's the difference with a VM? We can take the example of a house and a flat (I did not make that up, it comes from the official docker's documentation). The house is built from nothing and contains everything you would need and even more. A flat, not really, It is a piece of a building, where (for most of us) contains only what to live. So the container is the flat, and the house is the VM.
 
-Now we could wonder what is the famous "building" hosting all our flats then? It's the famous docker host. I don't know if you tried but if you try to run a docker command just after the installation you had an error like `Is the docker host running?`, Well guess what, no it is not. To make the docker host running, let's execute this command:
+Now we could wonder what is the famous "building" hosting all our flats then? It's the **famous** docker host. I don't know if you tried but if you run a docker command just after the installation you will have an error like `Is the docker host running?`, Well guess what, no it is not. To make the docker host running, let's execute this command:
 
-`sudo systemctl start dockerd` or `sudo service docker start` depends which version of Ubuntu you use. And now, if you try `docker ps`, you should have:
+`sudo systemctl start docker` or `sudo service docker start` depends which version of Ubuntu you use. And now, if you try `docker ps`, you should have:
 
-```CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                          NAMES```
+`CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES`
 
 which does not say anything, but at least we know that our docker host is running!
 
 ### Running a container
 
-Now that we have our docker host running, let's build some flat! For this example we will use a nice docker image: jess/hollywood, you will see it will be fun, especially if you always dreamt to be a hacker.
+Now that we have our docker host running, let's build some flats! For this example we will use a nice docker image: jess/hollywood, you will see it will be fun, especially if you always dreamed (or dreamt if you're American) to be a hacker.
 
 `docker run -it jess/hollywood`
 
 So normally you should have a fancy terminal with a lot of shit happening, forget about that, that was just for fun.
 
-Now let's see what this command had actually done. If the jess/hollywood image did not existed on your docker host, the docker cli did a `docker pull jess/hollywood` first which retrieves the docker image on your docker host. Once the download is done, docker will execute run the container as a service but returning the stdout of the service on your stdout (really usefull for debug). You could run this container in detach mode and the container would run in the background (production then).
+Now let's see what this command had actually done. If the jess/hollywood image did not existed on your docker host, the docker cli did a `docker pull jess/hollywood` first which retrieves the docker image on your docker host. Once the download is done, docker will execute run the container as a service but returning the stdout of the service on your stdout (really usefull for debug). You could run this container in detach mode and the container would run in the background (useful for production then).
 
 ### Executing a command
 
@@ -131,7 +131,7 @@ if the binary exists (don't try to run vim in a container, it will never be inst
 ### Linking a folder or a file from the host in the container
 
 So ok, we have our little mongo database running and some data in it. Cool, cool cool... But we agree that containers
-can be easily removed right? So what happens to the data when my container get destroyed???
+can be easily deleted, right? So what happens to the data when my container get destroyed???
 
 Let's do it, we will think about it later:
 ```
@@ -147,7 +147,7 @@ Well, you just lost all your data.
 
 Keep in mind that your containers are temporary, like vms, you should be able to destroy them and
 be able to recover the same state when you create a new one. So here comes `docker volumes`.
-The docker volumes will help you bind directories/files on the docker host. So now that we know that,
+The docker volumes will help you bind directories/files on the docker host. So now,
 we will create a docker volume linked in our docker host to store the data of our mongodb.
 
 Let's build again our docker container but this time with a volume:
@@ -172,7 +172,7 @@ OOOOOOh, some networking, the best part EVER. It would be weird to let a databas
 
 ![A poor guy crying in his shower](http://i.giphy.com/hmE2rlinFM7fi.gif)
 
-BUT! We gonna use a mongodb client (inside a docker container) to connect to our database.
+**BUT!** We gonna use a mongodb client (inside a docker container) to connect to our database.
 
 Let's add again the data in our mongodb.
 
@@ -188,7 +188,7 @@ Now let's create our client.
 Ok, the mongodb:mongo mongo mongo, looks pretty confusing. So `docker run -it --rm` We used it before. -i -> interactive mode (keeps STDIN open), -t -> Allocate a pseudo tty, and --rm Remove the container once the container stopped.
 
 
-We added the --link to create (suspens...) a link between the container we are creating and the one running under the name `mongodb`. `--link mongodb:mongo` means `Create a link to the mongodb container with the alias mongo`. The alias can be considered as an entry inside the file /etc/hosts of the docker container containing the IP of the mongodb container with the "alias name" mongo.
+We added the --link to create (suspens...) a link between the container we are creating and the one running under the name `mongodb`. `--link mongodb:mongo` means `Create a link to the mongodb container with the alias mongo`. The alias can be considered as an entry inside the /etc/hosts file of the docker container containing the IP of the mongodb container with the "alias name" mongo.
 
 Just to be understood, inside the container that we are creating, we can access to the database container with the hostname `mongo`.
 
@@ -208,7 +208,7 @@ and you should get:
 `apero`
 
 
-Nice, it's now time for the apero: https://www.amazon.co.uk/d/Grocery/Ricard-Pastis-8712838324198-45-70cl/B0043A0B2U/ref=sr_1_1_a_it?ie=UTF8&qid=1485704879&sr=8-1&keywords=pastis . Fuck*** hell, the pastis is quite expensive in this bloody island.
+Nice, it's now time for the apero: https://www.amazon.co.uk/d/Grocery/Ricard-Pastis-8712838324198-45-70cl/B0043A0B2U/ref=sr_1_1_a_it?ie=UTF8&qid=1485704879&sr=8-1&keywords=pastis . Fuck... hell, the pastis is quite expensive in this bloody island.
 
 Anyway, we just linked two docker container together and that's quite cool. We just finished to cover all the important features to know with docker. Congrats :D. Now we will get into a more advanced usage, creating our own docker image.
 
@@ -229,7 +229,7 @@ if __name__ == '__main__':
 
 Now, we can add a Dockerfile to build  an image for this application.
 
-We need to choose from which docker image we will base our one. We can start from an Ubuntu one, or directly using a python image. The last one will be easier, everything will be install by default and we will only need to do
+We need to choose from which docker image we will base our one. We can start from an Ubuntu one, or directly using a python image. The last one will be easier, everything will be installied by default and we will only need to do
 a python cli.py and the job is done :).
 
 Let's create the file `Dockerfile` where our cli.py lives with this content:
@@ -299,7 +299,7 @@ To verify that everything went well, we can inspect which images we have on our 
 
 `docker images`
 
-You should have the hello_cli but also the mongo image we downloaded the previous chapter. Now we can run
+You should have the hello_cli but also the mongo image we downloaded in the previous chapter. Now we can run
 our docker image and see if everything works:
 
 `docker run -it --rm hello_cli`
@@ -321,7 +321,7 @@ The important point to remember using a custom registry is to login before tryin
 
 And TADAM. We had a quick view on all the awesomeness of Docker in this little introduction. Of course this is just to show you quickly how it works but I
 invite you to play with it when you build a new application. You can use it as development environment or  even use it to deploy continuously applications without any
-fear (well if you app has bugs, that's not docker fault ;p). But for this last point it is heavily recommanded to use a software to orchestrate your containers such as
-nomad or ansible or kubernete, but little padawan, you will need to wait for an other article!
+fear (well if you app has bugs, that's not docker's fault ;p). But for this last point it is heavily recommanded to use a software to orchestrate your containers such as
+nomad or ansible or kubernete, but little padawan, you will need to wait for this topic in a future article!
 
 Sur ce, codez bien! Ciao!
