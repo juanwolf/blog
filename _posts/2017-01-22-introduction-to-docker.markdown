@@ -50,9 +50,15 @@ and you should be able to run any docker command. It is highly recommanded to ad
 
 ## What is a container?
 
-A container is as said multiple time above, a really light VMs. So what's the difference with a VM? We can take the example of a house and a flat (I did not make that up, it comes from the official docker's documentation). The house is built from nothing and contains everything you would need and even more. A flat, not really, It is a piece of a building, where (for most of us) contains only what to live. So the container is the flat, and the house is the VM.
+A container is as said multiple time above, a really light VMs, well I am sorry but I lied, a container is **not** a VM. So what's the difference then? We can take the example of a house and a flat (I did not make that up, it comes from the official docker's documentation). The house is built from nothing and contains everything you would need and even more. A flat, not really, It is a piece of a building, where (for most of us) contains only what to live. So the container is the flat, and the house is the VM.
 
-Now we could wonder what is the famous "building" hosting all our flats then? It's the **famous** docker host. I don't know if you tried but if you run a docker command just after the installation you will have an error like `Is the docker host running?`, Well guess what, no it is not. To make the docker host running, let's execute this command:
+Now we could wonder what is the famous "building" hosting all our flats then? It's the **famous** docker host. The docker host will replace the Hypervisor and be the builder of your container. So that's why it is not a VM, bye bye Hypervisor. An image will clarify the differences:
+
+![Image of differences of virtual machines and containers](https://imgur.com/MJHfm1c.jpg)
+
+So if take the reference of the flat and the house, we can see that the VMs contains more than needed to run just the application (the whole guest OS) compared to the container which contains only what the apps needs to work.
+
+I don't know if you tried but if you run a docker command just after the installation you will have an error like `Is the docker host running?`, Well guess what, no it is not. To make the docker host running, let's execute this command:
 
 `sudo systemctl start docker` or `sudo service docker start` depends which version of Ubuntu you use. And now, if you try `docker ps`, you should have:
 
@@ -165,6 +171,14 @@ If we would not care at all of accessing to the data, we could have created a na
 and link it this way:
 
 `docker run --name mongodb -d -v mongodb_data:/data/db mongo`
+
+You can also list the volumes you have in your docker host. For that run:
+
+`docker volume list`
+
+And weirdly, you will have one or multiple entries in it. In fact I lied again (sorry). When you run containers from a docker image that contains `VOLUME` instructions in their dockerfile (please have a look at the Creating our own container section), an unamed volume will be created and will contain the folders it is specified in the dockerfile. In the mongodb dockerfile that you can find [here](https://github.com/docker-library/mongo/blob/master/3.4/Dockerfile), we can see their is an instruction VOLUME for the /data/db, /data/configdb folders, so that means that some your unamed volumes that you found executing `docker volume list` contains the data we inserted in the first section.
+
+If we really wanted to destroy the volumes with the docker container in the example we could have ran this command `docker rm -v my_container`.
 
 ### Linking two containers together
 
