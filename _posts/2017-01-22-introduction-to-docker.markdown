@@ -224,7 +224,29 @@ and you should get:
 
 Nice, it's now time for the apero: https://www.amazon.co.uk/d/Grocery/Ricard-Pastis-8712838324198-45-70cl/B0043A0B2U/ref=sr_1_1_a_it?ie=UTF8&qid=1485704879&sr=8-1&keywords=pastis . Fuck... hell, the pastis is quite expensive in this bloody island.
 
-Anyway, we just linked two docker container together and that's quite cool. We just finished to cover all the important features to know with docker. Congrats :D. Now we will get into a more advanced usage, creating our own docker image.
+Anyway, we just linked two docker container together and that's quite cool. *BUT* If you read the documentation you saw this way of linking containers is called 'Legacy Links'. Yeah 'legacy'... We are cool kids right? Let's make it again but the right way!
+
+With docker you can build networks for your application and it makes so much easier the way to deal with linking containers together! For example when you want to build again a database, all the linked container will need to be reloaded, and that sucks. With the network feature, you can create networks, put your containers in it and they will magically discover each other. You still need to configure your application to use the name of your container to connect to the other container but that works pretty well.
+
+Let's do it! To create the network, run this command:
+
+`docker network create mongo_network`
+
+We need to add our mongodb to this network. So let's destroy our old container and rebuilt it.
+
+```
+docker stop mongodb
+docker rm mongodb
+docker run --network=mongo_network --name mongodb -d -v mongodb_data:/data/db mongo
+```
+
+And for the client...
+
+`docker run -it --rm --network=mongo_network mongo mongo --host=mongodb -u etienne -p ALaTienne --authenticationDatabase admin mongo/apero`
+
+And it should work like previously! A good thing to know is that you can't use "labels" as we did with the link. So be careful of how you name your containers, it will be easier to maintain.
+
+We just finished to cover all the important features to know with docker. Congrats :D. Now we will get into a more advanced usage, creating our own docker image.
 
 ## Creating our own container
 
