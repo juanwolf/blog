@@ -49,7 +49,7 @@ Maintenant vous pouvez utiliser des commandes comme root. Pour pouvoir utiliser 
 
 Maintenant vous devriez être capable d'utiliser la cli de docker. Je vous recommande vivement de faire cette petite manip', vous pourrez bénificier de l'autocomplétion sur zsh ou bash pour les noms de containers.
 
-## What is a container?
+## Qu'est ce qu'un container?
 
 Un container, comme je vous l'ai dit dans l'introduction est une ultra légère VM. Mais vous allez demander pourquoi je vous ai dit qu'en fait non... On peut prendre l'exemple d'une maison et d'un appartement (j'invente rien, je cite juste la doc officielle de Docker). La maison est construite de rien et va contenir beaucoup de choses, voir même plus que ce que vous aurez besoin pour vivre, de plus vous allez construire une maison non pas pour vous seuelement mais sûrement pour la partager avec votre famille, vos amis, vos animaux, etc... L'appartement quant à lui ne peut exister sans immeuble et ce que vous déciderez de placer dans l'appartement sera souvent le strict minimum à défaut de place (à moins que vous roulez sur l'or, chose que je vous souhaite). Dans cette petite métaphore la maison est la VM et l'appartement le container.
 
@@ -67,17 +67,18 @@ Je ne sais pas si vous avez essayé de lancer une commande docker mais normaleme
 
 qui ne sert pas à grand chose mais on s'est débarassé du message d'erreur ce qui prouve que tout marche comme prévu !
 
-### Running a container
+### Lancer un container
 
-Now that we have our docker host running, let's build some flats! For this example we will use a nice docker image: jess/hollywood, you will see it will be fun, especially if you always dreamed (or dreamt if you're American) to be a hacker.
+Maintenant que nous avons notre docker engine / host qui tourne, construisons donc quelques appartements. Pour cet exemple nous allons utiliser une image super cool: jess/hollywood, si vous avez toujours voulu être un hacker comme dans les films hollywoodien, vous allez être comblé ! Je vous conseille de mettre votre terminal en plein écran et lancer la commande suivante :
 
 `docker run -it jess/hollywood`
 
-So normally you should have a fancy terminal with a lot of shit happening, forget about that, that was just for fun.
+Stylé hein? Bon c'était juste pour le fun et merci à [@jessfraz](https://twitter.com/jessfraz) pour l'image.
 
-Now let's see what this command had actually done. If the jess/hollywood image did not existed on your docker host, the docker cli did a `docker pull jess/hollywood` first which retrieves the docker image on your docker host. Once the download is done, docker will execute run the container as a service but returning the stdout of the service on your stdout (really usefull for debug). You could run this container in detach mode and the container would run in the background (useful for production then).
+Regardons ce que la commande précédente a fait. Si vous n'aviez pas localement une copie de l'image sur votre docker host, docker a effectué `docker pull jess/hollywood` pour la télécharger. Une fois le téléchargement effectué, docker va exécuter lancer le container et retourner la sortie du service directement dans notre terminal.
+On aurait pu runner ce container en mode détaché mais il n'y aurait plus d'intéret d'utiliser ce container.
 
-### Executing a command
+### Executer une commande.
 
 Ok let's do some serious stuff. Let's install a database on our docker host. Let's do it slowly this time.
 
