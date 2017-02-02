@@ -80,41 +80,42 @@ On aurait pu runner ce container en mode détaché mais il n'y aurait plus d'int
 
 ### Executer une commande.
 
-Ok let's do some serious stuff. Let's install a database on our docker host. Let's do it slowly this time.
+Ok, commençons les choses sérieuses. On va installer une base de données sur notre docker host. Par contre ce coup-ci, on va y aller tranquilement.
 
 ```
 docker pull mongo
 docker run --name mongodb -d mongo
 ```
 
-If you execute `docker ps`, you should get something like:
+Si vous exécutez `docker ps`, vous devriez avoir un résultat comme celui-là:
 
 ```
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                          NAMES
  2a68c669eeb        mongo               "/entrypoint.sh mo..."   6 seconds ago       Up 4 seconds        27017/tcp                      mongodb
 ```
 
-As you can see we created a container from the mongo image with the name `mongodb` and it is running!
+Comme vous pouvez le voir, on vient de créer un container nommé `mongodb` avec la docker image de mongo !
 
-Now we gonna try to create an admin in the database.
-For that:
+Maintenant, nous allons essayer de créer un admin dans la base données.
+
+Pour cela :
 
 ```
 docker exec -it mongodb mongo admin
 ```
 
-You should get an output like:
+Vous devriez avoir une sortie comme celle-ci :
 
 ```
 connecting to: admin
 >
 ```
 
-Let's execute this command:
+Maintenant exécutons la commande :
 
 `db.createUser({ user: 'etienne', pwd:'ALaTienne', roles: [{role: "userAdminAnyDatabase", db: "admin"}]})`
 
-and normally you should have the output :
+et normalement, vous devriez avoir ça :
 
 ```
 Successfully added user: {
@@ -129,104 +130,105 @@ Successfully added user: {
 ```
 
 
-So to summarize, what we just learned previously is that we can run commands inside a docker container,
-if the binary exists (don't try to run vim in a container, it will never be installed) with the command
+Pour résumer ce que nous venons de faire, On peut exécuter des commandes au sein d'un container, si le binaire est au sein du container, il nous suffit de lancer
+
 `docker exec -it my_container my_command --m my_parameter`
 
-**Tip**: If you want to get inside a docker container to read logs or whatever, you can run
+**Conseil**: Si vous voulez vous rendre dans un container pour inspecter quoi que ce soit, vous pouvez utiliser cette commande
+
 `docker exec -it my_container /bin/bash`.
 
-### Linking a folder or a file from the host in the container
+### Lié un dossier ou un fichier depuis le docker host dans un container
 
-So ok, we have our little mongo database running and some data in it. Cool, cool cool... But we agree that containers
-can be easily deleted, right? So what happens to the data when my container get destroyed???
+Bon ok, on a notre base mongo et quelques données dedans. Cool, cool, cool... On est d'accord que des containers ça peut être facilement effacés ? Du coup que se passe t'il à ces données quand on détruit un container ?
 
-Let's do it, we will think about it later:
+Essayons, on verra après :
+
 ```
 docker stop mongodb
 docker rm mongodb
 ```
 
-Lol, don't worry, everything's fine, docker reacted just like that:
+Lol, pas de panique, tout va bien, docker a juste réagit comme ça:
 
 ![Spongebob erasing all in his head](http://i.giphy.com/5YO4km322zuNy.gif)
 
-Well, you just lost all your data.
+Bon... On a tout perdu. On vient de faire une "Gitlab". Mais bon c'est pas grave, "ça arrive".
 
-Keep in mind that your containers are temporary, like vms, you should be able to destroy them and
-be able to recover the same state when you create a new one. So here comes `docker volumes`.
-The docker volumes will help you bind directories/files on the docker host. So now,
-we will create a docker volume linked in our docker host to store the data of our mongodb.
+Gardez en tête que vos containers sont temporaires, un peu comme des vms, vous devriez être capables de les détruire et être capable de toujours avoir vos données et de récupérer l'état de votre vm comme si rien ne s'était passé.
+Docker nous permet de stocker des fichiers ou dossiers sur notre docker host grâce à ce que l'on appelle des `docker volumes`.
 
-Let's build again our docker container but this time with a volume:
+Créons donc un volume docker lié à notre container afin de garder les données de notre mongodb.
+
+Construisons de nouveau notre docker container mais cette fois-ci avec le volume :
 
 `docker run --name mongodb -d -v /somehwere/youwant/to/store/the/data/on/the/host:/data/db mongo`
 
-As you can see, we added the -v option (for volume, CAPTAIN OBVIOUS IN DA PLACE) with this pattern `location_of_the_volume_on_the_host:the_directory_to_get_in_the_container`
-And as you can see, some data appeared in the host at the location you specfied. Awesome, isn't it?
+Comme vous pouvez le voir, nous avons ajouter l'option -v(pour volume, CAPTAIN OBVIOUS IN DA PLACE) avec ce pattern `chemin_du_dossier_sur_lhost:_chemin_dans_le_container`
+Et si vous vous rendez dans le dossier que vous avez spécifié, vous pouvez voir que des données sont apparues dans ce dossier. Pas mal, hein ?
 
-With this practice we can do a `docker rm mongodb` without problem and link again our previous volume to have data in our database.
+De cette façon, nous pouvons supprimer le container sans problème et lié de nouveau notre dossier pour récupérer un container dans le même êtat que celui que nous avons détruit.
 
-If we would not care at all of accessing to the data, we could have created a named docker volume like that:
+Si nous ne voulions pas accéder aux données et simplement avoir un "espace de stockage" au sein de docker, on aurait pu créer un volume docker de cette façon :
 `docker volume create --name mongodb_data`
 
-and link it this way:
+et le lié de cette manière à notre container :
 
 `docker run --name mongodb -d -v mongodb_data:/data/db mongo`
 
-You can also list the volumes you have in your docker host. For that run:
+Vous pouvez aussi lister les volumes que vous avez sur votre docker host. Pour cela, utilisez :
 
 `docker volume list`
 
-And weirdly, you will have one or multiple entries in it. In fact I lied again (sorry). When you run containers from a docker image that contains `VOLUME` instructions in their dockerfile (please have a look at the Creating our own container section), an unamed volume will be created and will contain the folders it is specified in the dockerfile. In the mongodb dockerfile that you can find [here](https://github.com/docker-library/mongo/blob/master/3.4/Dockerfile), we can see their is an instruction VOLUME for the /data/db, /data/configdb folders, so that means that some your unamed volumes that you found executing `docker volume list` contains the data we inserted in the first section.
+Et bizarrement; vous devriez avoir plusieurs volumes... J'ai menti je m'excuse. Quand vous utilisez une image docker contenant des instructions "VOLUME" (voir la section Créer notre propre docker image), un volume non nommé va être créer par docker et contiendra les données du container. Dans l'image de mongodb ( que vous pouvez trouver [ici](https://github.com/docker-library/mongo/blob/master/3.4/Dockerfile), on peut voir qu'il y a une instruction VOLUME pour les dossiers /data/db, /data/configdb, ce qui veut dire que les volumes trouvés précédemment sont ceux de notre premier mongodb... Oups.
 
-If we really wanted to destroy the volumes with the docker container in the example we could have ran this command `docker rm -v my_container`.
 
-### Linking two containers together
+Si vous vouliez vraiment détruire les volumes d'un container, utilisez l'option -v : `docker rm -v my_container`.
 
-OOOOOOh, some networking, the best part EVER. It would be weird to let a database on its own without any application connecting to it, don't you think? We will not create a specific application for this section, I am sorry.
+### Lié deux container ensembles
+
+OOOOOOh, un peu de réseau, the best part EVER. Il serait un peu étrange de laisser une base données sans avoir d'applications connectées à celle-ci. Malheureusement, nous n'allons pas créer d'application spécifique pour cet exempleDésolé.
 
 ![A poor guy crying in his shower](http://i.giphy.com/hmE2rlinFM7fi.gif)
 
-**BUT!** We gonna use a mongodb client (inside a docker container) to connect to our database.
+**MAIS!** Nous allons utiliser le client mongodb (dans un container) pour se connecter à notre base de données.
 
-Let's add again the data in our mongodb.
+Ajoutons notre utilisateur admin comme dans la deuxième section.
 
 ```
 docker exec -it mongodb mongo admin
 > db.createUser({ user: 'etienne', pwd:'ALaTienne', roles: [{role: "userAdminAnyDatabase", db: "admin"}]})
 ```
 
-Now let's create our client.
+Maintenant créons notre client.
 
 `docker run -it --rm --link mongodb:mongo mongo mongo -u etienne -p ALaTienne --authenticationDatabase admin mongo/apero`
 
-Ok, the mongodb:mongo mongo mongo, looks pretty confusing. So `docker run -it --rm` We used it before. -i -> interactive mode (keeps STDIN open), -t -> Allocate a pseudo tty, and --rm Remove the container once the container stopped.
+Ok, le mongodb:mongo mongo mongo, est un peu chelou. Vous connaissez `docker run -it --rm`, on l'a déjà utilisé. -i -> interactive mode (garde STDIN ouvert), -t -> alloue un pseudo tty, et --rm supprime le container quand il est arrété.
 
 
-We added the --link to create (suspens...) a link between the container we are creating and the one running under the name `mongodb`. `--link mongodb:mongo` means `Create a link to the mongodb container with the alias mongo`. The alias can be considered as an entry inside the /etc/hosts file of the docker container containing the IP of the mongodb container with the "alias name" mongo.
+On a ajouté le --link pour créer (suspense...) un lien entre le container que nous sommes en train de créer et celui nommé `mongodb`. `--link mongodb:mongo` veut dire `Créé un lien depuis le container mongodb avec l'alias mongo`. L'alias peut être considéré comme une entrée dans le fichier /etc/hosts liant l'IP du container au label.
 
-Just to be understood, inside the container that we are creating, we can access to the database container with the hostname `mongo`.
+Pour être sûr d'être compris, dans le container que nous créons, nous pouvons accéder à la base de donnée en utilisant le nom de domaine `mongo`.
 
-So I explained `docker run -it --rm --link mongodb:mongo`, the next `mongo` is the name of the docker image we want. And the rest is the command that we are executing in the container (connecting the mongo client to the mongo database in the other container).
+J'ai expliqué `docker run -it --rm --link mongodb:mongo`, le prochain `mongo` est le nom de l'image docker. Et le reste est la commande que nous allons exécuter dans le container.
 
-
-Let's get back to work. The time you read this section, you should have seen that in your terminal, you have a
+Retournons taffer un peu. Vous devirez avoir un curseur vous attendant, du genre :
 
 `>`
 
-Waiting for you to write something. Let's write:
+Écrivons :
 
 `> db.getName()`
 
-and you should get:
+et vous devriez avoir :
 
 `apero`
 
 
-Nice, it's now time for the apero: https://www.amazon.co.uk/d/Grocery/Ricard-Pastis-8712838324198-45-70cl/B0043A0B2U/ref=sr_1_1_a_it?ie=UTF8&qid=1485704879&sr=8-1&keywords=pastis . Fuck... hell, the pastis is quite expensive in this bloody island.
+Bon bah c'est l'heure de l'apéro apparemment : https://www.amazon.co.uk/d/Grocery/Ricard-Pastis-8712838324198-45-70cl/B0043A0B2U/ref=sr_1_1_a_it?ie=UTF8&qid=1485704879&sr=8-1&keywords=pastis . WOW..., bon on boira autre chose que du pastis à Londres.
 
-Anyway, we just linked two docker container together and that's quite cool. *BUT* If you read the documentation you saw this way of linking containers is called 'Legacy Links'. Yeah 'legacy'... We are cool kids right? Let's make it again but the right way!
+Bref, on vient juste de lier deux container. *MAIS* Si vous avez regardé la documentation, vous avez sûrement vu que cette manière de faire est dépassée... Vu qu'on est des mecs au top de la technologie digitale, révolutionnant l'industrie et le monde dans une ambiance bien plus que familiale, faisons ça de manière classe!
 
 With docker you can build networks for your application and it makes so much easier the way to deal with linking containers together! For example when you want to build again a database, all the linked container will need to be reloaded, and that sucks. With the network feature, you can create networks, put your containers in it and they will magically discover each other. You still need to configure your application to use the name of your container to connect to the other container but that works pretty well.
 
