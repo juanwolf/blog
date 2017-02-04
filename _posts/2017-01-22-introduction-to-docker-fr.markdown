@@ -230,13 +230,13 @@ Bon bah c'est l'heure de l'apéro apparemment : https://www.amazon.co.uk/d/Groce
 
 Bref, on vient juste de lier deux container. *MAIS* Si vous avez regardé la documentation, vous avez sûrement vu que cette manière de faire est dépassée... Vu qu'on est des mecs au top de la technologie digitale, révolutionnant l'industrie et le monde dans une ambiance bien plus que familiale, faisons ça de manière classe!
 
-With docker you can build networks for your application and it makes so much easier the way to deal with linking containers together! For example when you want to build again a database, all the linked container will need to be reloaded, and that sucks. With the network feature, you can create networks, put your containers in it and they will magically discover each other. You still need to configure your application to use the name of your container to connect to the other container but that works pretty well.
+Avec docker vous pouvez créer des réseaux pour vos applications et ils vous facilitent la liaison de vos containers ! Par exemple, si vous voulez créer encore une fois une base de données, tous les containers qui seront liés à cette base de données auront besoin d'être relancé pour pouvoir recréer le lien entre les containers. Avec les réseaux docker, vous pouvez en créer un, placer vos container dedans et comme de par magie, ils vont être capables d'intéragir entre eux. Vous devez toujours configurer votre application afin qu'elle utilise les noms de domaines correspondant aux noms de vos docker containers mais ça marche plutôt bien.
 
-Let's do it! To create the network, run this command:
+Créons en donc un ! Pour créer un réseau, utilisez cette commande :
 
 `docker network create mongo_network`
 
-We need to add our mongodb to this network. So let's destroy our old container and rebuilt it.
+Nous devons ajouter notre mongodb dans ce réseau. Détruisons notre container mongo et reconstruisons le.
 
 ```
 docker stop mongodb
@@ -244,21 +244,21 @@ docker rm mongodb
 docker run --network=mongo_network --name mongodb -d -v mongodb_data:/data/db mongo
 ```
 
-And for the client...
+Et pour le client...
 
 `docker run -it --rm --network=mongo_network mongo mongo --host=mongodb -u etienne -p ALaTienne --authenticationDatabase admin mongo/apero`
 
-And it should work like previously! A good thing to know is that you can't use "labels" as we did with the link. So be careful of how you name your containers, it will be easier to maintain.
+Et tout devrait refonctionner comme précédemment ! Importante chose à savoir, vous ne pouvez plus utiliser les labels comme nous avions fait avec les liens. Donc faites attention aux noms des containers que vous attribuez.
 
-We just finished to cover all the important features to know with docker. Congrats :D. Now we will get into a more advanced usage, creating our own docker image.
+On vient juste de terminer tous les points importants de la ligne de commande de docker. Félicitations (ça fait jamais de mal de se féciliter de temps en temps :D).Maintenant nous allons passer au niveau supérieur et créer notre propre image docker.
 
-## Creating our own container
+## Créer sa propre image
 
-Let's start and finish on the advanced stuff. When you will want to build a new application with your lovely framework and that you want to use it with docker, you will have to create a specific Dockerfile, to build a docker image for your application.
+Commençons et terminons sur ce point.Quand vous voulez créer une nouvelle application avec votre framework préféré et que vous voulez utiliser docker, vous allez devoir créer un Dockerfile contenant les informations nécessaires pour installer votre application.
 
-Let's build a little application that print a string in the output. We gonna build step by step [this application](https://github.com/juanwolf/hello-cli).
+Construisons une simple application qui va retourner une string en sortie. On va construire étape par étape [cette application](https://github.com/juanwolf/hello-cli).
 
-First, We need to code our cli.py file. Here's the code:
+Premièrement, nous allons coder le cli.py. Le code :
 
 ```
 #!/bin/env python
@@ -267,12 +267,11 @@ if __name__ == '__main__':
     print("Hello world!")
 ```
 
-Now, we can add a Dockerfile to build  an image for this application.
+Maintenant nous pouvons ajouter le Dockerfile pour construire notre application.
 
-We need to choose from which docker image we will base our one. We can start from an Ubuntu one, or directly using a python image. The last one will be easier, everything will be installied by default and we will only need to do
-a python cli.py and the job is done :).
+La première étape qui est sûrement la plus importante est de choisir sur quelle image nous allons baser notre dockerfile. On peut commencer avec une image d'ubuntu ou directement utiliser une image optimisée pour python. La dernière image sera la plus facile à utiliser car nous n'aurons pas besoin d'installer de dépendance vu que tout sera contenu dans l'image python de base.
 
-Let's create the file `Dockerfile` where our cli.py lives with this content:
+Créons donc notre `Dockerfile` là où vous avez créé le fichier `cli.py` :
 
 ```
 # The docker image we base our one from
@@ -289,13 +288,13 @@ WORKDIR /opt/app
 ENTRYPOINT ["python", "cli.py"]
 ```
 
-If you want more information about the syntax and the command you can execute on this file, the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/) is your friend.
+Si vous avez besoin de plus d'informations à propos de la syntaxe du dockerfile, la [documentation officielle](https://docs.docker.com/engine/reference/builder/) est votre amie.
 
-Now that we have our Dockerfile, we need to build our image. For that:
+Maintenant que nous avons notre Dockerfile, nous pouvons créer notre image. Pour cela :
 
 `docker build -t hello_cli .`
 
-Which will build the docker image with the Dockerfile found in the `.` directory with the name hello_cli. If everything went well, you should have an output like this one:
+Qui créera donc l'image docker basée sur le dockerfile trouvé dans le repertoire courant (d'où le `.`) avec le nom `hello_cli`. Si tout s'est bien passé, vous devriez avoir une sortie du genre:
 
 ```
 Sending build context to Docker daemon 35.33 kB
@@ -330,32 +329,30 @@ Removing intermediate container 80db6a18e17e
 Successfully built deee15fd090
 ```
 
-As you can see every command we made in the dockerfile equals to a step when building the image.
-It's important to know that when a build failed docker will cache all the successfull steps to make
-your next build quicker. Also, docker will detect if you changed a cached step and will make it again and all
-the next ones.
+Comme vous pouvez le voir chaque commande dans le dockerfile est équivalent à une étape lorsque docker construit notre image.
+Il est important de savoir que lorsque votre build échoue, docker va "cacher" toutes les étapes qui ont réussies pour que la prochaine construction de votre image soit plus rapide. De plus, docker va détecter si vous avez changé une étape et la re-exécutera ainsi que toutes les suivantes.
 
-To verify that everything went well, we can inspect which images we have on our docker host locally. Run:
+Pour vérifier que tout s'est bien passé, nous pouvons inspecter quelles sont les images que nous avons sur notre docker host. Lancez:
 
 `docker images`
 
-You should have the hello_cli but also the mongo image we downloaded in the previous chapter. Now we can run
-our docker image and see if everything works:
+Vous devriez avoir une image `hello_cli` mais aussi l'image mongo que nous avons téléchargée dans le chapitre précédent. Maintenant nous pouvons
+créer notre container et voir si tout fonctionne :
 
 `docker run -it --rm hello_cli`
 
-And you should see:
+Et vous devriez voir :
 `Hello world!`
 
 AWESOME!
 
-## Publishing our docker image
+## Publier notre docker image
 
-If you are really proud of what we just accomplished, we can push this docker image to a registry (which is a "database" of docker image). Gitlab
-comes with one integrated but there's also the docker hub. As you wish. To push an image, you will need to login to the registry first with `docker login myregistry.com`
-and push your local image with `docker push hello_cli` and you are now able to download this image!
+Si vous êtes très fier du travail que nous venons d'accomplir, nous pouvons pousser cette image au sein d'un registre docker (qui est une sorte de "base de données" d'image docker). Gitlab
+intègre un registry par défaut mais vous avez aussi le docker hub. C'est comme vous voulez. Pour pousser une image, vous aurez besoin de vous logguer sur le registre depuis votre docker host avec cette commande `docker login myregistry.com`
+et pousser votre docker image avec `docker push hello_cli` et vous serez maintenant capable de la télécharger sur tous vos docker hosts !
 
-The important point to remember using a custom registry is to login before trying to pull an image.
+Le point important à se rappeler et que si vous utilisez un registre perso, vous devez vous authentifier avant de télécharger votre image.
 
 ## Conclusion
 
