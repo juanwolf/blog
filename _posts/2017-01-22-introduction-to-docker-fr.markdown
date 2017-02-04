@@ -356,9 +356,6 @@ Le point important à se rappeler et que si vous utilisez un registre perso, vou
 
 ## Conclusion
 
-And TADAM. We had a quick view on all the awesomeness of Docker in this little introduction. Of course this is just to show you quickly how it works but I
-invite you to play with it when you build a new application. You can use it as development environment or  even use it to deploy continuously applications without any
-fear (well if you app has bugs, that's not docker's fault ;p). But for this last point it is heavily recommanded to use a software to orchestrate your containers such as
-nomad or ansible or kubernete, but little padawan, you will need to wait for this topic in a future article!
+Et TADAM. On vient de voir à quel Docker est génial dans cette petite introduction. Bien sûr, ceci n'était qu'une introduction pour vous montrer comment Docker fonctionne mais je vous invite à jouer avec dès que vous créez une nouvelle application. Vous pouvez l'utiliser pour créer des environnements de développpement ou même l'utiliser en production et faire de l'intégration continue sans avoir peur d'une dépendance manquante ou quoi que ce soit. Pour ce dernier, je vous invite fortement à utiliser un "outil d'orchestration" pour gérer tous vos containers comme Nomad ou Ansible ou Kubernete, mais tu devras attendre un prochain article jeune padawan !
 
 Sur ce, codez bien! Ciao!
