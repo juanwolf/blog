@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "How to dockerize an application"
+date:   2017-02-22 23:12:01 +0000
+categories: other
+---
+
 # How to dockerize an application
 
 ## Introduction
