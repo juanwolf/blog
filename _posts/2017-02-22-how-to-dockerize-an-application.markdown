@@ -11,9 +11,12 @@ categories: other
 
 As you could have seen in the previous post, docker is quite handy to make your application running EVERYWHERE. So now the problem you can have is, how do you actually "dockerize" your application. I will give you my guideline, feel free to contribute to it, I will surely be wrong or missing something.
 
-## Define the requirement of the application
+## Define the requirements of the application
 
-It can sound a bit ship as advice, but before to start everything you need to identify and isolate what your application needs. A database? A task queue? etc... You can plan to have a container for each of your requirement.
+It can sound a bit cheap as advice, but before to start everything you need to identify and isolate what your application needs. A database? A task queue? etc... You can plan to have a container for each of your requirement.
+
+But also internally... Your application needs to run inside the container so you can't only ship your code and thinking be done with it. So for example let's say I wrote a Django application. But it will not by itself. I can install a uwsgi or running the default run command inside the container... The default run is not production ready, so you need to think about installing uwsgi... That's the kind of things that you need to prepare before any dockerization..
+
 
 ## Define a setting policy
 
