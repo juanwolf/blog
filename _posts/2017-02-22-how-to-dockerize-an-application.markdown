@@ -39,6 +39,7 @@ Instead of using a config file as usual you will need to setup one variable for 
 #### Pros
 
 * Static and sure that in dev or prod everything is working the same
+* Easy to scale
 
 #### Cons
 
@@ -49,6 +50,7 @@ Instead of using a config file as usual you will need to setup one variable for 
 
 #### Pros
 * Work as most software and can avoid you to loose time.
+* Easy to scale vertically
 
 #### Cons
 * you need the configuration file somewhere in the host (So you might some tools to do that)
@@ -64,7 +66,7 @@ It depends also on your case and your needs. Need a quick and dirty workaround? 
 
 When using docker, you knew that would have to change some stuff. That's where you will sweat a bit. Your application needs to be the tiniest possible. Tinier and isolated is your app and more gain you would have to use docker. Let's imagine a big app containing a task queue and a webapp. Let's imagine the first version is dockerized but both are in the same container. Well, you can't scale (horizontally at least) as you want your task queue or your webapp, you always need to deploy both... So always have the strict minimum in your container.
 
-To be clear, you will need to study every bit of your application to be able to run every single piece of software independently. 
+To be clear, you will need to study every bit of your application to be able to run every single piece of software independently.
 
 ## Define a retention policy
 
@@ -72,12 +74,16 @@ A big point that might force you to rebuild your container is the way you will u
 
 ## Example
 
-Would be a shame to not give you a little example before you get back to your keyboard with a strange mood of dockerizing the world. 
+Would be a shame to not give you a little example before you get back to your keyboard with a strange mood of dockerizing the world.
+I might add more examples when I will have experienced more docker deployement...
 
 ### Django
 
-As Django needs a settings file to survive, you might play first with a volume for this setting file. As well you might have configure the logging to log in a specific file... Add a volume in your dockerfile pointing to this/these file(S). 
+As Django needs a settings file to survive, you might play first with a volume for this setting file. As well you might have configure the logging to log in a specific file... Add a volume in your dockerfile pointing to this/these file(S). Would you like to serve the statics on your application or with your proxy? If you choose to serve the statics file with django,  you can use whitenoise.
 
-### NodeJS
+You will need a webserver to run your django application. I invite you to use uwsgi which is extremely reliable.
+
+
+And that's it, you have all the tips to build a nice django app dockerized. You can have a look at the way that django-cookiecutter generate its docker env, it's pretty cool.
 
 
