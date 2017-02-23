@@ -2,10 +2,10 @@
 layout: post
 title:  "How to dockerize an application"
 date:   2017-02-22 23:12:01 +0000
-categories: other
+categories: ops
 ---
 
-# How to dockerize an application
+# How to dockerize an application.
 
 ## Introduction
 
@@ -56,15 +56,28 @@ Instead of using a config file as usual you will need to setup one variable for 
 
 ### What to choose
 
-Clearly no idea. I made 3 applications the last few month and they use the 3 ways, and I am happy with none. I am tempted to say that the configuration with env variable is a the best as you can easily change this configuration and just depends on you to make sure that they are filled the same way accross environment or host. You can even use a tool that will deploy your container on different hosts with the same env variables. I use ansible in my case but there's lots so feel free to use the one you want :)
+Clearly no idea. I made 3 applications the last few months and they use the 3 ways, and I am happy with none. I am tempted to say that the configuration with env variable is a the best as you can easily change this configuration and just depends on you to make sure that they are filled the same way across environments or host. You can even use a tool that will deploy your container on different hosts with the same env variables. I use ansible in my case but there's lots, so feel free to use the one you want :)
 
-Depends on your case and your needs. Need a quick and dirty workaround?  Config embed. No need to change the configuration? Config embed. Big application that lives magically with a setting file -> setting file as volume. Feeling like a boyscoot and ready to break things? -> env variable.
+It depends also on your case and your needs. Need a quick and dirty workaround?  Config embed. No need to change the configuration? Config embed. Big application that lives magically with a setting file -> setting file as volume. Feeling like a boyscoot and ready to break things? -> env variable.
 
 ## Install the minimum
 
-When using docker, you knew that would have to change some stuff. That's where you will need to sweat a bit. Your application needs to the tiniest possible. Tinier and isolated is your app and more gain you would have to use docker. Let's imagine a big app container a task queue and a webapp. Let's imagine the first version is dockerized but both are in the same container. Well, you can't scale (horizontally at least) as you want your application... So always have the strict minimum in your container.
+When using docker, you knew that would have to change some stuff. That's where you will sweat a bit. Your application needs to be the tiniest possible. Tinier and isolated is your app and more gain you would have to use docker. Let's imagine a big app containing a task queue and a webapp. Let's imagine the first version is dockerized but both are in the same container. Well, you can't scale (horizontally at least) as you want your task queue or your webapp, you always need to deploy both... So always have the strict minimum in your container.
+
+To be clear, you will need to study every bit of your application to be able to run every single piece of software independently. 
 
 ## Define a retention policy
 
-A big point that might force you to rebuild your container is the way you will use docker volumes. It's important to detect before to continue if your container might get bigger. Which it should not. So you need to detect any logging file, any folder or file that can get bigger and define them as volume in your dockerfile. It is easier to manage volumes that size inside a container.
+A big point that might force you to rebuild your container is the way you will use docker volumes. It's important to think about it before to continue in case your container gets bigger (and you'll loose everything in it). Which it should not. So you need to detect any logging file, any folder or file that can grow or get updated and define them as volume in your dockerfile.
+
+## Example
+
+Would be a shame to not give you a little example before you get back to your keyboard with a strange mood of dockerizing the world. 
+
+### Django
+
+As Django needs a settings file to survive, you might play first with a volume for this setting file. As well you might have configure the logging to log in a specific file... Add a volume in your dockerfile pointing to this/these file(S). 
+
+### NodeJS
+
 
