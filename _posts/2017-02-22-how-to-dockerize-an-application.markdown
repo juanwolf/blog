@@ -71,6 +71,10 @@ To be clear, you will need to study every bit of your application to be able to 
 
 A big point that might force you to rebuild your container is the way you will use docker volumes. It's important to think about it before to continue in case your container gets bigger (and you'll loose everything in it). Which it should not. So you need to detect any logging file, any folder or file that can grow or get updated and define them as volume in your dockerfile.
 
+## Prepare some performance tests
+
+Ok, let's imagine you finished with your dockerization but suddenly you realize that your application is getting really slow. To make sure that does not happen and be sure about it, is to create some performance tests or using a tool showing you the quality of your app (New Relic for example).
+
 ## Example
 
 Would be a shame to not give you a little example before you get back to your keyboard with a strange mood of dockerizing the world.
@@ -84,10 +88,6 @@ Also, You will need a webserver to run your django application. I invite you to 
 
 
 And that's it, you have all the tips to build a nice django app dockerized. You can have a look at the way that django-cookiecutter generate its docker env, it's pretty cool.
-
-## Prepare some performance tests
-
-Ok, let's imagine you finished with your dockerization but suddenly you realize that your application is getting really slow. To make sure that does not happen and be sure about it, is to create some performance tests or using a tool showing you the quality of your app (New Relic for example).
 
 ## Conclusion
 
