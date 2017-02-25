@@ -11,81 +11,80 @@ categories: ops
 
 Comme vous avez pu le voir dans mon article précédent, docker est l'outil parfait pour assurer que votre application fonctionne sur toutes les plateformes. Maintenant le problème que l'on pourrait se poser est, comment faire pour dockerizer une application. Je vais vous donner mon retour après avoir perdu quelques cheveux sur cette techno. N'hésitez pas à contribuer à ce guide, je vous en serais plus que reconnaissant !
 
-## Definir les besoins de l'application
+## Définir les besoins de l'application
 
-Avant de commencer quoi que ce soit, vous devez vous demander de quoi votre application à besoin. Une base de données ? Un gestionnaire de tâches ? Etc... vous pouvez envisager de créer un container pour chaque logiciel que vous aurez besoin. 
+Avant de commencer quoi que ce soit, vous devez vous demander de quoi votre application à besoin. Une base de données ? Un gestionnaire de tâches ? Etc... vous pouvez envisager de créer un container pour chacun.
 
-Voua devez aussi identifier au niveau de votre application les outils que vous neccesiterez It can sound a bit cheap as advice, but before to start everything you need to identify and isolate what your application needs. A database? A task queue? etc... You can plan to have a container for each of your requirement.
-
-But also internally... Your application needs to run inside the container so you can't only ship your code and thinking be done with it. So for example let's say I wrote a Django application. But it will not by itself. I can install a uwsgi or running the default run command inside the container... The default run is not production ready, so you need to think about installing uwsgi... That's the kind of things that you need to prepare before any dockerization..
+Vous devez aussi identifier au niveau de votre application les outils que vous neccésiterez. Votre application a besoin de tourner comme un service dans votre container. Par exemple, si vous dockerizé une application django, vous devrez utiliser uwsgi.
 
 
-## Define a setting policy
+## Définir une police de rétention
 
-Biggest and hardest point ever when you start to play with containers. Do I need to embed the configuration file? Should I use env variable? Yeap, we all started to wonder this questions. And sadly there's no answer. Every case as their bad and good points. Let's make a little list of it:
+J'ai perdu pas mal de cheveux sur ce point là. Devez vous laisser la configuration dans le container ou utiliser des variables d'environnement ? Malheureusement je n'ai pas de réponses à ces questions. Par ailleurs, elles ont toutes leurs avantages et inconvénients. En voici la liste :
 
-### Configuration as environement variable:
+### Variables d'environnement comme configuration
 
-Instead of using a config file as usual you will need to setup one variable for each settings you have to configure. It can be a big effort at the first sight but can be really usefull on the long therm when you don't need to do anything dodgy to change the configuration that's inside your container.
+Plutôt que d'utiliser un fichier de configuration, vous pouvez changer votre configuration afin qu'elle utilise des variables d'environnement. Cependant cette méthode peut vous demandez pas mal d'effort mais peut s'avérer utile sur le long terme.
 
-#### Pros
+#### Plus
 
-* Easily configurable
+* Facilement configurable
+* Facilement "scalable" verticallement et horizontalement
 
-#### Cons
+#### Moins
 
-* Behavior can change in function of the environment as you might not use same value for the env. variables
+* Comportement peut varier en fonction des environnements. (Peut-être éviter avec des outils d'oorchestrations)
+* Peut demander beaucoup d'effort sur le refacto de la configuration
 
-### Configuration embed in the container:
+### Configuration contenue dans le container
 
-#### Pros
+#### Pour
 
-* Static and sure that in dev or prod everything is working the same
-* Easy to scale
-
-#### Cons
-
-* Nearly impossible to configure
-* Or if you want to configure it, you need to change the configuration before to build the container which can be dodgy sometimes even if you have some CI.
-
-### Configuration mounted as a volume:
-
-#### Pros
-* Work as most software and can avoid you to loose time.
-* Easy to scale vertically
+* Figée et donc sûr qu'en prod ou dev tout fonctionne de la même façon
+* Facilement "Scalable"
 
 #### Cons
-* you need the configuration file somewhere in the host (So you might some tools to do that)
-* Annoying for vertical scale as the configuration needs to leave on all the docker hosts.
+
+* Presque impossible à configurer une fois l'image construite
+* Nécessite de l'intégration continue pour changer la configuration lors d'une modification du code
+
+### Configuration montée comme un volume
+
+#### Pour
+* Fonctionne comme la plupart des applications (donc gain de temps de mise en place)
+* Facilement "scalable" verticalement
+
+#### Contre
+* Le fichier de configuration doit se trouver sur le docker host
+* Le fichier doit être présent et le même sur tous les docker hosts (Galère pour "scale" horizontal)
 
 ### What to choose
 
-Clearly no idea. I made 3 applications the last few months and they use the 3 ways, and I am happy with none. I am tempted to say that the configuration with env variable is a the best as you can easily change this configuration and just depends on you to make sure that they are filled the same way across environments or host. You can even use a tool that will deploy your container on different hosts with the same env variables. I use ansible in my case but there's lots, so feel free to use the one you want :)
+Franchement, aucune idée. J'ai créé 3 applications et elles utilisent les 3 différentes manières, et je suis pas super content du résultat. Je suis tenté de dire que les variables d'environnement est le meilleur choix. Vous pouvez toujours vous servir d'un fichier de configuration et repérer les éléments pouvant varier d'un environnement à un autre et les définir comme variable d'environnement. C'est le meilleur compromis que j'ai pu trouver. Afin que vous soyez sûr que vos variable d'environnements soit définies de la même manière dans votre environnement, je vous invite à utiliser un outil de déploiement ou d'orchestration. Personnellement j'utilise ansible mais vous êtes libres de choisir celui qui vous convient.
 
-It depends also on your case and your needs. Need a quick and dirty workaround?  Config embed. No need to change the configuration? Config embed. Big application that lives magically with a setting file -> setting file as volume. Feeling like a boyscoot and ready to break things? -> env variable.
+Ce choix peut aussi varier en fonction de vos besoins. Besoin d'un résultat rapide mais crade? Config contenue dans le container. Pqs besoin de changer la configuration? Configuration dans le container. Grosse application qui fonctionne comme de par magie avec un fichier de configuration -> Configuration montée comme un volume. Vous êtes en transe et pret à détruire des montagnes d'un seul coup de poing? -> variable d'environnement.
 
-## Install the minimum
+## Installer le minimum
 
-When using docker, you knew that would have to change some stuff. That's where you will sweat a bit. Your application needs to be the tiniest possible. Tinier and isolated is your app and more gain you would have to use docker. Let's imagine a big app containing a task queue and a webapp. Let's imagine the first version is dockerized but both are in the same container. Well, you can't scale (horizontally at least) as you want your task queue or your webapp, you always need to deploy both... So always have the strict minimum in your container.
+Quand vous utilisez docker, vous saviez que vous alliez changer quelques trucs. C'est là que vous allez suer un petit peu. Votre application a besoin d'être la plus petite possible. Plus votre application est petite et plus vous gagnerez à utiliser docker. Imaginons que votre application contienne une application web et un gestionnaire de tâche asynchrone et que la première version dockerizée contienne les deux éléments. Vous allez avoir du mal à répartir la charge entre ces deux éléments. Imaginons que la web app n'est quasiment jamais en surcharge mais que le gestionnaire de tâche l'est. Vous êtes obligé de redeployer un nouveau container avec la webapp qui sera jamais utilisée pour répondre à la charge des tâches... Donc pensez à découpler au maximum vos dépendences dans votre application.
 
-To be clear, you will need to study every bit of your application to be able to run every single piece of software independently.
+## Definir une police de rétention
 
-## Define a retention policy
+C'est le point qui m'a fait le plus redéployer des container... Il est important de réfléchir à chaque élément de votre application qui pourait grossir dans votre container (car si vous avez besoin de détruire votre container vous perdrez toutes les données dans celui-ci). Clairement votre container ne doit pas grossir. Vous devez donc définir dans votre dockerfile tout élément qui pourrait modifier durant l'exécution de votre application.
 
-A big point that might force you to rebuild your container is the way you will use docker volumes. It's important to think about it before to continue in case your container gets bigger (and you'll loose everything in it). Which it should not. So you need to detect any logging file, any folder or file that can grow or get updated and define them as volume in your dockerfile.
+## Exemple
 
-## Example
-
-Would be a shame to not give you a little example before you get back to your keyboard with a strange mood of dockerizing the world.
-I might add more examples when I will have experienced more docker deployement...
+Il serait dommage de vous laiser partir dockerizer la planète sans vous laisser un petit exemple.
+J'essaierai d'ajouter des exemples dans le futur quand j'aurai expérimenté plus de déploiement de containers.
 
 ### Django
 
-As Django needs a settings file to survive, you might play first with a volume for this setting file. As well you might have configure the logging to log in a specific file... Add a volume in your dockerfile pointing to this/these file(S). Would you like to serve the statics on your application or with your proxy? If you choose to serve the statics file with django,  you can use whitenoise.
+Comme django a besoin d'un fichier de configuration pour fonctionner, vous pouvez envisager de commencer par monter votre configuration comme un volume, ce sera le plus simple et le plus rapide. De plus, vous avez sûrement configurer votre application les logs pour logger dans un fichier. Pensez à définir un volume pour ce fichier. De même pour les fichier statiques ou les médias. Il est nécessaire de définir un volume pour vos médias. Cependant pour vos statics cela va dépendre si vous voulez les servir avec votre application ou avec un proxy. Pour la première solution je vous invite à regarder au niveau de whitenoise qui fait très bien le taf. Pour la seconde vous devez definir un volume pour votre STATIC_ROOT ET appeler collectstatic. Normalement vous devrez retrouver vos statics sur le docker host et pouvez les servir avec nginx ou apache. :)
 
-You will need a webserver to run your django application. I invite you to use uwsgi which is extremely reliable.
+N'oubliez pas que votre application a besoin de tourner comme un service. Vous devez donc penser à utliser uwsgi ou autre dans votre container. (Vous pouvez toujours utiliser la commande runserver pour votre environnement de dévelopemment, tant que ça reste QUE du développement)
 
+Et c'est tout :). Je vous invite à regarder comment django-cookiecutter gère les environnements docker, c'est plutôt bien foutu.
 
-And that's it, you have all the tips to build a nice django app dockerized. You can have a look at the way that django-cookiecutter generate its docker env, it's pretty cool.
+## Conclusion
 
-
+C'est pas beaucoup mais ce fut les points que j'aurai aimé connaître avant de me lancer dans la dockerization d'applications. N'hésitez pas à contribuer à ce petit guide avec vos retours ou vos exemples ! Sur ce, dockerizez bien! Ciao!
