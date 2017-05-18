@@ -7,14 +7,12 @@ categories: video-games
 
 # Hollow Knight, an indie masterpiece
 
-## Introduction 
+## Introduction
 
-Hollow knight is a game built by team cherry thanks to backers in kickstarter. Its been released in march 2017 and received amazing scores in metacritic (88 or 87, I need to check). Recommended by one of my friends, I decided to have a look as it costs around 15 euros or 10 pounds.
-
+Hollow knight is a game built by team cherry thanks to backers in kickstarter. It has been released in march 2017 and received good scores in metacritic (86 by the press). Recommended by one of my friends, I decided to have a look as it costs around 15 euros or 10 pounds.
 
 
 ![The title](http://cdn.akamai.steamstatic.com/steam/apps/367520/header.jpg?t=1492587166)
-
 
 
 ## Story
@@ -47,18 +45,17 @@ Every new regions is undiscovered and you will need to explore every little piec
 
 ![](https://lh3.googleusercontent.com/SbE00jQvXwfIhOoVJZ_JXI3aPqScTBeCJUky1K51DehIsPB_ABpnpx5_JhHe6PXupfG4l9TnPL8FkQ3uCfNZVfmEEvwCAUBw9iX2mY8DTucTjtiBVnonkuswrQ0u7Xo-XOsb8sfqt2rFmBDvFzYSJesYmeXAPnzMEF8WTdLWd4WVM-LtWbpe1wsSEiPkV1K4wiepDZmu3TwkwdpYhuiV0eeGgOpJ4o-8-oojHYzQdMM91l25FOHblHf_mf2LKls7em9ddhVdd7aC1c_9o20eWVNe3SnxIewGSplpvIfPwGEaP39JAs0hFzDsUp5oOEK1GSVApcFw4VW2qq8N8EmQ37d8NC82jWKUeA2WXAcUL-118UL8M0AM8C7D86CXFAxnN1aJIvkrqWU97Qljwn0ZT47rodMo8JqmkbPqXMPUmmBHfZ4nzBXl5OhZQ71MnoH23Cd-6y69ZVEOoFvBrKO9FsAYzc7M9uVAF1PU10eEplNjk7__0-BiMP6v5lt7PtXmBlAumkCWNjhPIUejivgp4ds7Qik5g4CVRthmz2jRgtLWGS5V2qOrhhFnl6xnNHv8A_G4VnfZ4sJprNrfrYfYv5Gk-2N2KPEPq0CeMvwF8rGgeGmIazPYEqCBNoR2csq7QxV7KAlRapvyAPMYiA5_w0kCDXE0bk7_ylDXyR_CNoQ=w1360-h768-no)
 
-So the exploration is really important (and quite addictive I have to admit) as you would get more powerful if you're investing time into it. As well the exploration will reward you every time, as tones of items are placed in the world. So don't be scared to go in unknown places. 
+So the exploration is really important (and quite addictive I have to admit) as you would get more powerful if you're investing time into it. As well the exploration will reward you every time, as tones of items are placed in the world. So don't be scared to go in unknown places.
 
 ![](https://lh3.googleusercontent.com/LQntUEb0DY3s7rigTc9NhC3NziLlGgay0Rt5vTxzVKLaANEgSkK4xex4SnjnpgJl07Yn72N2jtpn4t6RmZWJ22Cjx9cujXQzVdU7VzqVpz3Fl62UqSpeHCR5FQU01cuKn-LaG--a1lKYn2B_e75uJ1JST-VLxNqmDN-mg_c9pIBpASpQ0GHe1AoCujwaDpv3SYBMPUjCatOmOPLk7uVITT-Pn19zhs2izfcX1NkBrjPhwatWr6yjrw175KA5vRmxtXGZLd7h75Ix8hy236W85Q9-rae5RBXXMWRDCteCRi3CnjVmNI6lerSQN400Ai5Evop3FUCok7r_gQZIfsvM8XLUdkEMs_D2WJGjVQJAJSrZebYgj8TQcHMzCCq-j6YBY8fF0L943K39GJNa-8htIqzGQZrtUnS7V3H4JPjQm49mlBjw1Gf1-P-r-C1942RDhcc-x4rSzLWVNn01jQS_XptBc6LpAVk5l6PPqafmoY-LQG32o0UUrwvxQ0x54X_ezH5qQEgPsHnyIjwYn8P8evhA1yltsBNXV0RM4zD3B2fLOTbSo6nzquSTzsNkGjE_ETm4pC7yg98TNe9MvuyatCt5YCUCQH3CWAXkmGqGS_1nDSTDxhXT8SpOFG44WWLaSWLcyfeuPaiMXIHmFj6V0MliCYPLRWz1SoOxl710sUE=w1360-h768-no)
 
 As there's no help and you decide where you want to explore you might explore the world differently as one of your friend would have done it, where sometimes you might struggle to defeat a boss as you did not get a specific power or skill.
 
- 
 ### Action
 
 The gameplay is between metroid, castlevania and rogue legacy. It is just amazingly based on your skill and how you master the different skills of the "Vessel".
 
-Everytime you got touched, the screen gets darker for a second and everything get slowers, making you realizing you're getting closer to death, but might confuse you as well as you can loose the 'rythm' during a boss fight. 
+Everytime you got touched, the screen gets darker for a second and everything get slowers, making you realizing you're getting closer to death, but might confuse you as well as you can loose the 'rythm' during a boss fight.
 
 So speed and dodge are the master key to survive in the bug land. Lat point, the game is hard, not incridibly hard but you will have to pratice some of the bosses strategies to faint them.
 
