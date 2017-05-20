@@ -23,16 +23,16 @@ What you just know is that a terrible thing happened in the kingdom and all the 
 
 ## Universe / Atmosphere
 
-The universe is just fantastic. You feel totally into it as the graphism are cartoon style and really well made. You are into a 'bug' universe where a terrible incident happened. You can feel it as theirs no much color in the kingdom which is a bit depressing at the first sight. For example:
+The universe is just fantastic. You feel totally into it as the graphism are cartoon style and really well made. You are in a 'bug' universe where a terrible incident happened. You can feel it as their's no much color in the kingdom which is a bit depressing at the first sight. For example:
 
 ![](https://lh3.googleusercontent.com/8RctvoOLWhJ7hNCIwMucavvZyWaS1dQ6CyIXO0FhxMZYIKxYJgnR2o9wCZBGX_x-D2h_ODFYhny1NEFb5ecW1xaYHWWhXBpKJD5PYV3vaBWNQUAGtsDNhcMhZojyIe9Oxz06j7DmnrkrgdSuWca3Gy_yur71U-aZUpNqj6Vzo19mTyF9xGVG7C0ZLd6tEZbZLMFgMftyzzY7bHk89jiOICUJ0U7NktejWEDmV-Ov8Mn7BMdY5eHvtHcKkyYBq-cvou2jECENfYgOUqCZMHpFiZjnHU0ngvDTPP25ALy1UIS2QsVkBD6deInS84ksPakOHDxw7GxKfVgriPYAAISFFHZRmXxmB5QLLmklb5fbc9xmmuvjr078Ve08k7_rBuHUIsw-hCjtkSWikpye1t_uuc2XDrKbl81vcZrxn3olYh4yqREK63s9f69Twgzemm-WMZcHf4WmX-U8Dn8fXw-FQECkli6WsHDk1S0AYKIweInmjhv7qiMqbR5_duwt8gdc_K2-QF5JSz3eN0X21oqp8DtKbJw1klpI2s5OB97u9EkaXECELnY3xmJxGo3gDngLKkKrX3Czz7poX1FffaAgwTrUuZxydEkgwgrXEgxs_TClHMt8mq_bAlLZEgrQQoZPDRz4jU-daaXZhYN1droxLmJsqIBCEHI3SOk2Mp5bkPc=w1360-h768-no)
 
 
-But more you will explore and more region and atmosphere you will get such as greenpath.
+But more you will explore and more region and atmosphere you will discover such as greenpath.
 
 ![](https://lh3.googleusercontent.com/rtlsDlTi45Knv-c9kj0SSyOW-xXcgTq83J8bRsiwL3bcTY4dI_ex72ETVdiHcczSbnA5spTnKV-SGNSkLL72OvlQJOklI08hwFokF7lpzEwdsysYYR4IlVJsKiANLDvcaCsnZS0IrHhoID0b1MvCd8uyikEnfyWcG0cYSuj3QGhuLUYLyQZrKkyDMuA4GHx_RXWXLKo4eb0o2TS0O1vS3joT_IXdlYzXb44tWBVK3o_4TEDS0BjGxzJmrL6LqLUE0MNgv19A06eO3dq9m5pfk9d4DRzixRZB5wwd3-yc2-r-mvVmwB_Knm0Nq0IRVCP0Ximjkjx3gyB616rEqV2qUoXvvnUOZkUCpFv-3vsYeiVFp0NvPg83nlVCpncs93L5zg-qSmQJ3VnlLmtfQmufemTs1_eWH-DVbSkbKzEdsN3UtMeXwa-2AzP-nmR_1NzJbD6fcKNaJapHasu1i0b2vn_n6QjpeLRf_bGl_bqaY9GPItDoOGxFjLjNvfgRVIYDOJAawo9YVoi044SDxVjD36VyafjTLgNHtJWP5aeQD4epEJdEjPg-0VSIa9FG3t0fpbVl9VFKmuX9ZZdJFOhYjyQnt4-lAE0whgTHpqnpHFXubGRkoscZY5skxinGtUd013SQ_e6nu7-SGjsYNndibAXNiosMa7t_G5L235EtQ10=w1683-h950-no)
 
-But what's amazing as well in the game is the link between the environment and the music. Youwill have epic music during epic battles, resting music during youre resting time in hot sources. The atmosphere is just well really well made and you get so easily into it.
+But what's amazing as well in the game is the link between the environment and the music. You will have epic music during epic battles, resting music during youre resting time in hot sources. The atmosphere is just well really well made and you get so easily into it.
 
 ## Gameplay
 
@@ -40,7 +40,7 @@ The whole game is separated between two phases, exploration and action.
 
 ### Exploration
 
-Every new regions is undiscovered and you will need to explore every little piece of it to discover new skills, life or even friendships.
+Every new region is undiscovered and you will need to explore every little piece of it to discover new skills, life or even friendships.
 
 
 ![](https://lh3.googleusercontent.com/SbE00jQvXwfIhOoVJZ_JXI3aPqScTBeCJUky1K51DehIsPB_ABpnpx5_JhHe6PXupfG4l9TnPL8FkQ3uCfNZVfmEEvwCAUBw9iX2mY8DTucTjtiBVnonkuswrQ0u7Xo-XOsb8sfqt2rFmBDvFzYSJesYmeXAPnzMEF8WTdLWd4WVM-LtWbpe1wsSEiPkV1K4wiepDZmu3TwkwdpYhuiV0eeGgOpJ4o-8-oojHYzQdMM91l25FOHblHf_mf2LKls7em9ddhVdd7aC1c_9o20eWVNe3SnxIewGSplpvIfPwGEaP39JAs0hFzDsUp5oOEK1GSVApcFw4VW2qq8N8EmQ37d8NC82jWKUeA2WXAcUL-118UL8M0AM8C7D86CXFAxnN1aJIvkrqWU97Qljwn0ZT47rodMo8JqmkbPqXMPUmmBHfZ4nzBXl5OhZQ71MnoH23Cd-6y69ZVEOoFvBrKO9FsAYzc7M9uVAF1PU10eEplNjk7__0-BiMP6v5lt7PtXmBlAumkCWNjhPIUejivgp4ds7Qik5g4CVRthmz2jRgtLWGS5V2qOrhhFnl6xnNHv8A_G4VnfZ4sJprNrfrYfYv5Gk-2N2KPEPq0CeMvwF8rGgeGmIazPYEqCBNoR2csq7QxV7KAlRapvyAPMYiA5_w0kCDXE0bk7_ylDXyR_CNoQ=w1360-h768-no)
