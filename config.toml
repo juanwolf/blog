@@ -1,0 +1,36 @@
+baseURL = "https://juanwolf.github.io"
+languageCode = "en"
+defaultContentLanguage = "en"
+title = "blog.juanwolf.fr drafts"
+
+pygmentsuseclasses = true
+
+hasCJKLanguage = false
+enableRobotsTXT = true
+enableEmoji = true
+theme = "minimal"
+
+paginate = 10
+copyright = ""
+
+[params]
+    author = "Jean-Loup Adde"
+    description = "Personal blog theme powered by Hugo"
+    githubUsername = "#juanwolf"
+    accent = "#009688"
+    showBorder = true
+    backgroundColor = "white"
+    font = "Raleway" # should match the name on Google Fonts!
+    highlight = true
+    highlightStyle = "solarized-dark"
+    highlightLanguages = ["go", "python", "bash", "shell", "javascript", "scala"]
+
+[[menu.main]]
+    url = "/"
+    name = "Home"
+    weight = 1
+
+[[menu.main]]
+    url = "/post/"
+    name = "Posts"
+    weight = 2
