@@ -1,3 +1,9 @@
+---
+title:  "Introduction to Terraform"
+date:   2017-10-20
+tags: ["terraform", "introduction"]
+---
+
 # Introduction to Terraform
 
 ## Intro

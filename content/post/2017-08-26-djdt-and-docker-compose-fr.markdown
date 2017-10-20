@@ -1,8 +1,7 @@
 ---
-layout: post
 title:  "La django debug toolbar n'apparaît pas avec docker-compose"
-date:   2017-08-26 10:00:00 +0000
-categories: programmation
+date:   2017-08-26
+tags: ["programmation"]
 ---
 
 # La django debug toolbar n'apparait pas avec docker-compose

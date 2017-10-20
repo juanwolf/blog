@@ -1,8 +1,7 @@
 ---
-layout: post
 title:  "Hollow Knight, an indie master piece"
-date:   2017-04-09 10:00:00 +0000
-categories: video-games
+date:   2017-04-09
+tags: ["video-games"]
 ---
 
 # Hollow Knight, an indie masterpiece
