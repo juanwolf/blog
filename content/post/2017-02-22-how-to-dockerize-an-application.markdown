@@ -1,8 +1,7 @@
 ---
-layout: post
 title:  "How to dockerize an application"
-date:   2017-02-22 23:12:01 +0000
-categories: ops
+date:   2017-02-22
+tags: ["ops"]
 ---
 
 # How to dockerize an application.

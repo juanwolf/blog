@@ -1,8 +1,7 @@
 ---
-layout: post
 title:  "juanwolf.fr est de retour !"
-date:   2017-01-09 22:47:01 +0000
-categories: other
+date:   2017-01-09
+tags: ["other"]
 ---
 
 # juanwolf.fr est de retour !

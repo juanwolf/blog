@@ -1,8 +1,7 @@
 ---
-layout: post
 title:  Introduction to Docker
-date:   2017-01-22 23:47:01 +0000
-categories: programming
+date:   2017-01-22
+tags: ["programming"]
 ---
 
 # Introduction to Docker

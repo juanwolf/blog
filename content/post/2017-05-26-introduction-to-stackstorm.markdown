@@ -1,8 +1,7 @@
 ---
-layout: post
 title:  Introduction to Stackstorm
-date:   2017-05-26 07:11:01 +0000
-categories: programming
+date:   2017-05-26
+tags: ["programming"]
 ---
 
 # Introduction to stackstorm

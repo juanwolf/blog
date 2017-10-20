@@ -1,8 +1,7 @@
 ---
-layout: post
 title:  "Comment dockerizer une application ?"
-date:   2017-02-22 23:12:01 +0000
-categories: ops
+date:   2017-02-22
+tags: ["ops"]
 ---
 
 # Comment dockerizer une application
@@ -58,7 +57,7 @@ Plutôt que d'utiliser un fichier de configuration, vous pouvez changer votre co
 * Le fichier de configuration doit se trouver sur le docker host
 * Le fichier doit être présent et le même sur tous les docker hosts (Galère pour "scale" horizontal)
 
-### UFC - Que Choisir ? 
+### UFC - Que Choisir ?
 
 Franchement, aucune idée. J'ai créé 3 applications et elles utilisent les 3 différentes manières, et je suis pas super content du résultat. Je suis tenté de dire que les variables d'environnement est le meilleur choix. Vous pouvez toujours vous servir d'un fichier de configuration et repérer les éléments pouvant varier d'un environnement à un autre et les définir comme variables d'environnement. C'est le meilleur compromis que j'ai pu trouver. Afin que vous soyez sûr que vos variable d'environnements soient définies de la même manière dans votre environnement, je vous invite à utiliser un outil de déploiement ou d'orchestration. Personnellement j'utilise Ansible mais vous êtes libres de choisir celui qui vous convient.
 
