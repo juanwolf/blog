@@ -8,7 +8,7 @@ tags: ["terraform", "introduction"]
 
 ## Intro
 
-World is changing, developpers are forced to run their own shit, sys. admins does not deal with racks and any physical servers anymore. It feels good. Welcome in the cloud revolution. Ok, let's face it, you just run vms on someone else servers but still with a simple API call you can provide, provision and destroy infrastructure at your glance. It would be great to write some scripts to auto populate your VPCs on AWS but as well calling azure to provision some storage etc... Well at the end you might get "curl sick". Why not creating a tool that will deal with all the API calls for you instead? Well that's what terraform is and let's see how we can use this awesome tool.
+ With the massive adoption of the "Cloud", different tools are borned to simplificate dev / sys. admins lifes. These tools created a new way of dealing with infra, the Infrastructure as Code aka IaC. To be honest, the cloud is a nice word but let's face it, you just run vms on someone else servers. The big plus to use those is that with a simple API call you can provide, provision and destroy infrastructure at your glance. It would be great to write some scripts to auto populate your VPCs on AWS but as well calling azure to provision some storage etc... Well at the end you might get "curl sick". Why not creating a tool that will deal with all the API calls for you instead? Well that's what terraform is and let's see how we can use this awesome tool.
 
 > Disclaimer: This tutorial will be using AWS as cloud provider. Any penny you'll spend on the platform is in your entire responsability and you're aware reading this article that you'll have to spend some if you're not eligible for the AWS free tier
 
@@ -30,9 +30,9 @@ You need to go in the aws console and setup a specific user to use terraform. Go
 
 ### First Project
 
-Let's create a main.tf. If you're eligible for the AWS free tier feel free to use that, if not, you'll need to take some cash out (sorry).
+Let's create a main.tf. If you're eligible for the AWS free tier feel free to use that, if not, you'll need to take some cash out (sorry). You need an IAM user as well to get an access key and a secret key.
 
-We will start from scratch so
+We will start from scratch so:
 
 ```
 mkdir terraform_lab
@@ -42,49 +42,70 @@ git remote add origin git://my_git_repo.git
 ```
 
 ```terraform
-# main.tf
-
 provider "aws" {
     access_key = "your_access_key"
     secret_key = "your_secret_key"
+    region     = "eu-west-1" # You can change the region for the one your prefer
 }
 
-resource "aws_vpc" "management" {
-    cidr_block = "172.0.0.1/16"
+# Nice copy pasta from the doc (https://www.terraform.io/docs/providers/aws/r/instance.html)
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
 }
 
-resource "aws_internet_gateway" {
+resource "aws_vpc" "default" {
+    cidr_block = "172.16.0.0/16"
+}
 
+resource "aws_internet_gateway" "default"{
+    vpc_id = "${aws_vpc.default.id}"
 }
 
 resource "aws_subnet" "default" {
-    vpc_id = "${aws_vpc.management.id}"
+    vpc_id     = "${aws_vpc.default.id}"
+    cidr_block = "172.16.0.0/16" # Just one big subnet covering the whole VPC. Of course do not use that in production.
 }
 
 resource "aws_security_group" "open_bar" {
+    name = "open_bar"
+    description = "Allow all connections inbound and outbound"
+    vpc_id = "${aws_vpc.default.id}"
     ingress {
-        from = 0
-        to = 0
-        protocol = "-1"
+        from_port   = "0"
+        to_port     = "0"
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
     }
     egress {
-        from = 0
-        to = 0
-        protocol = "-1"
+        from_port   = "0"
+        to_port     = "0"
+        cidr_blocks = ["0.0.0.0/0"]
+        protocol    = "-1"
     }
 }
 
 resource "aws_instance" "simple_instance" {
-    type = "t2.micro"
-    subnets = [
-        "${aws_subnet.default.id}"
-    ]
+    ami  = "${data.aws_ami.ubuntu.id}"
+    instance_type = "t2.micro"
+    subnet_id = "${aws_subnet.default.id}"
 }
 ```
 
-So global impression, you see straight what components you're creating with terraform, compared to a bash script full a curl, it's more clear right?
+You see straight what components you're creating with terraform, compared to a bash script full of curls, it's more clear right?
 
-Now let's dismistied some part of the file.
+Now let's see how to use this file and dismistied it.
 
 #### Planning
 
@@ -92,11 +113,7 @@ Before doing anything regrettable, let's see what terraform will do. For that:
 
 `terraform plan`
 
-And you should have an output like:
-
-# TODO
-```
-```
+And you should have an output showing you every resource we gonna create.
 
 I advise you to save every plan you do before applying it. With this way to proceed, you are sure that what the plan planned will be applied and nothing more/less.
 
@@ -120,7 +137,7 @@ And tada, you come back to your original state, super easy isn't it?
 
 #### Terraform plan
 
-Planning in terraform is the best way to test, supervise and monitor what terraform will do. Everytime you want to test your terraform project -> plan,. you'll see syntax /logical errors. PLanning does not prevent on provider issues though. For example you create a subnet with a range like 172.0.0.1/32 (this is just an example) and you define a ec2 instance inside the subnet with a private ip like 192.168.1.1, well terraform will only get the error once you apply your change as AWS will return an error when terraform will do the API call.
+Planning in terraform is the best way to test, supervise and monitor what terraform will do. Everytime you want to test your terraform project -> plan, you'll see syntax /logical errors. PLanning does not prevent on provider issues though. For example you create a subnet with a range like 172.0.0.1/32 (this is just an example) and you define a ec2 instance inside the subnet with a private ip like 192.168.1.1, well terraform will only get the error once you apply your change as AWS will return an error when terraform will do the API call.
 
 So in our first try, the terraform plan created only stuff, which is normal as we started from scratch, but how do terraform will know how to modify some infra from the previous run? If you have a look in your project folder, you have a terraform.tfstate file. This is what terraform use to know the state of the components you defined in your main.tf in the cloud.
 
@@ -190,6 +207,7 @@ Let's put the provider in a different file first. Let's create a `providers.tf` 
 provider "aws" {
     access_key = "your_access_key"
     secret_key = "your_secret_key"
+    region     = "eu-west-1"
 }
 ```
 
@@ -208,13 +226,14 @@ Let's continue with our network configuration. Let's put the VPC, gateway in it.
 ```
 # vpc.tf
 
-resource "aws_vpc" "management" {
+resource "aws_vpc" "default" {
     cidr_block = "172.0.0.1/16"
 }
 
-resource "aws_internet_gateway" {
-
+resource "aws_internet_gateway" "default"{
+    vpc_id = "${aws_vpc.default.id}"
 }
+
 ```
 
 Let's do the same with subnets, security_groups and instances
@@ -222,15 +241,61 @@ Let's do the same with subnets, security_groups and instances
 ```
 # subnets.tf
 
+resource "aws_subnet" "default" {
+    vpc_id     = "${aws_vpc.default.id}"
+    cidr_block = "172.16.0.0/16" # Just one big subnet covering the whole VPC. Of course do not use that in production.
+}
+
 ```
 
 ```
 # security_groups.tf
 
+resource "aws_security_group" "open_bar" {
+    name = "open_bar"
+    description = "Allow all connections inbound and outbound"
+    vpc_id = "${aws_vpc.default.id}"
+    ingress {
+        from_port   = "0"
+        to_port     = "0"
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    egress {
+        from_port   = "0"
+        to_port     = "0"
+        cidr_blocks = ["0.0.0.0/0"]
+        protocol    = "-1"
+    }
+}
+
 ```
 
 ```
 # instances.tf
+
+# Yeah I put the ami with instances. No need elsewhere.
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
+resource "aws_instance" "simple_instance" {
+    ami  = "${data.aws_ami.ubuntu.id}"
+    instance_type = "t2.micro"
+    subnet_id = "${aws_subnet.default.id}"
+}
 
 ```
 
@@ -241,7 +306,7 @@ So here comes modules.
 
 ## Modules
 
-Modules allows you to seperate components of your infrastructure inside _modules_ allowing you to prevent any repetition in your infra definition. Really handy when you want to scale up some components of your current infra or when you want to refactor "all the masters".
+With modules you can seperate components of your infrastructure inside _modules_ allowing you to prevent any repetition in your infra definition. Really handy when you want to scale up some components of your current infra or when you want to refactor "all the masters".
 
 
 ### Architecture
@@ -272,10 +337,9 @@ Let's put our definition of the "simple_instance" in the main.tf
 # main.tf
 
 resource "aws_instance" "simple_instance" {
-    type = "${var.instance_type}"
-    subnets = [
-        "${var.subnet_ids}"
-    ]
+    ami  = "${var.ami_id}"
+    instance_type = "${var.instance_type}"
+    subnet_id = "${var.subnet_ids}"
     count = "${cluster_size}"
 }
 ```
@@ -290,7 +354,6 @@ Now let's configure the variables:
 
 variable "subnet_ids" {
     description = "The list of subnet id"
-    type = "list"
 }
 
 variable "cluster_size" {
@@ -301,6 +364,10 @@ variable "cluster_size" {
 variable "instance_type" {
     description = "The type of instance you want"
     default = "t2.micro"
+}
+
+variable "ami_id" {
+    description = "The AMI to use on these instances"
 }
 ```
 
@@ -323,8 +390,8 @@ So now let's create a main.tf at the root of our project calling this module:
 
 module "awesome_instance" {
     module_path = "modules/my_cluster_of_instances"
-
-    subnet_ids = ["${aws_subnet.default.id}"]
+    ami_id = "${data.aws_ami.ubuntu.id}"
+    subnet_id = "${aws_subnet.default.id}"
     instance_type = "t2.micro" # No need of this line as there's a default value
     cluster_size = 2 # Here we override the default value
 }
@@ -360,7 +427,7 @@ And using envx as a proper seperation between environments. It's really handy wh
 
 ## Other commands with terraform
 
-To finish this _super_ *long* article, I will briefly speaks about the command we did not see in the
+To finish this _super_ *long* article, I will briefly speaks about the command we did not see in the article.
 
 ### Taint
 
@@ -377,11 +444,11 @@ So you need to specify to which module you're tainting the ressource from. And a
 
 ### Graph
 
-If you have graphviz installed in your laptop, you can create a graph of the terraform resources you define. It's most of time unreadable to I don't recommend it.
+If you have graphviz installed in your laptop, you can create a graph of the terraform resources you define.
 
 ### Import
 
-If you created some resources in the UI and don't want to destroy it when using terraform, it's ok, you can add it to your terraform state using the import command.
+If you created some resources in the UI, adding their definition in your tf project will not be enough. You need to add it to your terraform state using the import command.
 
 For example if we did create the ec2 instance in the ui. We would add it like that in the tfstate file.
 
