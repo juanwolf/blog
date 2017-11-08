@@ -1,32 +1,32 @@
 ---
-title:  "Introduction to Terraform"
-date:   2017-10-20
+title:  "Introduction à Terraform"
+date:   2017-11-08
 tags: ["terraform", "introduction"]
 ---
 
-# Introduction to Terraform
+# Introduction à Terraform
 
 ## Intro
 
- With the massive adoption of the "Cloud", different tools are borned to simplificate dev / sys. admins lifes. These tools created a new way of dealing with infra, the Infrastructure as Code aka IaC. To be honest, the cloud is a nice word but let's face it, you just run vms on someone else servers. The big plus to use those is that with a simple API call you can provide, provision and destroy infrastructure at your glance. It would be great to write some scripts to auto populate your VPCs on AWS but as well calling azure to provision some storage etc... Well at the end you might get "curl sick". Why not creating a tool that will deal with all the API calls for you instead? Well that's what terraform is and let's see how we can use this awesome tool.
+Avec l'adoption massive du Cloud, différents outils sont nés pour simplifier la vie des dev et des sys. admins.  Ces outils ont créé une nouvelle façon de gérer de l'infrastructure, vous avez surement entendu parler de l'Infrastructure As Code aka IaC. Pour être franc, le "Cloud" est une jolie métaphore pour parler de VMs que vous allez faire tourner sur les serveurs d'une autre entreprise. Le gros plus sont les logiciels qui ont été développé pour et autour ce qui a rendu la création d'infrastructure beaucoup plus accessible. Et maintenant avec de simples appels à certaines API vous pouvez provisionner / créer et détruire une infra en un rien de temps! Ce serait sympa d'avoir quelques scripts pour poppuler vos VPCs sur AWS mais aussi appeler Azure pour provisionner du stockage, etc... À la fin vous risquerez de faire une curl overflow. Et pourquoi pas créer un outil pour vous faciliter la vie avec tous ces appels avec une syntaxe spécifique? Et bien c'est ce qu'est terraform et nous allons voir dans cet article comment l'utiliser.
 
-> Disclaimer: This tutorial will be using AWS as cloud provider. Any penny you'll spend on the platform is in your entire responsability and you're aware reading this article that you'll have to spend some if you're not eligible for the AWS free tier
+> ATTENTION: Ce tutoriel utilisera AWS comme cloud provider. Chaque centimes que vous dépenserez est de votre responsabilité, si jamais vous avez utilisé votre "periode d'essaie" sur Amazon, vous allez devoir sortir votre portefeuille :p
 
-## Starting baby steps
+## Commençons doucement
 
-What I find amazing in terraform is the flexibility that the tools give you. You can create 100 files, it will concatenate all of it, understanding which part is dependant to the other and so on, but before to have a funky project architecture let's start simple.
+Ce que je trouve plutôt cool avec Terraform, c'est sa flexibilité. Vous pouvez créer 100 fichiers, il va s'en occuper commme s'il n'était qu'un. Mais commençons tranquilement.
 
-First of all, let's install terraform
+Premièrement, installons terraform
 
 ### Installation
 
 * Mac: `brew install terraform`
 * Ubuntu: `sudo apt-get install terraform
-* Windows: Download the binary on the terraform download page, and add it to your PATH.
+* Windows: Le binaire est à disposition sur le site de terraform, et il faudra l'installer dans votre PATH
 
-### Setup your AWS account
+### Configurer votre account AWS
 
-You need to go in the aws console and setup a specific user to use terraform. Go into the `IAM` panel and create a user. `my_terraform`
+Vous devez aller dans la console AWS et créer un utilisateur spécifique. Pour cela, allez dans la section IAM et créer un utilisateur genre my_terraform ou quelque chose comme ça
 
 ### First Project
 
