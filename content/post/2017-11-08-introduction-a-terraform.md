@@ -28,11 +28,11 @@ Premièrement, installons terraform
 
 Vous devez aller dans la console AWS et créer un utilisateur spécifique. Pour cela, allez dans la section IAM et créer un utilisateur genre my_terraform ou quelque chose comme ça
 
-### First Project
+### Premier projet
 
-Let's create a main.tf. If you're eligible for the AWS free tier feel free to use that, if not, you'll need to take some cash out (sorry). You need an IAM user as well to get an access key and a secret key.
+Commençon par créer un fichier main.tf. Vous allez devoir créer un utilisateur dans IAM afin de récupérer une clé d'accès et une clé secrète.
 
-We will start from scratch so:
+Commençons from scratch:
 
 ```
 mkdir terraform_lab
@@ -103,45 +103,43 @@ resource "aws_instance" "simple_instance" {
 }
 ```
 
-You see straight what components you're creating with terraform, compared to a bash script full of curls, it's more clear right?
+Vous pouvez voir assez simplement quels components nous avons créé, si on compare ça à un script bash rempli de curl, c'est bien plus clair.
 
-Now let's see how to use this file and dismistied it.
+Maintenant voyons comment utiliser ce fichier et ce qu'il contient.
 
-#### Planning
+#### Plannification
 
-Before doing anything regrettable, let's see what terraform will do. For that:
+Afin de faire quoi que ce soit regrettable, voyons ce que terraform va créer. Pour cela:
 
 `terraform plan`
 
-And you should have an output showing you every resource we gonna create.
+Et vous devriez avoir un immense blob décrivant ce que vous allez créer.
 
-I advise you to save every plan you do before applying it. With this way to proceed, you are sure that what the plan planned will be applied and nothing more/less.
+Je vous conseil de sauvegarder tous vos "plan" avant de les appliquer. De cette manière, vous êtes sûr que ce que le plan à plannifier va être appliqué.
 
-For that, just specify the filename/path where you want to save your plan.
+Pour cela, spécifiez un nom de fichier / chemin où vous voulez sauver votre plan.
 
 `terarform plan -out ./my_aws_plan`
 
-Then after being happy with what the plan will do let's apply it.
+Après avoir vérifié que tout allait bien, on peut appliquer notre plan.
 
 `terraform apply ./my_aws_plans`
 
-And if you go in the console you should see that you have a brand new vpc, a subnet and an instance running.
+Et si vous vous rendez dans la console d'AWS, vous verrez un tout nouveau VPC avec une instance.
 
-Let's destroy all of these the time I explain you what we've just wrote in this main.tf file.
+Détruisons ce que nous venons de faire, le temps que je vous explique ce que contient le main.tf.
 
-For that: `terraform destroy`.
+Pour cela: `terraform destroy`.
 
-And tada, you come back to your original state, super easy isn't it?
+Et voilà! On vient de détruire tous les composants que nous avions précédemment créé, super simple hein?
 
-### What just happened?
+### Euh What the fuck ?
 
 #### Terraform plan
 
-Planning in terraform is the best way to test, supervise and monitor what terraform will do. Everytime you want to test your terraform project -> plan, you'll see syntax /logical errors. PLanning does not prevent on provider issues though. For example you create a subnet with a range like 172.0.0.1/32 (this is just an example) and you define a ec2 instance inside the subnet with a private ip like 192.168.1.1, well terraform will only get the error once you apply your change as AWS will return an error when terraform will do the API call.
+Plannifier est la meilleure forme pour tester, superviser et monitorer ce que terraform va exécuter. Je vous invite à "plan" votre code assez souvent, pour avoir un feedback assez rapide sur les erreurs de syntaxes, etc... Attention cependant terraform ne va pas détecter les erreurs logiques de votre code. Par exemple, si vous créez un subnet avec ce CIDR block 172.0.0.1/32 et que vous définissez une instance ec2 avec une IP hors de ce sous-réseau du genre 192.168.1.1, terraform va seulement détecter le problème une fois que vous allez appliquer vos changements car l'API d'AWS va retourner une erreur.
 
-So in our first try, the terraform plan created only stuff, which is normal as we started from scratch, but how do terraform will know how to modify some infra from the previous run? If you have a look in your project folder, you have a terraform.tfstate file. This is what terraform use to know the state of the components you defined in your main.tf in the cloud.
-
-When you do a plan if this terraform.tfstate file exists, terraform will pull the actual infrastructure configuration, update your tfstate file and compare what's in the tfstate and what you defined in the main.tf and will prompt you what will change once you run the apply.
+Donc dans votre premier essaie, le plan vous montre que vous n'allez que créer de nouvelles ressources (ce qui est logique vous me direz...). Mais comment terraform va savoir ce qu'il doit détruire à ce qu'il va devoir créer, etc...? Bref comment terraform s'y retrouve ? Si vous regardez au sein de votre projet, vous devriez voir que terraform à créé un nouveau fichier appelé "terraform.tfstate". Ce fichier va être utilisé par terraform, un peu comme une base de données, il va stocker toutes les infos à l'instant T de votre plan dans ce fichier, il est donc SUPER important mais j'y reviendrai un peu plus tard.
 
 #### Terraform apply
 
