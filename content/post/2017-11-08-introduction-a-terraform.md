@@ -143,53 +143,40 @@ Donc dans votre premier essaie, le plan vous montre que vous n'allez que créer 
 
 #### Terraform apply
 
-This action will actually do the API calls to your cloud provider, if no plan_file is specified terraform will update the state file **before** the apply, and will update after. That's why you better using a plan all the time in case your architecture gets modified between your plan and your apply.
+Cette action va, quant à elle, appliquer les changements que nous avons fait. Si aucun fichier de "plan" est indiqué, terraform va mettre le "state file" avant d'appliquer ces changements. Je vous conseille vivement de sauvegarder vos plan et de les réutiliser pour les "apply" au cas où vous travailler à deux sur la même infra.
+(Si vous comptez travailler à plusieurs sur le même projet, je vous invite à utiliser un "[backend](https://www.terraform.io/docs/backends/index.html)")
 
-### The terraform syntax
+### La syntaxe
 
-The terraform syntax is a common syntax if you used other hashicorps tools before. They use the .hcl format that they created which is JSON superpowered with comments and many other stuff (Ok, I can't find anything else right now, you got a point).
+La syntaxe utilisée dans Terraform est la même que pour tous les outils hashicorp. Ils utilisent le format ".hcl" qu'ils ont créé en se basant sur le format JSON.
 
-To configure our terraform with different providers, variables, or even configure the backends terraform will use to store your state file.
+On peut retrouver deux types de définitions dans le format hcl:
 
-You can find as well those but are to configure terraform and have this syntax `<terraform_keyword> <name> { ... }` :
+* `terraform_keyword name`
+* `terraform_keyword component_type component_id`
 
-* provider : Will provide authentication to the cloud provider
-* variable : Create a variable for the scope of your terraform apply
-* configuration : Used to configure terraform, useful for backends configuration (we'll see that later)
+Le premier est plus souvent utilisé pour des fins de configuration tel que variables, providers, etc... alors que le deuxième est plutôt orienté définition de ressources.
 
-Every things defined with terraform in your cloud provider will have the same structure `<terraform_keyword> <component_type> <component_id> { ... }`
+**Attention**: Si jamais vous changez le component_id entre deux apply, terraform ne va pas détecter que vous avez seulement renommer la ressource et détruira l'existante pour la remplacer avec une nouvelle.
 
-The terraform keyword can vary between:
+#### La section "Provider"
 
-* resource : Create a new component in the cloud using the provider configured
-* data : Will retrieve information about an existing component
+Dans terraform vous devez toujours utiliser un provider, cette section va permettre à terraform de se connecter à un cloud en particulier.
 
-The components type will all be different regarding which cloud provider you're using. The terraform documentation is your friend in this case (I'll not enumerate all of it as there's 100s)
+Dans notre exemple nous avons tout défini dans le fichier mais vous pouvez aussi utiliser des variables d'environnement. Et l'avantage est que vous pouvez même configurer terraform pour se connecter à plusieurs "cloud provider".
 
-And to finish the component_id, can be everything you like, the time you understand what it is. It used by terraform to identify the different components created.
-For example, if we would have defined two different kind of aws_instance, it would have been great to use 2 different component_id such as "front_end" or "back_end" etc...
+#### Les sections "Resources"
 
-**WARNING**: If for any reason you're changing this id, terraform will consider it as a new resource and will remove the exisiting one instead of modifying it.
+Ce sera les sections que vous utiliserez le plus. Les ressources sont les sections qui vont définir les composants que vous voulez créer, modifier dans votre cloud. Il faut savoir qu'une fois la ressource créée, vous pouvez utiliser certains attributs dans la suite de votre project terraform. Par exemple une fois une instance ec2 est créée vous pouvez récupérer son IP ou autre.
 
-#### Provider section
-
-in terraform you'll always need a provider section, you can consider this section as the authentication part of your terraform config.
-Here we did setup all the configuration, but you can set it up with env variables on the machine you're running terraform.
-
-You can of course use multiple providers in case you write your terraform files for azure, aws, vmware, etc...
-
-#### Resources sections
-
-This is where you define all the components you wants to **create** in the cloud. They are provider specific and once they are created you can access to different variables that this ressource will provide you. For example, creating the ec2 instance, we reuse the id of the subnets we created earlier.
-
-Once again, everything is detailed for every resource in the terraform documentation.
+Une fois de plus, je vous invite à aller voir la doc de terraform (il y a plus d'une centaines de ressources avec des variables tout aussi différentes, donc la flemme très cher websurfeu r/se.
 
 #### Interpolation
 
-If you read what I wrote just above in the resources section, you understood that the barbaric syntax used for defining the subnets of our aws_instance is a variable value.
-In terraform you can use strings with ${} to give some logic to the attributes you define. You can reuse ids of components you created (as we did), you can even use loops, conditions, maps, and even some mathematics function.
+Si vous avez étudié un peu le code au dessus, vous avez du voir que nous utilisons une variable pour définir le sous réseau de notre instance ec2.
+Avec terraform, vous pouvez interpoler des variables en utilisant `${}` afin d'avoir un peu de logique dans votre infra (il y a des loops, des conditions et tout!!!).
 
-### Raffined our project
+### Raffiner notre projet
 
 With the time, your project might get bigger, by that I mean, your main.tf file might contains thousands of line, which make it tough to maintain. Let's start with an intuitive approach: cut our main.tf file into pieces.
 
