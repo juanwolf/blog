@@ -21,7 +21,7 @@ First of all, let's install terraform
 ### Installation
 
 * Mac: `brew install terraform`
-* Ubuntu: `sudo apt-get install terraform
+* Ubuntu: `sudo apt-get install terraform`
 * Windows: Download the binary on the terraform download page, and add it to your PATH.
 
 ### Setup your AWS account
@@ -41,7 +41,7 @@ git init
 git remote add origin git://my_git_repo.git
 ```
 
-```terraform
+```
 provider "aws" {
     access_key = "your_access_key"
     secret_key = "your_secret_key"
@@ -91,8 +91,8 @@ resource "aws_security_group" "open_bar" {
     egress {
         from_port   = "0"
         to_port     = "0"
-        cidr_blocks = ["0.0.0.0/0"]
         protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
     }
 }
 
@@ -197,7 +197,7 @@ With the time, your project might get bigger, by that I mean, your main.tf file 
 
 #### Cutting the main.tf
 
-Terraform allows you to create whatever files you want, during a plan or an apply it will try to concatenate all the *.tf files in the current folder in one file. It will solve the dependencies between the different file and should be able to recreate the main.tf file as it was before we cut it in pieces. We just need to be **logical** on how we will do it.
+Terraform allows you to create whatever files you want, during a plan or an apply it will try to concatenate all the `*.tf` files in the current folder in one file. It will solve the dependencies between the different file and should be able to recreate the main.tf file as it was before we cut it in pieces. We just need to be **logical** on how we will do it.
 
 Let's put the provider in a different file first. Let's create a `providers.tf` file in the current folder containing just our aws logging creds.
 
@@ -264,8 +264,8 @@ resource "aws_security_group" "open_bar" {
     egress {
         from_port   = "0"
         to_port     = "0"
-        cidr_blocks = ["0.0.0.0/0"]
         protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
     }
 }
 
