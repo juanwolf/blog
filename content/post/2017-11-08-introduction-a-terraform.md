@@ -291,31 +291,38 @@ Pour cela nous avons les modules !
 
 ## Modules
 
-With modules you can seperate components of your infrastructure inside _modules_ allowing you to prevent any repetition in your infra definition. Really handy when you want to scale up some components of your current infra or when you want to refactor "all the masters".
+Avec les modules vous pouvez séparer _logiquement_ votre infrastructure dans des modules ce qui va vous permettre d'éviter de vous répéter et vous pouvez réutiliser vos modules dans différents projets, etc... Enfin bref c'est super utile si vous voulez augmenter le nombre de composant ou autre, seulement besoin d'incrémenter une variable et le tour est joué.
 
 
 ### Architecture
 
-To start with modules, you juxg need to create a modules folder at the root of your project, and create a folder with the name of the module you want to create. Inside the last folder you just need to create three files and you will have created your first module! Those files are:
+Pour commencer avec les modules, vous devez créer une dossier "modules", et créer un dossier spécifique au module en question. Dans le dernier dossier, vous avez seulement besoin de créer trois fichiers :
 
-* variables.tf: This file contains all the variables you would like to parametrize your module. For example you will pass some vpc_id or some AMIs.
+* variables.tf: Ce fichier contient toutes les variables paramétrant ce module. Par exemple, vous définierez une variable vpc_id, ou des ids d'AMIs.
 
-* main.tf: Like our first main.tf it will contains all the resource definition of your module.
+* main.tf: Comme notre bon vieux main.tf, il va contenir toutes les ressources définissant notre module.
 
-* outputs.tf: Contains all the variables you will need after executing the modules. The most common use is to _output_ the public ips of the future created instances.
+* outputs.tf: Contient toutes les variables dont vous aurez besoin après la création de vos ressources. Par exemple, il est très fréquent d'output les IPs publiques après la création d'instances ec2.
 
-### Using it
+Au cas où ce n'est pas clair:
 
-In our example, the infra is quite simple so this module will be as well. We will just put our simple_instance inside the module. But in a way as we can configure on which subnet, which az it will be.
+```
+mkdir -p modules/my_module
+touch modules/my_module/{variables,main,outputs}.tf
+```
 
-Let's start creating the module.
+### L'utiliser
+
+Dans notre exemple, l'infrastructure est plutôt simple donc le module va l'être tout aussi. On va juste créer notre "simple_instance" au sein de ce module. On va faire en sorte de pouvoir configurer dans quel subnet, on peut installer cette instance.
+
+Commençons par créer le module :
 
 ```
 mkdir -p modules/my_cluster_of_instances
 touch modules/my_cluster_of_instances/{main,variables,output}.tf
 ```
 
-Let's put our definition of the "simple_instance" in the main.tf
+Mettons notre définition de la "simple_instance" dans notre main.tf
 
 
 ```
@@ -329,10 +336,10 @@ resource "aws_instance" "simple_instance" {
 }
 ```
 
-If you saw, I changed the variable to be something defined from the variable.tf file.
-I added a count attribute in case we want to scale up this module
+Comme vous pouvez le voir plus haut, nous avons fait en sorte que toute l'instance soit paramètrable. Nous allons devoir ajouter les variables utilisées dans ce main.tf dans notre variables.tf.
+J'ai ajouté un attribut "count" au cas où nous voulions augmenter le nombre d'instance créée.
 
-Now let's configure the variables:
+Configurons nos variables:
 
 ```
 # variables.tf
@@ -356,6 +363,8 @@ variable "ami_id" {
 }
 ```
 
+Et maintenant, je veux connaître les IPs privées attribuées à mes instances après l'exécution du module. Pour cela:
+
 ```
 # output.tf
 
@@ -364,14 +373,12 @@ output "private_ips" {
 }
 ```
 
-The last one use a wildcard as we don't know how many instances will be created in the module. It means "_Ouput_ a list of the instances's private ips"
+Comme vous pouvez le voir j'ai utilisé une astérisque afin de référencer **toutes** les instances créées.
 
-So now let's create a main.tf at the root of our project calling this module:
+Maintenant nous pouvons créer notre main.tf qui va utiliser ce module :
 
 ```
 # main.tf
-
-# Everything we had a bit earlier ... (vpcs, subnets until the instance resource)
 
 module "awesome_instance" {
     module_path = "modules/my_cluster_of_instances"
@@ -381,69 +388,72 @@ module "awesome_instance" {
     cluster_size = 2 # Here we override the default value
 }
 
-aws_security_group_rule "a_simple_sg_rule" {
-    security_group_id = "${}"
-    type = "ingress"
-    from = 0
-    to_port = 0
-    protocol = -1
-    cidr_block = ["${module.awesome_instance.private_ips}"] # Using here the output of our module
+# Et ici nous pouvons utiliser l'output tel une variable
+# genre ${module.awesome_instance.private_ips}
+
+output "private_ips_of_my_module" {
+    value = ["${module.awesome_instance.private_ips}"]
 }
+
 ```
 
-In a command line:
+Testons :
 
 ```
 terraform get # Will create reference to our module
 terraform plan # Should destroy what we had before
 ```
 
-Sadly terraform will not understand that this module represent your old instance, and will try to remove your old instance to put the two news.
+Malheureusement, terraform ne va comprendre la référence à notre ancienne instance à juste bouger au sein d'un module. Donc encore une fois, terraform va vouloir supprimer l'ancienne pour la remplacer avec une nouvelle.
 
-### Conclusion about project structure
+### Conclusion à propos de la structure d'un projet
 
-So far, the module structure is the best one I met at the moment. I usually comes with few folders at the root of my projects:
+Jusque là, la meilleure structure que j'ai rencontré est celle des modules. Certes elle demande un peu plus d'expérience avec terraform. Dans la plupart de mes projets, je différencie les environnements dans deux dossiers et utilise un pour les modules à la racine, comme ceci:
 
 1. modules/
 2. env1/
 3. env2/
 
-And using envx as a proper seperation between environments. It's really handy when you have a lot of differences between environments.
+PLutôt sympa si vous avez pas mal de différences entre dev et prod par exemple. Le mieux serait d'avoir exactement la même définition, genre un main.tf commun mais seul les variables changent (encore plus dur niveau implémentation)
 
-## Other commands with terraform
+## Autres commandes
 
-To finish this _super_ *long* article, I will briefly speaks about the command we did not see in the article.
+Pour finir cet article _super_ *long*, je vais rapidement vous énoncer quelques commandes que nous n'avons pas encore vu dans l'article.
 
 ### Taint
 
-In terraform you can taint some resources so they will get destroyed at the next apply. Really useful if you want to start from scratch with some components.
+Dans terraform vous pouvez "taint" certaines ressources de votre projet, cela va indiquer à terraform de la supprimer au prochain "apply". Plutôt utile si vous avez des composants qui ont été marqué comme "not healthy" par AWS.
 
-From our module example, we would use it like that:
+En utilisant notre module, nous l'utiliserions comme ceci:
 
-`terraform taint -module=awesome_instance instance.0`
+`terraform taint -module=my_cluster_of_instances simple_instance.0`
 
-So you need to specify to which module you're tainting the ressource from. And after that resource_name.which_one .
-
-> **Warning**: There's no support for wildcard yet according to [this github issue](https://github.com/hashicorp/terraform/issues/)
+> **Attention**: Il n'y a pas encore de support pour les astérisques [this github issue](https://github.com/hashicorp/terraform/issues/)
 
 
 ### Graph
 
-If you have graphviz installed in your laptop, you can create a graph of the terraform resources you define.
+Si vous connaissez graphviz et que vous l'avez installé sur votre machine, vous pouvez créer une graphe réprésentant votre infra.
 
 ### Import
 
-If you created some resources in the UI, adding their definition in your tf project will not be enough. You need to add it to your terraform state using the import command.
+Si jamais vous avez créé un peu d'infrastructure en utilisant l'interface web, ajouter les définitions de ces éléments dans votre projet ne vas pas être suffisant. Terraform ne va comprendre que vous référez à cet élément. C'est pour cela que vous devez utiliser la fonction "import". Elle va ajouter la définition de votre instance au sein du tfstate.
 
-For example if we did create the ec2 instance in the ui. We would add it like that in the tfstate file.
+Par exemple, si nous avions créé l'instance ec2 avec la console, nous l'importerions comme ceci:
 
 ```
- terraform import aws_instance.my_instance the_id_of_the_instance
+ terraform import aws_instance.simple_instance the_id_of_the_instance
 ```
 
 ## Conclusion
 
- There's still much more to say about terraform but I'll stop here as I reached nearly 2500 words...
- We have seen that Terraform is a great tool to manage infrastructure with code. Their .tf format is a really good thing compared to simple json definition. And terraform is quite permissive so you can start with a simple project and finish with hundreds of modules calling each others making the adopotion of the tool quite easy. Anyway I leave you enjoy your `terraform destroy`
+Il y a encore pleins de choses à dire sur terraform et j'ai déjà atteint un nombre de mots conséquent...
+Je ne suis pas un expert non plus, donc je vous invite à regarder sur plusieurs blog, retour d'expérience afin de connaître la meilleure façon d'architecturer un projet terraform :)
+Nous avons vu les bases de l'outil ainsi que sa puissance et sa facilité d'utilisation. Le format utilisé est super intuitif comparé à du JSON. Et terraform est assez maléable pour être accessible à tout niveau d'utilisation.
+Je vous laisse terminer cette article en exécutant un petit
 
- Sur ce, codez bien! Ciao!
+```
+terraform destroy
+```
+
+Sur ce, codez bien! Ciao!
