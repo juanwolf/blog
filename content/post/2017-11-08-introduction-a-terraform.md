@@ -178,13 +178,13 @@ Avec terraform, vous pouvez interpoler des variables en utilisant `${}` afin d'a
 
 ### Raffiner notre projet
 
-With the time, your project might get bigger, by that I mean, your main.tf file might contains thousands of line, which make it tough to maintain. Let's start with an intuitive approach: cut our main.tf file into pieces.
+Avec le temps, votre projet va devenir beaucoup plus gros et confus. Décomposons notre main.tf en plusieurs fichiers afin de nous y retrouver un peu plus.
 
-#### Cutting the main.tf
+#### Décomposons le main.tf
 
-Terraform allows you to create whatever files you want, during a plan or an apply it will try to concatenate all the *.tf files in the current folder in one file. It will solve the dependencies between the different file and should be able to recreate the main.tf file as it was before we cut it in pieces. We just need to be **logical** on how we will do it.
+Terraform vous permet de créer n'importe quels fichier vous voulez. Lors d'un plan ou apply terraform va essayer de regrouper tous vos fichier en un en évaluant un arbre de dépendance entre tous les fichiers.
 
-Let's put the provider in a different file first. Let's create a `providers.tf` file in the current folder containing just our aws logging creds.
+Commençons par mettre le provider dans un nouveau fichier :
 
 ```
 # providers.tf
@@ -196,17 +196,17 @@ provider "aws" {
 }
 ```
 
-You can even commit this file with empty credentials, and just make sure you'll never push it again.
+Vous pouvez commiter ce fichier en omettant les mots de passe (bien sûr !) ou même utiliser les profiles configurables avec la cli d'aws.
 
-Let's test it!
+Essayons :
 
 `terraform apply`
 
 **...**
 
-Ok you're not reading the whole article. I said to test we use **plan not apply**. Well anyway if you fell in the trap, this should have not change anything.
+Ok, vous ne lisez pas l'article en entier. Avant tout "apply" je vous invite à faire un plan avant de détruire quoi que ce soit par erreur. De toute façon même si vous êtes tombé dans la panneau cela n'a pas du changer quoi que ce soit.
 
-Let's continue with our network configuration. Let's put the VPC, gateway in it.
+Continuons avec la configuration réseau. Nous allons mettre la création du VPC et l'internet gateway.
 
 ```
 # vpc.tf
@@ -221,7 +221,7 @@ resource "aws_internet_gateway" "default"{
 
 ```
 
-Let's do the same with subnets, security_groups and instances
+On va faire de même avec les sous-réseaux, security groups et les instances ec2.
 
 ```
 # subnets.tf
@@ -259,7 +259,8 @@ resource "aws_security_group" "open_bar" {
 ```
 # instances.tf
 
-# Yeah I put the ami with instances. No need elsewhere.
+# Oui je mets les ami avec les instances, pas besoin d'un fichier spécifique pour une data.
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -284,9 +285,9 @@ resource "aws_instance" "simple_instance" {
 
 ```
 
-At the end of the refactoring you'll get a nicer structure. This structure will last for few times until you infrastructure starts to get bigger. With time you'll see some limit to it like in case of complex dependencies or even about SOC (Separation of concerns)
+Après avoir tout refactoré, vous aurez une structure un peu plus convenable. Pour des projets de petite envergure, c'est grandement suffisant. Cependant si votre projet commence à grossir encore plus, vous allez besoin de gérer des dépendances un peu plus importantes et vous allez vouloir moduler votre projet de manière plus optimales.
 
-So here comes modules.
+Pour cela nous avons les modules !
 
 ## Modules
 
