@@ -54,8 +54,9 @@ type Post struct {
 }
 
 func writePost(post *Post) {
-	filenameEn := fmt.Sprintf("../content/post/%s.en.md", post.SlugEn)
-	filenameFr := fmt.Sprintf("../content/post/%s.fr.md", post.SlugEn)
+	date := strings.Split(post.PubDate, "T")[0]
+	filenameEn := fmt.Sprintf("../content/post/%s-%s.en.md", date, post.SlugEn)
+	filenameFr := fmt.Sprintf("../content/post/%s-%s.fr.md", date, post.SlugEn)
 	pandocCmdEn := fmt.Sprintf("echo \"%s\" | pandoc -f html -t gfm", post.TextEn)
 	pandocCmdFr := fmt.Sprintf("echo \"%s\" | pandoc -f html -t gfm", post.TextFr)
 	markdownEn, _ := exec.Command("bash", "-c", pandocCmdEn).Output()
@@ -83,10 +84,10 @@ author: "Jean-Loup Adde"
 		tagNamesFr = append(tagNamesFr, "\""+tag.NameFr+"\"")
 	}
 
-	postEn := fmt.Sprintf(metadataTemplate, post.TitleEn, strings.Split(post.PubDate, "T")[0],
+	postEn := fmt.Sprintf(metadataTemplate, post.TitleEn, date,
 		strings.Join(tagNamesEn, ", "), post.Category.NameEn, markdownEn)
 
-	postFr := fmt.Sprintf(metadataTemplate, post.TitleFr, strings.Split(post.PubDate, "T")[0],
+	postFr := fmt.Sprintf(metadataTemplate, post.TitleFr, date,
 		strings.Join(tagNamesFr, ", "), post.Category.NameFr, markdownFr)
 
 	ioutil.WriteFile(filenameFr, []byte(postFr), 0664)
