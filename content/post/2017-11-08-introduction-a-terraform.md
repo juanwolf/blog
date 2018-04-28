@@ -28,11 +28,11 @@ Premièrement, installons terraform
 
 Vous devez aller dans la console AWS et créer un utilisateur spécifique. Pour cela, allez dans la section IAM et créer un utilisateur genre my_terraform ou quelque chose comme ça
 
-### First Project
+### Premier projet
 
-Let's create a main.tf. If you're eligible for the AWS free tier feel free to use that, if not, you'll need to take some cash out (sorry). You need an IAM user as well to get an access key and a secret key.
+Commençon par créer un fichier main.tf. Vous allez devoir créer un utilisateur dans IAM afin de récupérer une clé d'accès et une clé secrète.
 
-We will start from scratch so:
+Commençons from scratch:
 
 ```
 mkdir terraform_lab
@@ -103,103 +103,88 @@ resource "aws_instance" "simple_instance" {
 }
 ```
 
-You see straight what components you're creating with terraform, compared to a bash script full of curls, it's more clear right?
+Vous pouvez voir assez simplement quels components nous avons créé, si on compare ça à un script bash rempli de curl, c'est bien plus clair.
 
-Now let's see how to use this file and dismistied it.
+Maintenant voyons comment utiliser ce fichier et ce qu'il contient.
 
-#### Planning
+#### Plannification
 
-Before doing anything regrettable, let's see what terraform will do. For that:
+Afin de faire quoi que ce soit regrettable, voyons ce que terraform va créer. Pour cela:
 
 `terraform plan`
 
-And you should have an output showing you every resource we gonna create.
+Et vous devriez avoir un immense blob décrivant ce que vous allez créer.
 
-I advise you to save every plan you do before applying it. With this way to proceed, you are sure that what the plan planned will be applied and nothing more/less.
+Je vous conseil de sauvegarder tous vos "plan" avant de les appliquer. De cette manière, vous êtes sûr que ce que le plan à plannifier va être appliqué.
 
-For that, just specify the filename/path where you want to save your plan.
+Pour cela, spécifiez un nom de fichier / chemin où vous voulez sauver votre plan.
 
 `terarform plan -out ./my_aws_plan`
 
-Then after being happy with what the plan will do let's apply it.
+Après avoir vérifié que tout allait bien, on peut appliquer notre plan.
 
 `terraform apply ./my_aws_plans`
 
-And if you go in the console you should see that you have a brand new vpc, a subnet and an instance running.
+Et si vous vous rendez dans la console d'AWS, vous verrez un tout nouveau VPC avec une instance.
 
-Let's destroy all of these the time I explain you what we've just wrote in this main.tf file.
+Détruisons ce que nous venons de faire, le temps que je vous explique ce que contient le main.tf.
 
-For that: `terraform destroy`.
+Pour cela: `terraform destroy`.
 
-And tada, you come back to your original state, super easy isn't it?
+Et voilà! On vient de détruire tous les composants que nous avions précédemment créé, super simple hein?
 
-### What just happened?
+### Euh What the fuck ?
 
 #### Terraform plan
 
-Planning in terraform is the best way to test, supervise and monitor what terraform will do. Everytime you want to test your terraform project -> plan, you'll see syntax /logical errors. PLanning does not prevent on provider issues though. For example you create a subnet with a range like 172.0.0.1/32 (this is just an example) and you define a ec2 instance inside the subnet with a private ip like 192.168.1.1, well terraform will only get the error once you apply your change as AWS will return an error when terraform will do the API call.
+Plannifier est la meilleure forme pour tester, superviser et monitorer ce que terraform va exécuter. Je vous invite à "plan" votre code assez souvent, pour avoir un feedback assez rapide sur les erreurs de syntaxes, etc... Attention cependant terraform ne va pas détecter les erreurs logiques de votre code. Par exemple, si vous créez un subnet avec ce CIDR block 172.0.0.1/32 et que vous définissez une instance ec2 avec une IP hors de ce sous-réseau du genre 192.168.1.1, terraform va seulement détecter le problème une fois que vous allez appliquer vos changements car l'API d'AWS va retourner une erreur.
 
-So in our first try, the terraform plan created only stuff, which is normal as we started from scratch, but how do terraform will know how to modify some infra from the previous run? If you have a look in your project folder, you have a terraform.tfstate file. This is what terraform use to know the state of the components you defined in your main.tf in the cloud.
-
-When you do a plan if this terraform.tfstate file exists, terraform will pull the actual infrastructure configuration, update your tfstate file and compare what's in the tfstate and what you defined in the main.tf and will prompt you what will change once you run the apply.
+Donc dans votre premier essaie, le plan vous montre que vous n'allez que créer de nouvelles ressources (ce qui est logique vous me direz...). Mais comment terraform va savoir ce qu'il doit détruire à ce qu'il va devoir créer, etc...? Bref comment terraform s'y retrouve ? Si vous regardez au sein de votre projet, vous devriez voir que terraform à créé un nouveau fichier appelé "terraform.tfstate". Ce fichier va être utilisé par terraform, un peu comme une base de données, il va stocker toutes les infos à l'instant T de votre plan dans ce fichier, il est donc SUPER important mais j'y reviendrai un peu plus tard.
 
 #### Terraform apply
 
-This action will actually do the API calls to your cloud provider, if no plan_file is specified terraform will update the state file **before** the apply, and will update after. That's why you better using a plan all the time in case your architecture gets modified between your plan and your apply.
+Cette action va, quant à elle, appliquer les changements que nous avons fait. Si aucun fichier de "plan" est indiqué, terraform va mettre le "state file" avant d'appliquer ces changements. Je vous conseille vivement de sauvegarder vos plan et de les réutiliser pour les "apply" au cas où vous travailler à deux sur la même infra.
+(Si vous comptez travailler à plusieurs sur le même projet, je vous invite à utiliser un "[backend](https://www.terraform.io/docs/backends/index.html)")
 
-### The terraform syntax
+### La syntaxe
 
-The terraform syntax is a common syntax if you used other hashicorps tools before. They use the .hcl format that they created which is JSON superpowered with comments and many other stuff (Ok, I can't find anything else right now, you got a point).
+La syntaxe utilisée dans Terraform est la même que pour tous les outils hashicorp. Ils utilisent le format ".hcl" qu'ils ont créé en se basant sur le format JSON.
 
-To configure our terraform with different providers, variables, or even configure the backends terraform will use to store your state file.
+On peut retrouver deux types de définitions dans le format hcl:
 
-You can find as well those but are to configure terraform and have this syntax `<terraform_keyword> <name> { ... }` :
+* `terraform_keyword name`
+* `terraform_keyword component_type component_id`
 
-* provider : Will provide authentication to the cloud provider
-* variable : Create a variable for the scope of your terraform apply
-* configuration : Used to configure terraform, useful for backends configuration (we'll see that later)
+Le premier est plus souvent utilisé pour des fins de configuration tel que variables, providers, etc... alors que le deuxième est plutôt orienté définition de ressources.
 
-Every things defined with terraform in your cloud provider will have the same structure `<terraform_keyword> <component_type> <component_id> { ... }`
+**Attention**: Si jamais vous changez le component_id entre deux apply, terraform ne va pas détecter que vous avez seulement renommer la ressource et détruira l'existante pour la remplacer avec une nouvelle.
 
-The terraform keyword can vary between:
+#### La section "Provider"
 
-* resource : Create a new component in the cloud using the provider configured
-* data : Will retrieve information about an existing component
+Dans terraform vous devez toujours utiliser un provider, cette section va permettre à terraform de se connecter à un cloud en particulier.
 
-The components type will all be different regarding which cloud provider you're using. The terraform documentation is your friend in this case (I'll not enumerate all of it as there's 100s)
+Dans notre exemple nous avons tout défini dans le fichier mais vous pouvez aussi utiliser des variables d'environnement. Et l'avantage est que vous pouvez même configurer terraform pour se connecter à plusieurs "cloud provider".
 
-And to finish the component_id, can be everything you like, the time you understand what it is. It used by terraform to identify the different components created.
-For example, if we would have defined two different kind of aws_instance, it would have been great to use 2 different component_id such as "front_end" or "back_end" etc...
+#### Les sections "Resources"
 
-**WARNING**: If for any reason you're changing this id, terraform will consider it as a new resource and will remove the exisiting one instead of modifying it.
+Ce sera les sections que vous utiliserez le plus. Les ressources sont les sections qui vont définir les composants que vous voulez créer, modifier dans votre cloud. Il faut savoir qu'une fois la ressource créée, vous pouvez utiliser certains attributs dans la suite de votre project terraform. Par exemple une fois une instance ec2 est créée vous pouvez récupérer son IP ou autre.
 
-#### Provider section
-
-in terraform you'll always need a provider section, you can consider this section as the authentication part of your terraform config.
-Here we did setup all the configuration, but you can set it up with env variables on the machine you're running terraform.
-
-You can of course use multiple providers in case you write your terraform files for azure, aws, vmware, etc...
-
-#### Resources sections
-
-This is where you define all the components you wants to **create** in the cloud. They are provider specific and once they are created you can access to different variables that this ressource will provide you. For example, creating the ec2 instance, we reuse the id of the subnets we created earlier.
-
-Once again, everything is detailed for every resource in the terraform documentation.
+Une fois de plus, je vous invite à aller voir la doc de terraform (il y a plus d'une centaines de ressources avec des variables tout aussi différentes, donc la flemme très cher websurfeu r/se.
 
 #### Interpolation
 
-If you read what I wrote just above in the resources section, you understood that the barbaric syntax used for defining the subnets of our aws_instance is a variable value.
-In terraform you can use strings with ${} to give some logic to the attributes you define. You can reuse ids of components you created (as we did), you can even use loops, conditions, maps, and even some mathematics function.
+Si vous avez étudié un peu le code au dessus, vous avez du voir que nous utilisons une variable pour définir le sous réseau de notre instance ec2.
+Avec terraform, vous pouvez interpoler des variables en utilisant `${}` afin d'avoir un peu de logique dans votre infra (il y a des loops, des conditions et tout!!!).
 
-### Raffined our project
+### Raffiner notre projet
 
-With the time, your project might get bigger, by that I mean, your main.tf file might contains thousands of line, which make it tough to maintain. Let's start with an intuitive approach: cut our main.tf file into pieces.
+Avec le temps, votre projet va devenir beaucoup plus gros et confus. Décomposons notre main.tf en plusieurs fichiers afin de nous y retrouver un peu plus.
 
-#### Cutting the main.tf
+#### Décomposons le main.tf
 
-Terraform allows you to create whatever files you want, during a plan or an apply it will try to concatenate all the *.tf files in the current folder in one file. It will solve the dependencies between the different file and should be able to recreate the main.tf file as it was before we cut it in pieces. We just need to be **logical** on how we will do it.
+Terraform vous permet de créer n'importe quels fichier vous voulez. Lors d'un plan ou apply terraform va essayer de regrouper tous vos fichier en un en évaluant un arbre de dépendance entre tous les fichiers.
 
-Let's put the provider in a different file first. Let's create a `providers.tf` file in the current folder containing just our aws logging creds.
+Commençons par mettre le provider dans un nouveau fichier :
 
 ```
 # providers.tf
@@ -211,17 +196,17 @@ provider "aws" {
 }
 ```
 
-You can even commit this file with empty credentials, and just make sure you'll never push it again.
+Vous pouvez commiter ce fichier en omettant les mots de passe (bien sûr !) ou même utiliser les profiles configurables avec la cli d'aws.
 
-Let's test it!
+Essayons :
 
 `terraform apply`
 
 **...**
 
-Ok you're not reading the whole article. I said to test we use **plan not apply**. Well anyway if you fell in the trap, this should have not change anything.
+Ok, vous ne lisez pas l'article en entier. Avant tout "apply" je vous invite à faire un plan avant de détruire quoi que ce soit par erreur. De toute façon même si vous êtes tombé dans la panneau cela n'a pas du changer quoi que ce soit.
 
-Let's continue with our network configuration. Let's put the VPC, gateway in it.
+Continuons avec la configuration réseau. Nous allons mettre la création du VPC et l'internet gateway.
 
 ```
 # vpc.tf
@@ -236,7 +221,7 @@ resource "aws_internet_gateway" "default"{
 
 ```
 
-Let's do the same with subnets, security_groups and instances
+On va faire de même avec les sous-réseaux, security groups et les instances ec2.
 
 ```
 # subnets.tf
@@ -274,7 +259,8 @@ resource "aws_security_group" "open_bar" {
 ```
 # instances.tf
 
-# Yeah I put the ami with instances. No need elsewhere.
+# Oui je mets les ami avec les instances, pas besoin d'un fichier spécifique pour une data.
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -299,37 +285,44 @@ resource "aws_instance" "simple_instance" {
 
 ```
 
-At the end of the refactoring you'll get a nicer structure. This structure will last for few times until you infrastructure starts to get bigger. With time you'll see some limit to it like in case of complex dependencies or even about SOC (Separation of concerns)
+Après avoir tout refactoré, vous aurez une structure un peu plus convenable. Pour des projets de petite envergure, c'est grandement suffisant. Cependant si votre projet commence à grossir encore plus, vous allez besoin de gérer des dépendances un peu plus importantes et vous allez vouloir moduler votre projet de manière plus optimales.
 
-So here comes modules.
+Pour cela nous avons les modules !
 
 ## Modules
 
-With modules you can seperate components of your infrastructure inside _modules_ allowing you to prevent any repetition in your infra definition. Really handy when you want to scale up some components of your current infra or when you want to refactor "all the masters".
+Avec les modules vous pouvez séparer _logiquement_ votre infrastructure dans des modules ce qui va vous permettre d'éviter de vous répéter et vous pouvez réutiliser vos modules dans différents projets, etc... Enfin bref c'est super utile si vous voulez augmenter le nombre de composant ou autre, seulement besoin d'incrémenter une variable et le tour est joué.
 
 
 ### Architecture
 
-To start with modules, you juxg need to create a modules folder at the root of your project, and create a folder with the name of the module you want to create. Inside the last folder you just need to create three files and you will have created your first module! Those files are:
+Pour commencer avec les modules, vous devez créer une dossier "modules", et créer un dossier spécifique au module en question. Dans le dernier dossier, vous avez seulement besoin de créer trois fichiers :
 
-* variables.tf: This file contains all the variables you would like to parametrize your module. For example you will pass some vpc_id or some AMIs.
+* variables.tf: Ce fichier contient toutes les variables paramétrant ce module. Par exemple, vous définierez une variable vpc_id, ou des ids d'AMIs.
 
-* main.tf: Like our first main.tf it will contains all the resource definition of your module.
+* main.tf: Comme notre bon vieux main.tf, il va contenir toutes les ressources définissant notre module.
 
-* outputs.tf: Contains all the variables you will need after executing the modules. The most common use is to _output_ the public ips of the future created instances.
+* outputs.tf: Contient toutes les variables dont vous aurez besoin après la création de vos ressources. Par exemple, il est très fréquent d'output les IPs publiques après la création d'instances ec2.
 
-### Using it
+Au cas où ce n'est pas clair:
 
-In our example, the infra is quite simple so this module will be as well. We will just put our simple_instance inside the module. But in a way as we can configure on which subnet, which az it will be.
+```
+mkdir -p modules/my_module
+touch modules/my_module/{variables,main,outputs}.tf
+```
 
-Let's start creating the module.
+### L'utiliser
+
+Dans notre exemple, l'infrastructure est plutôt simple donc le module va l'être tout aussi. On va juste créer notre "simple_instance" au sein de ce module. On va faire en sorte de pouvoir configurer dans quel subnet, on peut installer cette instance.
+
+Commençons par créer le module :
 
 ```
 mkdir -p modules/my_cluster_of_instances
 touch modules/my_cluster_of_instances/{main,variables,output}.tf
 ```
 
-Let's put our definition of the "simple_instance" in the main.tf
+Mettons notre définition de la "simple_instance" dans notre main.tf
 
 
 ```
@@ -343,10 +336,10 @@ resource "aws_instance" "simple_instance" {
 }
 ```
 
-If you saw, I changed the variable to be something defined from the variable.tf file.
-I added a count attribute in case we want to scale up this module
+Comme vous pouvez le voir plus haut, nous avons fait en sorte que toute l'instance soit paramètrable. Nous allons devoir ajouter les variables utilisées dans ce main.tf dans notre variables.tf.
+J'ai ajouté un attribut "count" au cas où nous voulions augmenter le nombre d'instance créée.
 
-Now let's configure the variables:
+Configurons nos variables:
 
 ```
 # variables.tf
@@ -370,6 +363,8 @@ variable "ami_id" {
 }
 ```
 
+Et maintenant, je veux connaître les IPs privées attribuées à mes instances après l'exécution du module. Pour cela:
+
 ```
 # output.tf
 
@@ -378,14 +373,12 @@ output "private_ips" {
 }
 ```
 
-The last one use a wildcard as we don't know how many instances will be created in the module. It means "_Ouput_ a list of the instances's private ips"
+Comme vous pouvez le voir j'ai utilisé une astérisque afin de référencer **toutes** les instances créées.
 
-So now let's create a main.tf at the root of our project calling this module:
+Maintenant nous pouvons créer notre main.tf qui va utiliser ce module :
 
 ```
 # main.tf
-
-# Everything we had a bit earlier ... (vpcs, subnets until the instance resource)
 
 module "awesome_instance" {
     module_path = "modules/my_cluster_of_instances"
@@ -395,69 +388,72 @@ module "awesome_instance" {
     cluster_size = 2 # Here we override the default value
 }
 
-aws_security_group_rule "a_simple_sg_rule" {
-    security_group_id = "${}"
-    type = "ingress"
-    from = 0
-    to_port = 0
-    protocol = -1
-    cidr_block = ["${module.awesome_instance.private_ips}"] # Using here the output of our module
+# Et ici nous pouvons utiliser l'output tel une variable
+# genre ${module.awesome_instance.private_ips}
+
+output "private_ips_of_my_module" {
+    value = ["${module.awesome_instance.private_ips}"]
 }
+
 ```
 
-In a command line:
+Testons :
 
 ```
 terraform get # Will create reference to our module
 terraform plan # Should destroy what we had before
 ```
 
-Sadly terraform will not understand that this module represent your old instance, and will try to remove your old instance to put the two news.
+Malheureusement, terraform ne va comprendre la référence à notre ancienne instance à juste bouger au sein d'un module. Donc encore une fois, terraform va vouloir supprimer l'ancienne pour la remplacer avec une nouvelle.
 
-### Conclusion about project structure
+### Conclusion à propos de la structure d'un projet
 
-So far, the module structure is the best one I met at the moment. I usually comes with few folders at the root of my projects:
+Jusque là, la meilleure structure que j'ai rencontré est celle des modules. Certes elle demande un peu plus d'expérience avec terraform. Dans la plupart de mes projets, je différencie les environnements dans deux dossiers et utilise un pour les modules à la racine, comme ceci:
 
 1. modules/
 2. env1/
 3. env2/
 
-And using envx as a proper seperation between environments. It's really handy when you have a lot of differences between environments.
+PLutôt sympa si vous avez pas mal de différences entre dev et prod par exemple. Le mieux serait d'avoir exactement la même définition, genre un main.tf commun mais seul les variables changent (encore plus dur niveau implémentation)
 
-## Other commands with terraform
+## Autres commandes
 
-To finish this _super_ *long* article, I will briefly speaks about the command we did not see in the article.
+Pour finir cet article _super_ *long*, je vais rapidement vous énoncer quelques commandes que nous n'avons pas encore vu dans l'article.
 
 ### Taint
 
-In terraform you can taint some resources so they will get destroyed at the next apply. Really useful if you want to start from scratch with some components.
+Dans terraform vous pouvez "taint" certaines ressources de votre projet, cela va indiquer à terraform de la supprimer au prochain "apply". Plutôt utile si vous avez des composants qui ont été marqué comme "not healthy" par AWS.
 
-From our module example, we would use it like that:
+En utilisant notre module, nous l'utiliserions comme ceci:
 
-`terraform taint -module=awesome_instance instance.0`
+`terraform taint -module=my_cluster_of_instances simple_instance.0`
 
-So you need to specify to which module you're tainting the ressource from. And after that resource_name.which_one .
-
-> **Warning**: There's no support for wildcard yet according to [this github issue](https://github.com/hashicorp/terraform/issues/)
+> **Attention**: Il n'y a pas encore de support pour les astérisques [this github issue](https://github.com/hashicorp/terraform/issues/)
 
 
 ### Graph
 
-If you have graphviz installed in your laptop, you can create a graph of the terraform resources you define.
+Si vous connaissez graphviz et que vous l'avez installé sur votre machine, vous pouvez créer une graphe réprésentant votre infra.
 
 ### Import
 
-If you created some resources in the UI, adding their definition in your tf project will not be enough. You need to add it to your terraform state using the import command.
+Si jamais vous avez créé un peu d'infrastructure en utilisant l'interface web, ajouter les définitions de ces éléments dans votre projet ne vas pas être suffisant. Terraform ne va comprendre que vous référez à cet élément. C'est pour cela que vous devez utiliser la fonction "import". Elle va ajouter la définition de votre instance au sein du tfstate.
 
-For example if we did create the ec2 instance in the ui. We would add it like that in the tfstate file.
+Par exemple, si nous avions créé l'instance ec2 avec la console, nous l'importerions comme ceci:
 
 ```
- terraform import aws_instance.my_instance the_id_of_the_instance
+ terraform import aws_instance.simple_instance the_id_of_the_instance
 ```
 
 ## Conclusion
 
- There's still much more to say about terraform but I'll stop here as I reached nearly 2500 words...
- We have seen that Terraform is a great tool to manage infrastructure with code. Their .tf format is a really good thing compared to simple json definition. And terraform is quite permissive so you can start with a simple project and finish with hundreds of modules calling each others making the adopotion of the tool quite easy. Anyway I leave you enjoy your `terraform destroy`
+Il y a encore pleins de choses à dire sur terraform et j'ai déjà atteint un nombre de mots conséquent...
+Je ne suis pas un expert non plus, donc je vous invite à regarder sur plusieurs blog, retour d'expérience afin de connaître la meilleure façon d'architecturer un projet terraform :)
+Nous avons vu les bases de l'outil ainsi que sa puissance et sa facilité d'utilisation. Le format utilisé est super intuitif comparé à du JSON. Et terraform est assez maléable pour être accessible à tout niveau d'utilisation.
+Je vous laisse terminer cette article en exécutant un petit
 
- Sur ce, codez bien! Ciao!
+```
+terraform destroy
+```
+
+Sur ce, codez bien! Ciao!
