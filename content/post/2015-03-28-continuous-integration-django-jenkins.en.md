@@ -16,7 +16,7 @@ So you'll never have this feeling again because all will be
 automatized, you'll just need to do a little click and let jenkins
 rocks :). Let's see how to do that !!!
 
-![](post_preview/20150328_183333_jenkins-django.png)
+![](/post_preview/20150328_183333_jenkins-django.png)
 
 Jenkins
 -------
