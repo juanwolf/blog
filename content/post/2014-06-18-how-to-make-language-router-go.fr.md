@@ -16,7 +16,7 @@ alors cet article est exactement fait pour vous ! N'ayant trouvé aucun
 équivalent répondant à mes attentes, je me suis donc attelé à la tâche
 de le créer. Voyons comment j'ai procédé.
 
-![](/old_blog/20150322_141925_gogogo1.jpg)
+![](/post_preview/20150322_141925_gogogo1.jpg)
 
 ## Quelle arborescence de fichiers choisir ?
 

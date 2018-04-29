@@ -11,7 +11,7 @@ author: "Jean-Loup Adde"
 
 If you asked yourself the same question as me "How could I serve my static files for different languages ?", so this post is exactly for you ! Let's see how I did.
 
-![](/old_blog/20150322_141925_gogogo1.jpg)
+![](/post_preview/20150322_141925_gogogo1.jpg)
 
 ## Which file tree should we choose ?
 It was the first question I asked myself. A lot of solution is possible to solve this problem. In my side, I choosed this file tree:  en, fr, stylesheets, js and img. The directories "en" and "fr" will have the html files translated (We suppose that the equivalent files has the same name),  and the other directories will contain all the css and js.
