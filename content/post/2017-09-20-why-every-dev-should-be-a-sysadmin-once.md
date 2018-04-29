@@ -2,6 +2,8 @@
 title:  "Going to the dark side: Why every dev should do some sysadmin"
 date:   2017-09-20
 tags: ["dev"]
+
+draft: true
 ---
 
 # Going to the dark side: Why every dev should cross the line to join the sys admin side at least once in their carreer

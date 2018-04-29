@@ -2,6 +2,7 @@
 title:  Configuration omnibus pour GitLab CE avec kubernetes
 date:   2017-05-26
 tags: ["kubernetes"]
+draft: true
 ---
 
 # Configuration Omnibus pour GitLab CE avec kubernetes
