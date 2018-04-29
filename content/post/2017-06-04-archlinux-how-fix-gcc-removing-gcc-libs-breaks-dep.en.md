@@ -11,6 +11,8 @@ author: "Jean-Loup Adde"
 
 Hi everyone, I was crossing this issue this morning so let's fix it\!
 
+![](/post_preview/20170604_144529_archlinux-logo-1159446C2C-seeklogo.com.png)
+
 First of all this issue is appearing because I enabled the multilib
 support in my arch config
 (<https://wiki.archlinux.org/index.php/multilib>). To fix this problem

@@ -11,6 +11,9 @@ author: "Jean-Loup Adde"
 
 Salut tout le monde, je viens d'avoir un petit problème en essayant de mettre à jour mon archlinux ce matin; Fixons ça en 2 minutes!
 
+![](/post_preview/20170604_144529_archlinux-logo-1159446C2C-seeklogo.com.png)
+
+
 Premièrement ce problème apparaitra seuelement si vous avez activé le support multilib d'archlinux ([https://wiki.archlinux.org/index.php/multilib](https://wiki.archlinux.org/index.php/multilib)). Pour fixer ce problème vous devez installer tous les paquets gcc en multilib ou aucun, mais pas les deux. Premièrement, trouvons quels paquets foutent le bordel. Utilisez :
 
 ```bash
