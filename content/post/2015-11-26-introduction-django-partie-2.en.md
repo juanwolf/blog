@@ -51,7 +51,9 @@ définis
 [ici](https://github.com/juanwolf/ces2015-django/commit/205a43c29e6d3d09a351246e4f80b3001123fcc0#diff-ac710ad52bd5f9914feeba7ef60d40b0R84).
 On peut voir que la syntaxe est la suivante :
 
+```django
     {% block nom_du_block %} {% endblock %}
+```
 
 Dans les templates fils, nous devrons seulement ajouter du contenu au
 sein de ces deux balises afin de les raffiner.
@@ -63,7 +65,9 @@ Passons maintenant aux nouveautés au sein du fichier home.html
 On peut voir qu'une grande partie du fichier a été supprimée dû à la
 création du template parent. En spécifiant
 
-    {% extends blogengine/include/base.html %}
+```django
+{% extends blogengine/include/base.html %}
+```
 
 Nous précisons à django que ce template étends le template base.html, il
 nous suffit alors dans le template home.html de redéfinir les blocks
@@ -78,19 +82,23 @@ dans la boucle for
 ([ici](https://github.com/juanwolf/ces2015-django/commit/205a43c29e6d3d09a351246e4f80b3001123fcc0#diff-2f7d65f01bb2d1dfb6cb3a1379b2ac1cR21)).
 Cela aurait donné un truc du genre :
 
-    {% for post in posts %}
-        {% include blogengine/include/post.html %}
-    {% endfor %}
+```django
+{% for post in posts %}
+    {% include blogengine/include/post.html %}
+{% endfor %}
+```
 
 Et pour le fichier post.html
 
-    {# @vars post : The instance of post to render #}
-    <div class=post-preview>
-        <h2 class=post-title>{{ post.title }}</h2>
-        <h3 class=post-subtitle>{{ post.content }}</h3>
-        <p class=post-subtitle>{{ post.content }}</p>
-        <p class=post-meta>{% trans Posté par :  %}{{ post.author }}</p>
-    </div>
+```django
+{# @vars post : The instance of post to render #}
+<div class=post-preview>
+    <h2 class=post-title>{{ post.title }}</h2>
+    <h3 class=post-subtitle>{{ post.content }}</h3>
+    <p class=post-subtitle>{{ post.content }}</p>
+    <p class=post-meta>{% trans Posté par :  %}{{ post.author }}</p>
+</div>
+```
 
 ## Les formulaires
 
@@ -104,11 +112,13 @@ ModelForm de django.forms, et de préciser dans la classe Meta de quel
 model il s'agit et quel champs nous voulons renseigner dans le
 formulaire. Au cas où ce n'est pas clair :
 
-    class PostForm(ModelForm):
+```python
+class PostForm(ModelForm):
 
-        class Meta:
-            model = Post
-            fields = ['title', 'content', 'author']
+    class Meta:
+        model = Post
+        fields = ['title', 'content', 'author']
+```
 
 On ne peut faire plus conçis \!
 
@@ -136,6 +146,7 @@ Pour créer une règle de validation pour un champs particulier, vous
 devez créer une fonction préfixé de clean et suffixé de
 le_nom_du_field. Exemple :
 
+```python
     # Dans la classe PostForm
     def clean_content(self):
         # Le code nous permettant de vérifier que le champs est valide.
@@ -145,6 +156,7 @@ le_nom_du_field. Exemple :
             raise ValidationError(JE DÉTESTE LES EPINARDS PUTAIN DE MERDE)
 
         return content
+```
 
 C'est un exemple, vous ne trouverez pas d'exemple comme celui-là sur le
 github, j'ai laissé le comportement par défaut des formulaires qui est
@@ -161,12 +173,14 @@ fait, le widget est l'entité qui va s'occuper de générer l'HTML de notre
 champs. Du coup supposons qu'on veuille appliquer une classe commune à
 tous nos champs. On ferait alors:
 
+```python
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)
         for key, field in six.iteritems(self.fields):
             self.fields[key].widget.attrs['class'] = 'ma-super-classe-css'
             # On peut aussi ajouter n'importe quel type d'attribut tel que placeholder par exemple
             self.fields[key].widget.attrs['placeholder'] = 'placeholder'
+```
 
 Avec ce système, on peut alors créer des widget spécifiques pour chaque
 élément non communs à django. Par exemple, vous utilisez un plugin
@@ -184,7 +198,7 @@ particulier, il nous suffit au sein de cette classe de précisier, le
 model, le template et l'url en cas d'ajout réussi en base pour faire
 fonctionner cette vue. Exemple :
 
-```
+```python
 class CreatePost(CreateView):
     model = Post
     form_class = PostForm
@@ -206,7 +220,9 @@ N'oublions pas de définir l'url de notre vue ! On reprends le principe
 que nous avons vu pour la vue PostListView, dans
 [blogengine/urls](https://github.com/juanwolf/ces2015-django/commit/4d68d728f049f955069daae04e7bf835e794e46c#diff-ed9ef2250d32df28fb81d6a3a6a3e887R9):
 
+```python
     url(r'post/create', CreatePost.as_view(), name='create-post'),
+```
 
 Vous pouvez voir que sur le commit, j'ai fait une légère erreur à mettre
 un / au début de l'url (À NE PAS REPRODUIRE CHEZ VOUS).
@@ -220,9 +236,11 @@ form. Cette variable a été injectée dans le contexte de la vue
 CreatePost (comportement par défaut des Create, Delete, Update view). Au
 sein du template, nous pouvons looper sur les champs comme ceci :
 
-    {% for field in form %}
-        {{ field }}
-    {% endfor %}
+```django
+{% for field in form %}
+    {{ field }}
+{% endfor %}
+```
 
 Ceci va simplement afficher le widget de chaque champs de notre
 formulaire. Le problème est que si nous avons des erreurs dans notre
@@ -230,16 +248,19 @@ formulaire, elles ne seront pas affichées. Heureusement, que chaque
 champs contient la liste d'erreurs qui lui est associé. On peut alors
 afficher les erreurs comme ceci :
 
-    {% for field in form %}
-        {% if field.errors %}
-            <ul>
-                {% for error in field.errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        {{ field }}
-    {% endfor %}
+
+```django
+{% for field in form %}
+    {% if field.errors %}
+        <ul>
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {{ field }}
+{% endfor %}
+```
 
 ## Déploiement
 
@@ -257,38 +278,41 @@ de même une sacré ligne !).
 
 On va décortiquer le fichier ligne par ligne :
 
-    [uwsgi]
-    plugins = python # On indique le plugin uwsgi utilisé (uwsgi peut lancer du php, perl, ruby..)
-    # Django-related settings
-    # Le chemin vers le projet django
-    chdir           = /home/juanwolf/ces2015-django/
-    # Le fichier wsgi.py (application mère .wsgi)
-    module          = ces2015.wsgi:application
-    # Le chemin vers le virtualenv du projet
-    home            = /home/juanwolf/ces2015-django/virtualenv/
+```ini
+[uwsgi]
+plugins = python # On indique le plugin uwsgi utilisé (uwsgi peut lancer du php, perl, ruby..)
+# Django-related settings
+# Le chemin vers le projet django
+chdir           = /home/juanwolf/ces2015-django/
+# Le fichier wsgi.py (application mère .wsgi)
+module          = ces2015.wsgi:application
+# Le chemin vers le virtualenv du projet
+home            = /home/juanwolf/ces2015-django/virtualenv/
 
-    # process-related settings
-    # master
-    master          = true
-    # Le nombre de processus utilisé
-    processes       = 10
-    # Emplacement de la socket unix qu'on va utiliser avec nginx
-    socket          = /home/juanwolf/ces2015-django/ces2015.sock
-    # Les permissions de la socket
-    chmod-socket    = 644
+# process-related settings
+# master
+master          = true
+# Le nombre de processus utilisé
+processes       = 10
+# Emplacement de la socket unix qu'on va utiliser avec nginx
+socket          = /home/juanwolf/ces2015-django/ces2015.sock
+# Les permissions de la socket
+chmod-socket    = 644
 
-    uid = juanwolf
-    gid = juanwolf
-    chown_socket = juanwolf
-    # On transforme les processus en démo en précisant l'emplacement du fichier de log
-    daemonize = /var/log/uwsgi/ces2015.log
-    # On nettoie l'environnement quand on éteint le processus
-    vacuum          = true
+uid = juanwolf
+gid = juanwolf
+chown_socket = juanwolf
+# On transforme les processus en démo en précisant l'emplacement du fichier de log
+daemonize = /var/log/uwsgi/ces2015.log
+# On nettoie l'environnement quand on éteint le processus
+vacuum          = true
+```
 
 si on execute la commande :
 
-    uwsgi --ini ces2015.ini
-
+```bash
+uwsgi --ini ces2015.ini
+```
 Notre serveur devrait se lancer \! Par ailleurs, nous devons le lier à
 nginx et utiliser la socket précédemment créée. Pour cela, on va faire
 un petit peu de config nginx.
@@ -296,18 +320,20 @@ un petit peu de config nginx.
 Créons premièrement le lien entre nginx et la socket. Dans votre
 nginx.conf, ajoutez :
 
-    upstream ces {
-        server unix:///chemin/vers/la/socket/django.sock;
-    }
-    server {
-        listen 80;
-        server_name awesome.django.fr;
+```nginx
+upstream ces {
+    server unix:///chemin/vers/la/socket/django.sock;
+}
+server {
+    listen 80;
+    server_name awesome.django.fr;
 
-        location / {
-            uwsgi_pass ces;
-            include /etc/nginx/uwsgi_params;
-        }
+    location / {
+        uwsgi_pass ces;
+        include /etc/nginx/uwsgi_params;
     }
+}
+```
 
 On relance nginx, et là, on a notre serveur nginx qui tourne et on peut
 accéder à notre application toute fraichement installée !!!!

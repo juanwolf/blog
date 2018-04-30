@@ -302,7 +302,7 @@ notre rootHandler. Et voilà !
 
 En effet. Faisons ça !
 
-```
+```go
 package main
 import (
  	"github.com/gorilla/mux"

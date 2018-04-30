@@ -52,7 +52,7 @@ purpose. Here I'll have only one group \"Browse\" because they are
 the only functionnality I'll test. So inside the Scenario.scala
 file:
 
-```
+```scala
 // Object grouping all the browsing features
 object Browse {
 
@@ -90,7 +90,7 @@ personas.
 
 In the Scenario.scala
 
-```
+```scala
 class Scenario extends Simulation {
     // Vars to configure personas (this section will be with feeders)
     val indexPageUrl = "http://blog.juanwolf.fr"
@@ -137,7 +137,7 @@ for 100 users at the same time
 Inside the Scenario.scala file
 
 
-```
+```scala
 class Scenario extends Simulation {
   /* ... */
 
@@ -155,7 +155,7 @@ To execute our simulation, we need to use the gatling maven plugin. So
 inside our pom.xml, we'll add this lines :
 
 
-```
+```xml
 <build>
     <plugins>
         <plugin>
@@ -219,7 +219,7 @@ something more sophisticated as JSON, Map, you can specify the jsonPath
 of the element you want to reach. Example: I save in my session these
 variables:
 
-```
+```scala
 record1: Map(
            "loc" -> "http://www.example.com/",
            "lastmod" -> "2005-01-01",
@@ -252,7 +252,7 @@ previous example, i'll declare it like that:
 With this API, you'll be able to manipulate the session directly
 with getters and setters. Example:
 
-```
+```scala
 val scn = scenario("Test Sessions")
     .exec(session => {
         session.set("key", "value").set("Bernard", "Lama")
@@ -276,7 +276,7 @@ Firstly, you can specify the HTTP code you're expecting after each
 request. I'll used this kind of checks in the personas creation. Let's
 see it again:
 
-```
+```scala
 val goToIndex = exec(
     http("Go To Index")
     .get(indexPageUrl)
@@ -294,7 +294,7 @@ define how many user we are injecting in the simulation).
 
 If we change the Scenario.scala file, it will be:
 
-```
+```scala
 setUp(
     websurfers.inject(atOnceUsers(150))
 ).assertions(
@@ -360,7 +360,7 @@ To debug, it's quite simple. You need to use the exec and the session
 variable to debug what you want (in fact it's not that simple).
 Example:
 
-```
+```scala
 val scn = scenario("My awesome scenario")
    .exec(http(""))
    .exec(session => {

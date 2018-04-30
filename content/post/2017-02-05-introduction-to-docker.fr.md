@@ -28,18 +28,19 @@ C'est assez simple d'installer docker sur archlinux :
 
 Sur Ubuntu, c'est un poil plus compliqué :
 
-    sudo apt-get install apt-transport-https \\
-      ca-certificates
+```bash
+sudo apt-get install apt-transport-https \\
+  ca-certificates
 
-    curl -fsSL https://yum.dockerproject.org/gpg | \\
-    sudo apt-key add - # We add the docker's official GPG key
+curl -fsSL https://yum.dockerproject.org/gpg | \\
+sudo apt-key add - # We add the docker's official GPG key
 
-    sudo add-apt-repository \\
-    "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
+sudo add-apt-repository \\
+"deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
 
-    sudo apt-get update
-    sudo apt-get -y install docker-engine
-
+sudo apt-get update
+sudo apt-get -y install docker-engine
+```
 
 
 Maintenant vous pouvez utiliser des commandes comme root. Pour pouvoir
@@ -150,43 +151,35 @@ sur notre docker host. Par contre ce coup-ci, on va y aller
 tranquillement.
 
 
-
-    docker pull mongo
-    docker run --name mongodb -d mongo
-
+```bash
+docker pull mongo
+docker run --name mongodb -d mongo
+```
 
 
 Si vous exécutez `docker ps`, vous devriez avoir un résultat comme
 celui-là:
 
 
-```
+```bash
     CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                          NAMES
-    2a68c669eeb        mongo               "/entrypoint.sh mo..."   6 seconds ago       Up 4 seconds        27017/tcp                      mongodb
+    2a68c669eeb         mongo               "/entrypoint.sh mo..."   6 seconds ago       Up 4 seconds        27017/tcp                      mongodb
 ```
 
 
 Comme vous pouvez le voir, on vient de créer un container nommé
 `mongodb` avec la docker image de mongo !
 
-
-
 Maintenant, nous allons essayer de créer un admin dans la base données.
-
-
 
 Pour cela :
 
-
-
     docker exec -it mongodb mongo admin
-
-
 
 Vous devriez avoir une sortie comme celle-ci :
 
 
-``
+```bash
 connecting to: admin
 >
 ```
@@ -194,33 +187,26 @@ connecting to: admin
 
 Maintenant exécutons la commande :
 
-
-
 `db.createUser({ user: 'etienne', pwd:'ALaTienne', roles: [{role: "userAdminAnyDatabase", db: "admin"}]})`
-
-
 
 et normalement, vous devriez avoir ça :
 
 
-
-    Successfully added user: {
-      "user" : "etienne",
-      "roles" : [
-          {
-              "role" : "userAdminAnyDatabase",
-              "db" : "admin"
-          }
-      ]
-    }
-
-
+```bash
+Successfully added user: {
+  "user" : "etienne",
+  "roles" : [
+      {
+          "role" : "userAdminAnyDatabase",
+          "db" : "admin"
+      }
+  ]
+}
+```
 
 Pour résumer ce que nous venons de faire, On peut exécuter des commandes
 au sein d'un container, si le binaire est au sein du container, il nous
 suffit de lancer
-
-
 
 `docker exec -it my_container my_command --m my_parameter`
 
@@ -247,11 +233,7 @@ Essayons, on verra après :
     docker stop mongodb
     docker rm mongodb
 
-
-
 Lol, pas de panique, tout va bien, docker a juste réagit comme ça:
-
-
 
 !["Spongebob](http://i.giphy.com/5YO4km322zuNy.gif)
 
@@ -270,16 +252,10 @@ dossiers sur notre docker host grâce à ce que l'on appelle des
 Créons donc un volume docker lié à notre container afin de garder les
 données de notre mongodb.
 
-
-
 Construisons de nouveau notre docker container mais cette fois-ci avec
 le volume :
 
-
-
 `docker run --name mongodb -d -v /somehwere/youwant/to/store/the/data/on/the/host:/data/db mongo`
-
-
 
 Comme vous pouvez le voir, nous avons ajouter l'option -v (pour volume,
 CAPTAIN OBVIOUS IN DA PLACE) avec ce pattern
@@ -287,37 +263,23 @@ CAPTAIN OBVIOUS IN DA PLACE) avec ce pattern
 rendez dans le dossier que vous avez spécifié, vous pouvez voir que des
 données sont apparues dans ce dossier. Pas mal, hein ?
 
-
-
 De cette façon, nous pouvons supprimer le container sans problème et lié
 de nouveau notre dossier pour récupérer un container dans le même état
 que celui que nous avons détruit.
-
-
 
 Si nous ne voulions pas accéder aux données et simplement avoir un
 "espace de stockage" au sein de docker, on aurait pu créer un
 volume docker de cette façon :
 `docker volume create --name mongodb_data`
 
-
-
 et le lié de cette manière à notre container :
 
-
-
 `docker run --name mongodb -d -v mongodb_data:/data/db mongo`
-
-
 
 Vous pouvez aussi lister les volumes que vous avez sur votre docker
 host. Pour cela, utilisez :
 
-
-
 `docker volume list`
-
-
 
 Et bizarrement; vous devriez avoir plusieurs volumes... J'ai menti, je
 m'excuse. Quand vous utilisez une image docker contenant des
@@ -349,12 +311,12 @@ pour se connecter à notre base de données.
 
 Ajoutons notre utilisateur admin comme dans la deuxième section.
 
-    docker exec -it mongodb mongo admin
-    > db.createUser({ user: 'etienne', pwd:'ALaTienne', roles: [{role: "userAdminAnyDatabase", db: "admin"}]})
+```bash
+docker exec -it mongodb mongo admin
+> db.createUser({ user: 'etienne', pwd:'ALaTienne', roles: [{role: "userAdminAnyDatabase", db: "admin"}]})
+```
 
 Maintenant créons notre client.
-
-
 
 `docker run -it --rm --link mongodb:mongo mongo mongo -u etienne -p ALaTienne --authenticationDatabase admin mongo/apero`
 
@@ -380,40 +342,24 @@ J'ai expliqué `docker run -it --rm --link mongodb:mongo`, le prochain
 `mongo` est le nom de l'image docker. Et le reste est la commande que
 nous allons exécuter dans le container.
 
-
-
 Retournons taffer un peu. Vous devriez avoir un curseur vous attendant,
 du genre :
 
-
-
 `>`
-
-
 
 Écrivons :
 
-
-
 `> db.getName()`
-
-
 
 et vous devriez avoir :
 
-
-
 `apero`
-
-
 
 Bref, on vient juste de lier deux container. *MAIS* Si vous avez regardé
 la documentation, vous avez sûrement vu que cette manière de faire est
 dépassée... Vu qu'on est des mecs au top de la technologie digitale,
 révolutionnant l'industrie et le monde dans une ambiance bien plus que
 familiale, faisons ça de manière classe!
-
-
 
 Avec docker vous pouvez créer des réseaux pour vos applications et ils
 vous facilitent la liaison de vos containers ! Par exemple, si vous
@@ -426,11 +372,7 @@ toujours configurer votre application afin qu'elle utilise les noms de
 domaines correspondant aux noms de vos docker containers mais ça marche
 plutôt bien.
 
-
-
 Créons en donc un ! Pour créer un réseau, utilisez cette commande :
-
-
 
 `docker network create mongo_network`
 
@@ -447,11 +389,7 @@ container mongo et reconstruisons le.
 
 Et pour le client...
 
-
-
 `docker run -it --rm --network=mongo_network mongo mongo --host=mongodb -u etienne -p ALaTienne --authenticationDatabase admin mongo/apero`
-
-
 
 Et tout devrait refonctionner comme précédemment ! Importante chose à
 savoir, vous ne pouvez plus utiliser les labels comme nous avions fait
@@ -481,7 +419,7 @@ application](https://github.com/juanwolf/hello-cli).
 
 Premièrement, nous allons coder le cli.py. Le code :
 
-```
+```python
 #!/bin/env python
 
 if __name__ == '__main__':
@@ -492,8 +430,6 @@ if __name__ == '__main__':
 Maintenant nous pouvons ajouter le Dockerfile pour construire notre
 application.
 
-
-
 La première étape qui est sûrement la plus importante est de choisir sur
 quelle image nous allons baser notre dockerfile. On peut commencer avec
 une image d'ubuntu ou directement utiliser une image optimisée pour
@@ -501,13 +437,11 @@ python. La dernière image sera la plus facile à utiliser car nous
 n'aurons pas besoin d'installer de dépendance vu que tout sera contenu
 dans l'image python de base.
 
-
-
 Créons donc notre `Dockerfile` là où vous avez créé le fichier `cli.py`
 :
 
 
-```
+```docker
 # The docker image we base our one from
 FROM python:3.6
 # Information of the maintainer of this file
@@ -542,7 +476,7 @@ répertoire courant (d'où le `.`) avec le nom `hello_cli`. Si tout
 s'est bien passé, vous devriez avoir une sortie du genre:
 
 
-```
+```bash
 Sending build context to Docker daemon 35.33 kB
 Step 1 : FROM python:3.6
 3.6: Pulling from library/python

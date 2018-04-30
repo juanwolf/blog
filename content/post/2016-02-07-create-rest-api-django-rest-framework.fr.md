@@ -83,9 +83,11 @@ Pour l'installation vous avez deux choix, installer depuis pip ou de
 l'installer depuis github. On va se contenter de la première. Activer
 votre virtualenv, nous allons commencer !
 
-    pip install djangorestframework
-    pip install markdown
-    pip install django-filter
+```bash
+pip install djangorestframework
+pip install markdown
+pip install django-filter
+```
 
 Ou sinon vous pouvez les ajouter dans votre fichier requirements.txt de
 votre projet.
@@ -94,7 +96,9 @@ Maintenant créons une nouvelle application pour développer notre API !
 Ouvrez un terminal, déplacez vous à la racine de votre projet django et
 tapez:
 
-    python manage.py startapp api
+```
+python manage.py startapp api
+```
 
 Si tout c'est bien passé, vous devriez avoir un dossier avec un dossier
 migrations, et des fichiers models.py, views.py, apps.py, tests.py,
@@ -128,7 +132,7 @@ poster des articles :/)
 Dans api/views.py
 
 
-```
+```python
 # api/views.py
 from blogengine import models
 from api import serializers
@@ -170,7 +174,7 @@ Voilà ce que l'on aurait pu écrire si les ModelSerializer n'existaient
 pas ! On va juste avoir besoin de spécifier le modèle et le djrf
 va s'occuper de créer les champs à la volée. Plutôt cool:
 
-```
+```python
 # api/serializers.py
 
 
@@ -217,7 +221,7 @@ Créer un serializer qui sera imbriqué directement dans notre
 PostSerializer !
 
 
-```
+```python
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Category
@@ -233,7 +237,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 ```
 
-```
+```json
 {
     "id": 12,
     "pub_date": "2015-12-26T15:24:10Z",
@@ -260,7 +264,7 @@ révolutionne le monde de la création de l'API depuis maintenant, pfiou,
 longtemps. Je veux bien sûr parler de 'depth'.
 
 
-```
+```python
 
 class PostSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
@@ -292,7 +296,7 @@ catégorie aux articles, nous allons avoir n requêtes faites en bases de
 plus pour n articles au sein du JSON de retour. Pourquoi ? Pour
 l'affichage de votre json, le django rest framework va faire:
 
-```
+```python
 # 1
 nested_obj = post.category
 # 2
@@ -312,7 +316,7 @@ récupérer les articles.
  Pour cela, rendons nous dans le fichier api/views.py.
 
 
-```
+```python
 # api/views.py
 
 class PostViewSet(ReadOnlyModelViewSet):
@@ -340,7 +344,7 @@ Si l'on créé au sein de notre fichier api/urls.py un routeur tel
 que:
 
 
-```
+```python
 api/urls.py
 
 from rest_framework import routers
@@ -381,7 +385,7 @@ d'applications django dans le settings.py.
 Et pour finir, nous allons inclure les urls swagger dans notre urls.py
 
 
-```
+```python
 #juanwolf_s_blog/urls.py
 urlpatterns = [
     '',

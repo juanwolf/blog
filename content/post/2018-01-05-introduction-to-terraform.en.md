@@ -76,151 +76,117 @@ free to use that, if not, you'll need to take some cash out (sorry). You
 need an IAM user as well to get an access key and a secret key.
 
 
-
 We will start from scratch so:
 
+```bash
+mkdir terraform_lab
+cd terraform_lab
+git init
+git remote add origin git://my_git_repo.git
+```
 
 
-    mkdir terraform_lab
-		cd terraform_lab
-		git init
-		git remote add origin git://my_git_repo.git
+```tf
+provider "aws" {
+    access_key = "your_access_key"
+    secret_key = "your_secret_key"
+    region     = "eu-west-1" # You can change the region for the one your prefer
+}
 
+# Nice copy pasta from the doc (https://www.terraform.io/docs/providers/aws/r/instance.html)
+data "aws_ami" "ubuntu" {
+  most_recent = true
 
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
+  }
 
-    provider "aws" {
-		    access_key = "your_access_key"
-		    secret_key = "your_secret_key"
-		    region     = "eu-west-1" # You can change the region for the one your prefer
-		}
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
 
-		# Nice copy pasta from the doc (https://www.terraform.io/docs/providers/aws/r/instance.html)
-		data "aws_ami" "ubuntu" {
-		  most_recent = true
+  owners = ["099720109477"] # Canonical
+}
 
-		  filter {
-		    name   = "name"
-		    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
-		  }
+resource "aws_vpc" "default" {
+    cidr_block = "172.16.0.0/16"
+}
 
-		  filter {
-		    name   = "virtualization-type"
-		    values = ["hvm"]
-		  }
+resource "aws_internet_gateway" "default"{
+    vpc_id = "${aws_vpc.default.id}"
+}
 
-		  owners = ["099720109477"] # Canonical
-		}
+resource "aws_subnet" "default" {
+    vpc_id     = "${aws_vpc.default.id}"
+    cidr_block = "172.16.0.0/16" # Just one big subnet covering the whole VPC. Of course do not use that in production.
+}
 
-		resource "aws_vpc" "default" {
-		    cidr_block = "172.16.0.0/16"
-		}
+resource "aws_security_group" "open_bar" {
+    name = "open_bar"
+    description = "Allow all connections inbound and outbound"
+    vpc_id = "${aws_vpc.default.id}"
+    ingress {
+        from_port   = "0"
+        to_port     = "0"
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    egress {
+        from_port   = "0"
+        to_port     = "0"
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+}
 
-		resource "aws_internet_gateway" "default"{
-		    vpc_id = "${aws_vpc.default.id}"
-		}
-
-		resource "aws_subnet" "default" {
-		    vpc_id     = "${aws_vpc.default.id}"
-		    cidr_block = "172.16.0.0/16" # Just one big subnet covering the whole VPC. Of course do not use that in production.
-		}
-
-		resource "aws_security_group" "open_bar" {
-		    name = "open_bar"
-		    description = "Allow all connections inbound and outbound"
-		    vpc_id = "${aws_vpc.default.id}"
-		    ingress {
-		        from_port   = "0"
-		        to_port     = "0"
-		        protocol    = "-1"
-		        cidr_blocks = ["0.0.0.0/0"]
-		    }
-		    egress {
-		        from_port   = "0"
-		        to_port     = "0"
-		        protocol    = "-1"
-		        cidr_blocks = ["0.0.0.0/0"]
-		    }
-		}
-
-		resource "aws_instance" "simple_instance" {
-		    ami  = "${data.aws_ami.ubuntu.id}"
-		    instance_type = "t2.micro"
-		    subnet_id = "${aws_subnet.default.id}"
-		}
-
-
+resource "aws_instance" "simple_instance" {
+    ami  = "${data.aws_ami.ubuntu.id}"
+    instance_type = "t2.micro"
+    subnet_id = "${aws_subnet.default.id}"
+}
+```
 
 You see straight what components you're creating with terraform,
 compared to a bash script full of curls, it's more clear right?
 
-
-
 Now let's see how to use this file and dismistied it.
 
-
-
 #### Planning
-
-
 
 Before doing anything regrettable, let's see what terraform will do. For
 that:
 
-
-
 `terraform plan`
-
-
 
 And you should have an output showing you every resource we gonna
 create.
-
-
 
 I advise you to save every plan you do before applying it. With this way
 to proceed, you are sure that what the plan planned will be applied and
 nothing more/less.
 
-
-
 For that, just specify the filename/path where you want to save your
 plan.
 
-
-
 `terarform plan -out ./my_aws_plan`
-
-
 
 Then after being happy with what the plan will do let's apply it.
 
-
-
 `terraform apply ./my_aws_plans`
-
-
 
 And if you go in the console you should see that you have a brand new
 vpc, a subnet and an instance running.
 
-
-
 Let's destroy all of these the time I explain you what we've just wrote
 in this main.tf file.
 
-
-
 For that: `terraform destroy`.
-
-
 
 And tada, you come back to your original state, super easy isn't it?
 
-
-
 ### What just happened?
-
-
 
 #### Terraform plan
 
@@ -233,8 +199,6 @@ instance inside the subnet with a private ip like 192.168.1.1, well
 terraform will only get the error once you apply your change as AWS will
 return an error when terraform will do the API call.
 
-
-
 So in our first try, the terraform plan created only stuff, which is
 normal as we started from scratch, but how do terraform will know how to
 modify some infra from the previous run? If you have a look in your
@@ -242,14 +206,10 @@ project folder, you have a terraform.tfstate file. This is what
 terraform use to know the state of the components you defined in your
 main.tf in the cloud.
 
-
-
 When you do a plan if this terraform.tfstate file exists, terraform will
 pull the actual infrastructure configuration, update your tfstate file
 and compare what's in the tfstate and what you defined in the main.tf
 and will prompt you what will change once you run the apply.
-
-
 
 #### Terraform apply
 
@@ -348,8 +308,6 @@ aws\_instance is a variable value. In terraform you can use strings with
 of components you created (as we did), you can even use loops,
 conditions, maps, and even some mathematics function.
 
-
-
 ### Raffined our project
 
 With the time, your project might get bigger, by that I mean, your
@@ -357,11 +315,7 @@ main.tf file might contains thousands of line, which make it tough to
 maintain. Let's start with an intuitive approach: cut our main.tf file
 into pieces.
 
-
-
 #### Cutting the main.tf
-
-
 
 Terraform allows you to create whatever files you want, during a plan or
 an apply it will try to concatenate all the `*.tf` files in the current
@@ -369,127 +323,109 @@ folder in one file. It will solve the dependencies between the different
 file and should be able to recreate the main.tf file as it was before we
 cut it in pieces. We just need to be **logical** on how we will do it.
 
-
-
 Let's put the provider in a different file first. Let's create a
 `providers.tf` file in the current folder containing just our aws
 logging creds.
 
 
+```tf
+# providers.tf
 
-    # providers.tf
-
-		provider "aws" {
-		    access_key = "your_access_key"
-		    secret_key = "your_secret_key"
-		    region     = "eu-west-1"
-		}
-
-
+provider "aws" {
+    access_key = "your_access_key"
+    secret_key = "your_secret_key"
+    region     = "eu-west-1"
+}
+```
 
 You can even commit this file with empty credentials, and just make sure
 you'll never push it again.
 
-
-
 Let's test it!
-
-
 
 `terraform apply`
 
-
-
 **...**
-
-
 
 Ok you're not reading the whole article. I said to test we use **plan
 not apply**. Well anyway if you fell in the trap, this should have not
 change anything.
 
-
-
 Let's continue with our network configuration. Let's put the VPC,
 gateway in it.
 
+```tf
+# vpc.tf
 
+resource "aws_vpc" "default" {
+    cidr_block = "172.16.0.0/16"
+}
 
-    # vpc.tf
-
-		resource "aws_vpc" "default" {
-		    cidr_block = "172.16.0.0/16"
-		}
-
-		resource "aws_internet_gateway" "default"{
-		    vpc_id = "${aws_vpc.default.id}"
-		}
-
-
-
+resource "aws_internet_gateway" "default"{
+    vpc_id = "${aws_vpc.default.id}"
+}
+```
 
 Let's do the same with subnets, security\_groups and instances
 
+```tf
+# subnets.tf
+
+resource "aws_subnet" "default" {
+    vpc_id     = "${aws_vpc.default.id}"
+    cidr_block = "172.16.0.0/16" # Just one big subnet covering the whole VPC. Of course do not use that in production.
+}
+```
+
+```tf
+# security_groups.tf
+
+resource "aws_security_group" "open_bar" {
+    name = "open_bar"
+    description = "Allow all connections inbound and outbound"
+    vpc_id = "${aws_vpc.default.id}"
+    ingress {
+        from_port   = "0"
+        to_port     = "0"
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    egress {
+        from_port   = "0"
+        to_port     = "0"
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+}
+```
 
 
-    # subnets.tf
+```tf
+# instances.tf
 
-		resource "aws_subnet" "default" {
-		    vpc_id     = "${aws_vpc.default.id}"
-		    cidr_block = "172.16.0.0/16" # Just one big subnet covering the whole VPC. Of course do not use that in production.
-		}
+# Yeah I put the ami with instances. No need elsewhere.
+data "aws_ami" "ubuntu" {
+  most_recent = true
 
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
+  }
 
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
 
+  owners = ["099720109477"] # Canonical
+}
 
-    # security_groups.tf
-
-		resource "aws_security_group" "open_bar" {
-		    name = "open_bar"
-		    description = "Allow all connections inbound and outbound"
-		    vpc_id = "${aws_vpc.default.id}"
-		    ingress {
-		        from_port   = "0"
-		        to_port     = "0"
-		        protocol    = "-1"
-		        cidr_blocks = ["0.0.0.0/0"]
-		    }
-		    egress {
-		        from_port   = "0"
-		        to_port     = "0"
-		        protocol    = "-1"
-		        cidr_blocks = ["0.0.0.0/0"]
-		    }
-		}
-
-
-
-
-    # instances.tf
-
-		# Yeah I put the ami with instances. No need elsewhere.
-		data "aws_ami" "ubuntu" {
-		  most_recent = true
-
-		  filter {
-		    name   = "name"
-		    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
-		  }
-
-		  filter {
-		    name   = "virtualization-type"
-		    values = ["hvm"]
-		  }
-
-		  owners = ["099720109477"] # Canonical
-		}
-
-		resource "aws_instance" "simple_instance" {
-		    ami  = "${data.aws_ami.ubuntu.id}"
-		    instance_type = "t2.micro"
-		    subnet_id = "${aws_subnet.default.id}"
-		}
-
+resource "aws_instance" "simple_instance" {
+    ami  = "${data.aws_ami.ubuntu.id}"
+    instance_type = "t2.micro"
+    subnet_id = "${aws_subnet.default.id}"
+}
+```
 
 
 
@@ -498,27 +434,17 @@ structure will last for few times until you infrastructure starts to get
 bigger. With time you'll see some limit to it like in case of complex
 dependencies or even about SOC (Separation of concerns)
 
-
-
 So here comes modules.
-
-
 
 Modules
 -------
-
-
 
 With modules you can seperate components of your infrastructure inside
 *modules* allowing you to prevent any repetition in your infra
 definition. Really handy when you want to scale up some components of
 your current infra or when you want to refactor "all the masters".
 
-
-
 ### Architecture
-
-
 
 To start with modules, you juxg need to create a modules folder at the
 root of your project, and create a folder with the name of the module
@@ -552,119 +478,104 @@ way as we can configure on which subnet, which az it will be.
 
 Let's start creating the module.
 
-
-
     mkdir -p modules/my_cluster_of_instances
 		touch modules/my_cluster_of_instances/{main,variables,output}.tf
-
-
 
 Let's put our definition of the "simple\_instance" in the main.tf
 
 
+```tf
+# main.tf
 
-    # main.tf
-
-		resource "aws_instance" "simple_instance" {
-		    ami  = "${var.ami_id}"
-		    instance_type = "${var.instance_type}"
-		    subnet_id = "${var.subnet_ids}"
-		    count = "${cluster_size}"
-		}
-
-
+resource "aws_instance" "simple_instance" {
+    ami  = "${var.ami_id}"
+    instance_type = "${var.instance_type}"
+    subnet_id = "${var.subnet_ids}"
+    count = "${cluster_size}"
+}
+```
 
 If you saw, I changed the variable to be something defined from the
 variable.tf file. I added a count attribute in case we want to scale up
 this module
 
-
-
 Now let's configure the variables:
 
+```tf
+# variables.tf
+
+variable "subnet_ids" {
+    description = "The list of subnet id"
+}
+
+variable "cluster_size" {
+    description "The number of instance you want"
+    default = 1
+}
+
+variable "instance_type" {
+    description = "The type of instance you want"
+    default = "t2.micro"
+}
+
+variable "ami_id" {
+    description = "The AMI to use on these instances"
+}
 
 
-    # variables.tf
 
-		variable "subnet_ids" {
-		    description = "The list of subnet id"
-		}
+# output.tf
 
-		variable "cluster_size" {
-		    description "The number of instance you want"
-		    default = 1
-		}
-
-		variable "instance_type" {
-		    description = "The type of instance you want"
-		    default = "t2.micro"
-		}
-
-		variable "ami_id" {
-		    description = "The AMI to use on these instances"
-		}
-
-
-
-    # output.tf
-
-		output "private_ips" {
-		    value = ["${aws_instance.simple_instance.*.private_ip}"]
-		}
-
+output "private_ips" {
+    value = ["${aws_instance.simple_instance.*.private_ip}"]
+}
+```
 
 
 The last one use a wildcard as we don't know how many instances will be
 created in the module. It means "*Ouput* a list of the instances's
 private ips"
 
-
-
 So now let's create a main.tf at the root of our project calling this
 module:
 
 
+```tf
+# main.tf
 
-    # main.tf
+# Everything we had a bit earlier ... (vpcs, subnets until the instance resource)
 
-		# Everything we had a bit earlier ... (vpcs, subnets until the instance resource)
+module "awesome_instance" {
+    module_path = "modules/my_cluster_of_instances"
+    ami_id = "${data.aws_ami.ubuntu.id}"
+    subnet_id = "${aws_subnet.default.id}"
+    instance_type = "t2.micro" # No need of this line as there's a default value
+    cluster_size = 2 # Here we override the default value
+}
 
-		module "awesome_instance" {
-		    module_path = "modules/my_cluster_of_instances"
-		    ami_id = "${data.aws_ami.ubuntu.id}"
-		    subnet_id = "${aws_subnet.default.id}"
-		    instance_type = "t2.micro" # No need of this line as there's a default value
-		    cluster_size = 2 # Here we override the default value
-		}
-
-		aws_security_group_rule "a_simple_sg_rule" {
-		    security_group_id = "${}"
-		    type = "ingress"
-		    from = 0
-		    to_port = 0
-		    protocol = -1
-		    cidr_block = ["${module.awesome_instance.private_ips}"] # Using here the output of our module
-		}
-
+aws_security_group_rule "a_simple_sg_rule" {
+    security_group_id = "${}"
+    type = "ingress"
+    from = 0
+    to_port = 0
+    protocol = -1
+    cidr_block = ["${module.awesome_instance.private_ips}"] # Using here the output of our module
+}
+```
 
 
 In a command line:
 
 
-
-    terraform get # Will create reference to our module
-		terraform plan # Should destroy what we had before
-
-
+```bash
+terraform get # Will create reference to our module
+terraform plan # Should destroy what we had before
+```
 
 Sadly terraform will not understand that this module represent your old
 instance, and will try to remove your old instance to put the two news.
 
-
-
 ### Conclusion about project structure
-
-
 
 So far, the module structure is the best one I met at the moment. I
 usually comes with few folders at the root of my projects:

@@ -95,36 +95,27 @@ github. I'll just show the first one because it's the most common and
 the easiest one. It's time to activate your virtualenv , let's start!
 
 
-
-    pip install djangorestframework
-    pip install markdown
-    pip install django-filter
-
-
+```bash
+pip install djangorestframework
+pip install markdown
+pip install django-filter
+```
 
 Or you can add them in your requirements.txt.
-
-
 
 Now, let's create a new application to develop our API! Open a
 terminal, go to the root of your django project and write:
 
-
-
-    python manage.py startapp api
-
-
+```bash
+python manage.py startapp api
+```
 
 If everything went ok, you should have a new folder called api,
 containing a migrations folder, files like models.py, admin.py,
 views.py, etc... You can delete the models.py, admin.py, and the
 migrations folder.
 
-
-
 ### Viewsets
-
-
 
  Viewsets will act like views in django. They will allow us to
 request the databasefor a specific request. We can compare them of
@@ -150,7 +141,7 @@ would be a shame if everyone could be able to post articles :/)
 In api/views.py
 
 
-```
+```python
 # api/views.py
 from blogengine import models
 from api import serializers
@@ -175,7 +166,7 @@ We'll add inside our serializer, fields that we'll need. We could then
 write our serializer like that:
 
 
-```
+```python
 # api/serializers.py
 
 from rest_framework import serializers
@@ -194,7 +185,7 @@ django rest framework will take care to create the fields automatically.
 Pretty cool:
 
 
-```
+```python
 # api/serializers.py
 
 from rest_framework import serializers
@@ -235,7 +226,7 @@ Let's start with the first point:
 
 Create a nested serializer that will be added in our PostSerializer!
 
-```
+```python
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Category
@@ -250,7 +241,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ('title', 'text', 'category')
 ```
 
-```
+```json
 {
     "id": 12,
     "pub_date": "2015-12-26T15:24:10Z",
@@ -276,7 +267,7 @@ revolutionize the world of API's creation. I'm speking of the famous
 'depth' attribute.
 
 
-```
+```python
 class PostSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
 
@@ -307,7 +298,7 @@ post JSON. As I said before we'll have N posts displayed but N + 1
 requests done to the database. Why? To display our JSON, the django rest
 framework will do:
 
-```
+```python
 # 1
 nested_obj = post.category
 # 2
@@ -324,7 +315,7 @@ elements / foreign keys elements.
 
  For that, let's go to the api/views.py file.
 
-```
+```python
 # api/views.py
 
 
@@ -352,7 +343,7 @@ of create the urls.
  If we create a router like that in our api/urls.py:
 
 
-```
+```python
 # api/urls.py
 
 from rest_framework import routers
@@ -392,7 +383,7 @@ application list in our settings.py.
 To finish, we need to include swagger urls to our urls.py
 
 
-```
+```python
 #juanwolf_s_blog/urls.py
 urlpatterns = [
     '',

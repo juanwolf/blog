@@ -55,7 +55,9 @@ Ajoutez au sein au dossier myproject/ (premier du nom) un troisième
 dossier appelé templates. Rendez vous au sein du fichier settings.py du
 dossier myproject (second du nom). Ajoutez-y :
 
+```python
     TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+```
 
 vous voilà donc parer à créer vos templates. Je vous conseille
 d'organiser vos templates par application, c'est un moyen simple de ne

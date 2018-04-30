@@ -65,8 +65,10 @@ a 6MB/s connection) There’s more than 50000 commits so it’ll take time
 
 Anyway once that’s done, let’s look for some aws code:
 
-    cd kubernetes
-    grep -r -i aws .
+```bash
+cd kubernetes
+grep -r -i aws .
+```
 
 Bloody heel, that’s a lot. Let’s reduce that to the go files.
 
@@ -86,47 +88,51 @@ file is the one, the criminal.
 Let’s have a look into it. After a search on nodeName, we can find a
 nice structure:
 
-    type awsInstance struct {
-        ec2 EC2
-        // id in AWS
-        awsID string
+```go
+type awsInstance struct {
+    ec2 EC2
+    // id in AWS
+    awsID string
 
-        // node name in k8s
-        nodeName types.NodeName
+    // node name in k8s
+    nodeName types.NodeName
 
-        // availability zone the instance resides in
-        availabilityZone string
+    // availability zone the instance resides in
+    availabilityZone string
 
-        // ID of VPC the instance resides in
-        vpcID string
+    // ID of VPC the instance resides in
+    vpcID string
 
-        // ID of subnet the instance resides in
-        subnetID string
+    // ID of subnet the instance resides in
+    subnetID string
 
-        // instance type
-        instanceType string
-    }
+    // instance type
+    instanceType string
+}
+```
 
 We are getting close\! How this nodeName gets setted though…
 
-    // newAWSInstance creates a new awsInstance object
-    func newAWSInstance(ec2Service EC2, instance *ec2.Instance) *awsInstance {
-        az :=
-        if instance.Placement != nil {
-            az = aws.StringValue(instance.Placement.AvailabilityZone)
-        }
-        self := &awsInstance{
-            ec2:              ec2Service,
-            awsID:            aws.StringValue(instance.InstanceId),
-            nodeName:         mapInstanceToNodeName(instance),
-            availabilityZone: az,
-            instanceType:     aws.StringValue(instance.InstanceType),
-            vpcID:            aws.StringValue(instance.VpcId),
-            subnetID:         aws.StringValue(instance.SubnetId),
-        }
-
-        return self
+```go
+// newAWSInstance creates a new awsInstance object
+func newAWSInstance(ec2Service EC2, instance *ec2.Instance) *awsInstance {
+    az :=
+    if instance.Placement != nil {
+        az = aws.StringValue(instance.Placement.AvailabilityZone)
     }
+    self := &awsInstance{
+        ec2:              ec2Service,
+        awsID:            aws.StringValue(instance.InstanceId),
+        nodeName:         mapInstanceToNodeName(instance),
+        availabilityZone: az,
+        instanceType:     aws.StringValue(instance.InstanceType),
+        vpcID:            aws.StringValue(instance.VpcId),
+        subnetID:         aws.StringValue(instance.SubnetId),
+    }
+
+    return self
+}
+```
 
 Ok, so the aws instance is getting its node name using the
 mapInstanceToNodeName function, so close, I am burning. Let’s search for
@@ -138,10 +144,12 @@ and
 
 ## The murderer
 
-    // mapInstanceToNodeName maps a EC2 instance to a k8s NodeName, by extracting the PrivateDNSName
-    func mapInstanceToNodeName(i *ec2.Instance) types.NodeName {
-        return types.NodeName(aws.StringValue(i.PrivateDnsName))
-    }
+```go
+// mapInstanceToNodeName maps a EC2 instance to a k8s NodeName, by extracting the PrivateDNSName
+func mapInstanceToNodeName(i *ec2.Instance) types.NodeName {
+    return types.NodeName(aws.StringValue(i.PrivateDnsName))
+}
+```
 
 BOOM. Here it is. This code is forcing the nodeName to be set as the
 PrivateDnsName of your ec2 instance. **sigh** what a journey.

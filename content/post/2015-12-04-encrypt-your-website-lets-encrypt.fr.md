@@ -86,34 +86,38 @@ nginx.conf).
 
 Normalement votre config actuelle doit ressembler à ça :
 
-    http {
-        server {
-            server_name blablablabla.com;
-            listen 80;
+```nginx
+http {
+    server {
+        server_name blablablabla.com;
+        listen 80;
 
-            ///
-        }
-        # Etc...
-
+        ///
     }
+    # Etc...
+
+}
+```
 
 Ce que nous allons faire et de dire à nginx que si on a uen requete en
 HTTP, on le redirige vers HTTPS.
 
-    http {
-        server {
-            listen 80;
-            server_name blablablabla.com;
-            return 301 https://;
-        }
+```nginx
+http {
+    server {
+        listen 80;
+        server_name blablablabla.com;
+        return 301 https://;
     }
+}
+```
 
 On utilise 301 afin de notifier que notre site est passé en HTTPS (301 =
 Permanently moved)
 
 Maintenant on va configurer nginx pour écouter les entrées https
 
-```
+```nginx
  http {
     server {
         listen 80;

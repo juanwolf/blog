@@ -93,11 +93,11 @@ import (
  	"log"
 )
 func main() {
-     router := mux.NewRouter()
-     http.Handle("/", router)
-     if err := http.ListenAndServe(":8080", nil); err != nil {
-         log.Fatal("ListenAndServe: ", err)
-     }
+    router := mux.NewRouter()
+    http.Handle("/", router)
+    if err := http.ListenAndServe(":8080", nil); err != nil {
+        log.Fatal("ListenAndServe: ", err)
+    }
 }
 ```
 
@@ -198,7 +198,7 @@ It explains why we had to split our strings. We use the function previously crea
 We had to show the language in the URL, right ?
 Yeah you're right ! I already forgot. Let's do this!
 
-```
+```golang
 package main
 
 import (
@@ -224,7 +224,8 @@ func detectLanguageFromHTTPHeader(r *http.Request) string {
  	header := r.Header
  	languagesRequest := header.Get("Accept-Language")
  	languages := strings.Split(languagesRequest, ",")
- 	fmt.Println(languages) 	for _, language := range languages {
+ 	fmt.Println(languages)
+  for _, language := range languages {
  		language_without_quality := strings.Split(language, ";")[0]
  		language_detected := strings.Split(language_without_quality, "-")[0]
  		if languageMap[language_detected] == true {

@@ -34,9 +34,11 @@ actually). Anyway\!
 
 Let's be quick, here's the fix:
 
-    # Run this command in the directory you would run docker-compose
-    docker network list | grep tools | sed -r 's/^([0-9a-z]+).*$/\1/' | xargs docker network inspect  --format {{ range .IPAM.Config }}{{ .Gateway }}{{ end }}
-    # Add the IP to your ALLOWED_IPS and the djdt should now appeared :)
+```bash
+# Run this command in the directory you would run docker-compose
+docker network list | grep tools | sed -r 's/^([0-9a-z]+).*$/\1/' | xargs docker network inspect  --format {{ range .IPAM.Config }}{{ .Gateway }}{{ end }}
+# Add the IP to your ALLOWED_IPS and the djdt should now appeared :)
+```
 
 Ok that was the ultra short answer and please don't think I wrote that
 without thinking, it took me one hour to figure out this bloody line
@@ -64,13 +66,14 @@ command from the docker folder). We can check that by running `docker
 network ls`. Now we can run `ip addr` and we should see that a new
 interface appeared on the local machine. In my case it looks like
     that:
-
-    4: br-57a6b1bdcf1a: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
-        link/ether 02:42:98:71:d9:10 brd ff:ff:ff:ff:ff:ff
-        inet 172.19.0.1/16 scope global br-57a6b1bdcf1a
-           valid_lft forever preferred_lft forever
-        inet6 fe80::42:98ff:fe71:d910/64 scope link
-           valid_lft forever preferred_lft forever
+```bash
+4: br-57a6b1bdcf1a: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
+    link/ether 02:42:98:71:d9:10 brd ff:ff:ff:ff:ff:ff
+    inet 172.19.0.1/16 scope global br-57a6b1bdcf1a
+       valid_lft forever preferred_lft forever
+    inet6 fe80::42:98ff:fe71:d910/64 scope link
+       valid_lft forever preferred_lft forever
+```
 
 The good interface will be your network\_id (showed with `docker network
 ls`) prefixed by br\_. And the IP displayed there is the one allocated

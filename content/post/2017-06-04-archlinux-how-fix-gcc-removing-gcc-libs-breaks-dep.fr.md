@@ -22,7 +22,7 @@ sudo pacman -Qs gcc
 
 Vous devriez avoir un output comme ça :
 
-```
+```bash
 local/gcc 6.3.1-2 (base-devel)
   The GNU Compiler Collection - C and C++ frontends
 local/gcc-libs-multilib 6.3.1-2

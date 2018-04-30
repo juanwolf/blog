@@ -51,7 +51,7 @@ que tous les différents liens disponibles sur le site, la page
 d'accueil, une page tag, une page de catégorie et une page
 d'article. Au sein du fichier Scenario.scala:
 
-```
+```scala
 // Object regroupant les fonctions de navigations sur le site
 object Browse {
 
@@ -96,7 +96,7 @@ définissons nos personas !
 
 Au sein du fichier Scenario.scala
 
-```
+```scala
 class Scenario extends Simulation {
     // Variables de configurations (voir section feeders)
     val indexPageUrl = "http://blog.juanwolf.fr"
@@ -144,7 +144,7 @@ pour faire tourner ce site :/).
 
 Au sein du fichier Scenario.scala
 
-```
+```scala
 class Scenario extends Simulation {
   /*...*/
 
@@ -159,7 +159,7 @@ class Scenario extends Simulation {
 Pour exécuter notre simulation, on va devoir utiliser le plugin maven de
 gatling. Au sein de votre pom.xml, on va ajouter ces lignes:
 
-```
+```xml
 <build>
     <plugins>
         <plugin>
@@ -227,7 +227,7 @@ cas où vous auriez stocké un json, objet, map, vous pouvez utiliser le
 jsonpath associé pour accéder à cet élément. Exemple: Je stocke au sein
 de la session ces variables :
 
-```
+```scala
 record1: Map(
            "loc" -> "http://www.example.com/",
            "lastmod" -> "2005-01-01",
@@ -262,13 +262,13 @@ Avec cet API, vous pourrez manipuler directement les attributs au sein
 de la session grâce à des getter et setter. Exemple :
 
 ```scala
-    val scn = scenario("Test Sessions")
-    .exec(session => {
-        session.set("key", "value").set("Bernard", "Lama")
-        // On affiche le contenu de la session pour la clé "Bernard"
-        println("BERNARD" + session("Bernard").as[String])
-        session
-    })
+val scn = scenario("Test Sessions")
+.exec(session => {
+    session.set("key", "value").set("Bernard", "Lama")
+    // On affiche le contenu de la session pour la clé "Bernard"
+    println("BERNARD" + session("Bernard").as[String])
+    session
+})
 ```
 
 **WARNING:** Faites attention aux getters, si vous ne spécifiez pas le
@@ -285,12 +285,12 @@ Premièrement, vous pouvez spécifier quel est le code de retour HTTP
 attendu. On a déjà rencontré ce type de verification au sein du fichier
 User/WebSurfer. Reprenons un appel de ce fichier :
 
-```
-    val goToIndex = exec(
+```scala
+val goToIndex = exec(
     http("Go To Index")
     .get(indexPageUrl)
     .check(status.is(200))
- )
+)
 ```
 
 C'est à ça que correspond la dernière partie. Nous allons vérifier que
@@ -304,8 +304,8 @@ de la configuration des scénarios.
 
 Si on reprend le fichier Scenario.scala précédent, cela nous donnera :
 
-```
-    setUp(
+```scala
+setUp(
     websurfers.inject(atOnceUsers(150))
 ).assertions(
     // On veut que la globalité du blog réponde en moins d'une seconde et demie

@@ -90,13 +90,15 @@ Normally your config should look like that:
 What we'll od it's to say to nginx that all http request will be
 redirected to https.
 
-    http {
-        server {
-            listen 80;
-            server_name blablablabla.com;
-            return 301 https://;
-        }
+```nginx
+http {
+    server {
+        listen 80;
+        server_name blablablabla.com;
+        return 301 https://;
     }
+}
+```
 
 We use a 301 code response to notify that our site is passed to HTTPS
 (yeah you can be proud of that, BUT NOT YET WE'RE NOT DONE) (By the way:
@@ -104,7 +106,7 @@ We use a 301 code response to notify that our site is passed to HTTPS
 
 Now let's configure our virtual server:
 
-```
+```nginx
  http {
     server {
         listen 80;
@@ -128,7 +130,9 @@ Now let's configure our virtual server:
 
 We restart the nginx
 
-    sudo systemctl restart nginx
+```bash
+sudo systemctl restart nginx
+```
 
 ET VOILÀ, you know have a server running through HTTPS. Life is so easy.
 

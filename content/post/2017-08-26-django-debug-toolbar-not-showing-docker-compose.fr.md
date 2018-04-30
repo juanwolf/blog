@@ -34,9 +34,11 @@ sais pas :/ M'enfin bref\!
 Pour ceux qui veulent une réponse
     rapide:
 
-    # Utilisez cette commande dans le dossier où vous utilisez docker-compose d'habitude
-    docker network list | grep tools | sed -r 's/^([0-9a-z]+).*$/\1/' | xargs docker network inspect  --format {{ range .IPAM.Config }}{{ .Gateway }}{{ end }}
-    # Ajoutez l'IP dans votre variable ALLOWED_IPS et la djdt devrait apparaitre :)
+```bash
+# Utilisez cette commande dans le dossier où vous utilisez docker-compose d'habitude
+docker network list | grep tools | sed -r 's/^([0-9a-z]+).*$/\1/' | xargs docker network inspect  --format {{ range .IPAM.Config }}{{ .Gateway }}{{ end }}
+# Ajoutez l'IP dans votre variable ALLOWED_IPS et la djdt devrait apparaitre :)
+```
 
 Ok c’était pour la réponse rapide mais bon cette commande magique m'a
 pris tout de même pas mal de temps.
@@ -70,12 +72,14 @@ une nouvelle interface est apparue sur la machine. Dans mon elle
 ressemble a
     ça:
 
-    4: br-57a6b1bdcf1a: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
-        link/ether 02:42:98:71:d9:10 brd ff:ff:ff:ff:ff:ff
-        inet 172.19.0.1/16 scope global br-57a6b1bdcf1a
-           valid_lft forever preferred_lft forever
-        inet6 fe80::42:98ff:fe71:d910/64 scope link
-           valid_lft forever preferred_lft forever
+```bash
+4: br-57a6b1bdcf1a: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
+    link/ether 02:42:98:71:d9:10 brd ff:ff:ff:ff:ff:ff
+    inet 172.19.0.1/16 scope global br-57a6b1bdcf1a
+       valid_lft forever preferred_lft forever
+    inet6 fe80::42:98ff:fe71:d910/64 scope link
+       valid_lft forever preferred_lft forever
+```
 
 La bonne interface va être le reseau\_id (que vous pouvez connaître
 grâce à `docker network ls`) préfixé par br\_. Et l'IP affichée est
