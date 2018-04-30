@@ -16,6 +16,8 @@ theme = "jane"
 paginate = 10
 copyright = ""
 
+googleAnalytics = "UA-116906295-2"
+
 [author]
     name = "Jean-Loup Adde"
 
@@ -26,7 +28,7 @@ copyright = ""
 
 [params]
     author = "Jean-Loup Adde"
-    description = "Personal blog theme powered by Hugo"
+    description = "Personal blog about software engineering and video games"
     githubUsername = "#juanwolf"
     accent = "#009688"
     showBorder = true
