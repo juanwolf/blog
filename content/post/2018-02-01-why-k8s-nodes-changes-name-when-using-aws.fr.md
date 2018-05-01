@@ -146,7 +146,7 @@ and
 
 ## The murderer
 
-```
+```go
 // mapInstanceToNodeName maps a EC2 instance to a k8s NodeName, by extracting the PrivateDNSName
 func mapInstanceToNodeName(i *ec2.Instance) types.NodeName {
     return types.NodeName(aws.StringValue(i.PrivateDnsName))
