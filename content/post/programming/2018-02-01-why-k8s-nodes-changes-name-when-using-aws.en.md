@@ -5,6 +5,10 @@ date: 2018-02-01
 tags: ["docker", "kubernetes"]
 categories: ["Programming"]
 
+slug: "why-k8s-nodes-changes-name-when-using-aws"
+aliases:
+  -  "/programming/why-k8s-nodes-changes-name-when-using-aws/"
+
 draft: false
 author: "Jean-Loup Adde"
 ---

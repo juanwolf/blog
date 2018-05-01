@@ -4,6 +4,9 @@ title: How to make a language router with Go?
 date: 2014-06-18
 tags: ["Go"]
 categories: ["Programming"]
+slug: "how-to-make-language-router"
+aliases:
+  = /programming/how-to-make-language-router/
 
 draft: false
 author: "Jean-Loup Adde"

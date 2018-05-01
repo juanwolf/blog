@@ -5,6 +5,10 @@ date: 2016-03-27
 tags: ["Jenkins", "ionic"]
 categories: ["Programming"]
 
+slug: how-automatically-push-ionic-app-google-play
+aliases:
+  - /programming/ow-automatically-push-ionic-app-google-play/
+
 draft: false
 author: "Jean-Loup Adde"
 ---

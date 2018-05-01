@@ -5,6 +5,10 @@ date: 2018-01-05
 tags: ["Go", "operations"]
 categories: ["Programming"]
 
+slug: introduction-to-terraform
+aliases:
+  - "/programming/introduction-to-terraform/"
+
 draft: false
 author: "Jean-Loup Adde"
 ---

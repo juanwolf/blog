@@ -5,6 +5,10 @@ date: 2017-02-26
 tags: ["Go", "ops"]
 categories: ["Programmation"]
 
+slug: comment-dockerizer-une-application
+aliases:
+  - /programmation/comment-dockerizer-une-application/
+
 draft: false
 author: "Jean-Loup Adde"
 ---

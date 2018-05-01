@@ -4,6 +4,10 @@ date: 2014-10-19
 tags: ["Django"]
 categories: ["Programming"]
 
+slug: how-to-create-404-page-django
+aliases:
+  - /programming/how-to-create-404-page-django
+
 draft: false
 author: "Jean-Loup Adde"
 ---

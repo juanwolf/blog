@@ -5,6 +5,10 @@ date: 2014-06-18
 tags: ["Go"]
 categories: ["Programmation"]
 
+slug: comment-creer-router-langue-avec-go
+aliases:
+- /programmation/comment-creer-router-langue-avec-go
+
 draft: false
 author: "Jean-Loup Adde"
 ---

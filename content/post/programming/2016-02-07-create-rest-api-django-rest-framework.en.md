@@ -5,6 +5,10 @@ date: 2016-02-07
 tags: ["Django", "django REST framework"]
 categories: ["Programming"]
 
+slug: create-rest-api-django-rest-framework
+aliases:
+  - /programming/create-rest-api-django-rest-framework
+
 draft: false
 author: "Jean-Loup Adde"
 ---

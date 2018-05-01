@@ -4,6 +4,10 @@ date: 2015-03-28
 tags: ["Django", "Jenkins"]
 categories: ["Programming"]
 
+slug: continuous-integration-django-jenkins
+aliases:
+  - /programming/continuous-integration-django-jenkins/
+
 draft: false
 author: "Jean-Loup Adde"
 ---

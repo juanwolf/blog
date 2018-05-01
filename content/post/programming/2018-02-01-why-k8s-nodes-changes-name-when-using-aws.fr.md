@@ -5,6 +5,10 @@ date: 2018-02-01
 tags: ["docker", "kubernetes"]
 categories: ["Programmation"]
 
+slug: "pourquoi-noeuds-k8s-changent-nom-avec-aws"
+aliases:
+  - "/programmation/pourquoi-noeuds-k8s-changent-nom-avec-aws/"
+
 draft: false
 author: "Jean-Loup Adde"
 ---

@@ -5,6 +5,10 @@ date: 2015-10-21
 tags: ["Jenkins", "scala"]
 categories: ["Programming"]
 
+slug: spray-your-web-application-gatling
+aliases:
+  - /programming/spray-your-web-application-gatling/
+
 draft: false
 author: "Jean-Loup Adde"
 ---

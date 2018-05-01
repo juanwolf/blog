@@ -5,6 +5,10 @@ date: 2017-02-26
 tags: ["Go", "operations"]
 categories: ["Programming"]
 
+slug: how-to-dockerize-application
+aliases:
+  - /programming/how-to-dockerize-application
+
 draft: false
 author: "Jean-Loup Adde"
 ---

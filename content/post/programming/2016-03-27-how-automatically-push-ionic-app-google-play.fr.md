@@ -5,6 +5,10 @@ date: 2016-03-27
 tags: ["Jenkins", "ionic"]
 categories: ["Programmation"]
 
+slug: integration-continue-ionic-avec-jenkins
+aliases:
+  - /programmation/integration-continue-ionic-avec-jenkins/
+
 draft: false
 author: "Jean-Loup Adde"
 ---

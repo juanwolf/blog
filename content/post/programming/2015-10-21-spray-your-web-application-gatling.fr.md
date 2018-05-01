@@ -5,6 +5,10 @@ date: 2015-10-21
 tags: ["Jenkins", "scala"]
 categories: ["Programmation"]
 
+slug: mitraillez-votre-web-application-avec-gatling
+aliases:
+  - /programmation/mitraillez-votre-web-application-avec-gatling/
+
 draft: false
 author: "Jean-Loup Adde"
 ---

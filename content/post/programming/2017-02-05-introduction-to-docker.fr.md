@@ -5,6 +5,10 @@ date: 2017-02-05
 tags: ["ops"]
 categories: ["Programmation"]
 
+slug: introduction-a-docker
+aliases:
+  - /programmation/introduction-a-docker
+
 draft: false
 author: "Jean-Loup Adde"
 ---
