@@ -66,8 +66,8 @@ googleAnalytics = "UA-116906295-2"
     weight = 2
 
 [[menu.main]]
-    url = "/post/other/"
-    name = "Other"
+    url = "/post/others/"
+    name = "Others"
     weight = 3
 
 [[menu.main]]
