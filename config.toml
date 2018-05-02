@@ -1,7 +1,7 @@
-baseURL = "https://juanwolf.github.io"
+baseURL = "https://blog.juanwolf.fr"
 languageCode = "en"
 defaultContentLanguage = "en"
-title = "blog.juanwolf.fr drafts"
+title = "blog.juanwolf.fr - Jean-Loup's Adde blog about software engineering and video games"
 
 PygmentsCodeFences = true # Enable syntax highlighting with GitHub flavoured code fences
 PygmentsUseClasses = true # Use CSS classes to format highlighted code
@@ -37,7 +37,7 @@ googleAnalytics = "UA-116906295-2"
     since = "2014"
     rssFullContent = true
 
-    logoTitle = "juanwolf.fr"
+    logoTitle = "blog.juanwolf.fr"
     keywords = [""]
     highlight = true
     highlightStyle = "solarized-dark"
