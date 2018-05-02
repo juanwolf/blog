@@ -56,17 +56,17 @@ googleAnalytics = "UA-116906295-2"
     n-gitlab = "http://gitlab.com/juanwolf"
 
 [[menu.main]]
-    url = "/programming/"
+    url = "/post/programming/"
     name = "Programming"
     weight = 1
 
 [[menu.main]]
-    url = "/video-games/"
+    url = "/post/video-games/"
     name = "Video Games"
     weight = 2
 
 [[menu.main]]
-    url = "/other/"
+    url = "/post/other/"
     name = "Other"
     weight = 3
 
