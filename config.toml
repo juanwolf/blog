@@ -50,7 +50,6 @@ googleAnalytics = "UA-116906295-2"
     enable = false
 
 [params.social]
-    a-email = "mailto:"
     c-twitter = "https://twitter.com/juan__wolf"
     g-github = "https://github.com/juanwolf"
     n-gitlab = "http://gitlab.com/juanwolf"
