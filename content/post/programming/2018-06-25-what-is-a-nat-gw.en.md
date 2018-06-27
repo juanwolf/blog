@@ -1,5 +1,5 @@
 ---
-title: "What Is a NAT Gateway"
+title: "What is a NAT Gateway?"
 date: 2018-06-25T08:27:38+01:00
 draft: true
 ---
@@ -13,6 +13,7 @@ but I would like to go even deeper and see what happens at the packet level.
 So first things first, what is actually a nat gateway?? If we listen to papy wikipedia, he says:
 
 > Network address translation (NAT) is a method of remapping one IP address space into another by modifying network address information in the IP header of packets while they are in transit across a traffic routing device.[1] The technique was originally used as a shortcut to avoid the need to readdress every host when a network was moved. It has become a popular and essential tool in conserving global address space in the face of IPv4 address exhaustion. One Internet-routable IP address of a NAT gateway can be used for an entire private network.
+Sources: [Wikipedia](https://en.wikipedia.org/wiki/Network_address_translation)
 
 Ok Grandpa, you kinda spoiled everyone and explained everything I wanted to cover in this article. Anyway... So as Grandpa said, it's pretty common to see an infrastructure using NAT Gateways, especially these days with the Cloud. In the cloud, there's one rule. Keep everything private. Then the NAT appears.
 
@@ -29,4 +30,17 @@ _Insert drawing here_
 As you can see in the diagram, every outbound connection goes through the NAT Gateway and goes back to the specific instance. My question is how? The instance has no public IP, so the server on the internet when he does receive a packet, sees only the NAT instance's IP. So how does a NAT gateway works?
 
 
-## How a NAT gateway works?
+## How does a NAT gateway work?
+
+So as grandpa spoiled us, the nat gateway literally receives every packet sent to it and inject inside of it the nat address ip so the external server knows where to send back the packet.
+
+But how does the NAT knows where to send the packet back?
+
+If you've been a bit curious to what Grandpa were saying on his own page, he says:
+
+1. Establishing two-way communication
+2. Translation of the endpoint
+
+## Let's implement one!
+
+I was thinking that it could be a really cool exercise to implement it. As I need to lvl up my skills in go, you'll be the fruit of this experience :smile:
