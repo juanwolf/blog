@@ -23,12 +23,9 @@ We are quite lucky, cloud providers sells specific instances or services to take
 
 Then you have a platform like this:
 
-
-_Insert drawing here_
-
+![Schema of an architecture in the cloud with one vpc, one private subnet with four instances connected to the nat gateway which is inside a public subnet and relay the traffic to the internet](/post_content/2018-06-25/nat_vpc.svg)
 
 As you can see in the diagram, every outbound connection goes through the NAT Gateway and goes back to the specific instance. My question is how? The instance has no public IP, so the server on the internet when he does receive a packet, sees only the NAT instance's IP. So how does a NAT gateway works?
-
 
 ## How does a NAT gateway work?
 
@@ -41,6 +38,19 @@ If you've been a bit curious to what Grandpa were saying on his own page, he say
 1. Establishing two-way communication
 2. Translation of the endpoint
 
+![Nat packet translation](/post_content/2018-06-25/nat_anim.svg)
+
 ## Let's implement one!
 
 I was thinking that it could be a really cool exercise to implement it. As I need to lvl up my skills in go, you'll be the fruit of this experience :smile:
+
+### 1. Establishing two way communication
+
+Simple but not the easiest we need to setup the two way communication. By that it means we need to setup the communication between the outside world server to the actual instance. The trickiest is that the IP address advertised by the NAT will be itself and not the one of the private IP.
+
+For that the NAT will need to register which packet went where and from which instance.
+
+### 2. Translation of the endpoint
+
+So once we have the packet, now we need to change the actual address where this packet should come back to.
+
