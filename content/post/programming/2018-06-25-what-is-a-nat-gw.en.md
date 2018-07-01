@@ -33,24 +33,35 @@ So as grandpa spoiled us, the nat gateway literally receives every packet sent t
 
 But how does the NAT knows where to send the packet back?
 
-If you've been a bit curious to what Grandpa were saying on his own page, he says:
-
-1. Establishing two-way communication
-2. Translation of the endpoint
-
 ![Nat packet translation](/post_content/2018-06-25/nat_anim.svg)
+
+So what happens is:
+
+Your request goes to the NAT Gateway, It will receive the packet and store the localisation of the sender and the destination in what we call a _NAT table_. The nat will then change the from header of your request to replace the source IP with the one of the NAT, send the packet to the proper destination, then your nat gets the response back, change the destination of the packet/request for the instance that's in your private subnet, and boom. Job done.
+
+You can imagine there could be some clash if the red and the blue instance queries the exact same endpoint, the NAT will not know where to redirect the response.
+
+So I was thinking to change as well the source port for a random one so we would know to which host redirect this request! I read a bit more on the internet that's actually what's happening (so pretty proud of myself there :smile:)
+
+Let's summarize:
+
+1. Your request/packet goes to the nat
+2. The nat register the source IP, source port, destination IP, destination port and get a random port available and put all this info in the translation table
+3. Modifies the source IP and the source port for the NAT public IP and the random port allocated to this request
+4. Send the request/packet to destination
+5. The destination server process the request and sends the request back to the NAT gateway (as it thinks it comes from it, lol, you fool)
+6. The NAT receives the packet/request, check its translation table, if there's an entry for it, sends it in the private instance
+7. The private instance receives the packet.
 
 ## Let's implement one!
 
 I was thinking that it could be a really cool exercise to implement it. As I need to lvl up my skills in go, you'll be the fruit of this experience :smile:
 
-### 1. Establishing two way communication
+### 1. Defining the Translation table
+### 2. Listening for every incoming packages
+### 3. Make the magic happen
 
-Simple but not the easiest we need to setup the two way communication. By that it means we need to setup the communication between the outside world server to the actual instance. The trickiest is that the IP address advertised by the NAT will be itself and not the one of the private IP.
 
-For that the NAT will need to register which packet went where and from which instance.
+## Conclusion
 
-### 2. Translation of the endpoint
-
-So once we have the packet, now we need to change the actual address where this packet should come back to.
-
+Et voila! We saw how a NAT Gateway behave and its limitation. They are one of the core component used in an infra in the Cloud so I am sure knowing that will help you when dealing with SREs/DevOps.
