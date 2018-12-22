@@ -1,6 +1,9 @@
 ---
 title: "What is a NAT Gateway?"
 date: 2018-12-20T08:27:38+01:00
+tags: ["ops", "cloud", "network"]
+categories: ["Programmation"]
+
 ---
 
 Looking into designing platform and new architectures can be quite intimidating, especially when it's your first time or you come from a software background.
@@ -72,4 +75,3 @@ Et voila! We saw how a NAT Gateway behave and its limitation. They are one of th
 
 ### PS:
 I tried to implement one [here](https://github.com/juanwolf/toran). I focused on getting a first version out before releasing this article but as the project were never ending (started in June) and I did not get the time (and the appetite at the end) to finish it properly, you can enjoy (if enjoyable) the draft I made of it.
-

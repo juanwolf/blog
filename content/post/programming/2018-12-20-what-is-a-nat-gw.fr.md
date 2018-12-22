@@ -1,6 +1,9 @@
 ---
 title: "Qu'est ce qu'une NAT Gateway?"
 date: 2018-12-20T08:27:38+01:00
+tags: ["ops", "cloud", "network"]
+categories: ["Programmation"]
+
 ---
 
 Créer des plateformes et des nouvelles architectures dans le Cloud peut-être intimidant. Surtout la première fois qu'on se lance dans le domaine de l'infrastructure. Certains composants apparaissent comme des boites noires ayant une place mystérieuse mais nécessaire dans l'infrastructure.
@@ -71,4 +74,3 @@ Et voilà! Nous venons de voir comment fonctionne une NAT Gateway et ses contrai
 
 ### Post Scriptum
 J'ai essayé d'en implémenter une [ici](https://github.com/juanwolf/toran). Je voulais à tout prix terminer la première version de ce projet avant de sortir cet article. Malheureusement, je n'ai pas vu le bout de ce projet (commencé en Juin, tout de même) et je n'ai pas eu le temps (et le courage sur la fin) de le terminer. Qui sait? Peut être que ces lignes de code vous aideront un jour.
-
