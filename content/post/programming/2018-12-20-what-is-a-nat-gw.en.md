@@ -69,6 +69,6 @@ So roughly 28232 ports I would say (just guessing). That's our maximum of epheme
 
 ## Conclusion
 
-Et voila! We saw how a NAT Gateway behave and its limitation. They are one of the core component used in an infra in the Cloud so I am sure knowing that will help you when dealing with SREs/DevOps. Sur ce codez bien!
+Et voila! We saw how a NAT Gateway behave and its limitation. They are one of the core components of an infrastructure in the :cloud: so it's pretty important to have at least a basic knowledge of what they are used for. Sur ce codez bien!
 
 **PS:** I tried to implement one [here](https://github.com/juanwolf/toran). It was way more difficult than I thought. As I had better (aka not as useless) projects in my head, I started to work on them instead of finishing this one :smile:.
