@@ -1,0 +1,118 @@
+#+TITLE: 30 days of Ring Fit Adventure
+#+DATE: 2019-12-03
+#+TAGS[]: Sport Switch
+#+CATEGORIES[]: "Video Games"
+#+DRAFT: true
+
+** Introduction
+I did not play the switch for quite a while, isn't it? Nintendo: "We gamified the sports industry, come have a look". Alright...
+One of the main selling point of the Switch was their amazing controller that could be fitted anywhere. I remember before the Switch got propered released,
+people were getting crazy about the accessories that could get released with this new system.
+Who could have thought that one of the most selling game would be the new version of the Wii Fit?
+
+# TODO: Add miniature
+
+** Mechanics
+   As you might know already, the Ring Fit Adventure game can't be played without it's accessory the ring.
+*** The Ring & co
+    The ring is a device where you install your joycon and press it to trigger an action. At first,
+you might think that apart from pressing the ring, there's not much to do... However, the Nintendo team succeeded to include more than 40 different exercises
+to this device! As well, you need to couple the ring with a strap to your leg to detect running activities or if you're sit down on the floor etc... To be honest,
+I was a bit unsure on the recognition of your movement but it works really well! Most of the time I thought the game was not recognizing properly my movements
+were because I was doing the exercises wrong.
+
+# TODO: Add picture of the ring
+
+** Story
+   Let's be clear, the story is not main selling point of this game. The story starts with you waking up in strange lands. A ring is weirdly calling for your help.
+It apparently got sealed. You decide to break the seal with your massive muscles, when suddenly you realise that Dragaux, a dragon filled with _dark influence_ escaped from it.
+The ring starts suddenly talking to you, saying that Dragaux was defeated a long time ago by the Ring itself but to seal Dragaux it gave all its strength
+ away and will need help from you to stop him from spreading his _dark influence_. That's where the guilt trip starts...
+
+# TODO: Add picture of Dragaux
+
+** Gameplay
+*** RPG-like
+
+Apart from the cliche beginning, the world around the adventure is well thought,
+you make smoothies as you would make potions in a normal RPGs,
+ennemies are gym accessories, your armor is nothing more than your training
+outfits... What's really good is that they adapted **ALL** the concept of a
+ RPG.
+
+And the main one. The role playing experience. Have you ever dreamt of playing
+Link and swinging your sword around? I did. Ok, it's not as cool as a sword
+but you'll still have the same feeling. The one that your actual actions
+affects the environment and ennemies. The most impressive one is that
+exercises have different strength against ennemies and some of the hardest
+attack will inflict more damages. So harder the exercise the more damage you do,
+and that's when the strategy comes in because you can't fire all those strong
+attack because your body can't take it. Does not fill like some heros on DBZ/Naruto/One Piece?
+
+# TODO: Add pictures of lvls
+
+*** Mini Games
+    To gamify even more physical activities, Nintendo went even further and
+added mini-games to the list. This way, you can invite some friends for
+a drink, play "who can do the more push-ups" and have some fun! Just kidding
+the mini-games are actually pretty fun and the list is well furnished:
+- Smash the moles like minigame (works your pecs / arms)
+- Aeorplane precision game (work your triceps)
+- Shooting games (Mainly working on your arms) <= that's the only one everyone
+will want to play
+- Beat'em up like (Works your core by pressing the ring on your abs and you have
+to rotate to smash the robots around you)
+
+# TODO: Add picture of minigames
+
+*** Farming
+    How could we speak about RPGs without speaking of farming/grinding?
+The game gets some mechanics of classic RPGs, as it's not open world, you
+would farm specific levels to gather ingredients to make smoothies. You can
+even grind XPs but the game will get easier and you'll loose the benefit
+of training.
+
+
+** Will I turn like Schwarzy?
+
+   Definitely not. The game will strengthen you a lot, working on your core,
+ posture, legs and many other parts. However, if you stick to the adventure,
+the game will not push you too hard. Between exercices, you'll have dialogues
+to rest. As well, the game will make sure that you work on all the parts of
+the body, so you'll end up with a well rounded shaped body. But nothing like
+our boy Arnold. You'll look like more to Jet Lee to be honest. And that's a
+honour :smnile:.
+
+However, you can stick to exrecises if you do not enjoy the adventure that much.
+This mode will look like if you were going to the gym with a coach. You can
+pick up the specific parts of the body you want to work on and focus on them.
+
+*** The exercises
+The exercises are categorised in 4 themes: arms, legs, core and yoga.
+
+I guess you understood all the different categories but let me enumerate some
+of the exercises you could find in the game:
+For the arms part, there's front press or even using the ring like a bow (
+pretty good for your triceps :smile:).
+The Legs will have the different kind of squats (wide/normal), mountain climber
+and some cardio exercises where you have to knee-lifting (TODO check term).
+Core will have the famous and feared plank, some stretching of the core and
+crunch (TODO check)
+And Yoga, you'll be able to some warrior poses, chairs and trees. It was a
+really good introduction to it for me and really enjoy those exercises!
+
+# TODO: Add picture of all the exercises
+
+** Conclusion
+
+
+To be honest, I love this _game_. It literally brings the gym into your
+switch. It's the perfect mix between augmented reality with a nice accessory (I was not expecting sweating so much with
+this bloody ring) and sports. You can adjust the difficulty to your fitness
+level and focus on getting better. Finally a RPG where you are actually
+the hero :champagne: (to drink with moderation, of course). So if you're
+new to fitness, an afficionado or just curious, I highly recommend you
+to get it! However, this post is not responsible for your daily addiction
+of dopamine.
+
+Sur ce, jouez bien! xoxo.
