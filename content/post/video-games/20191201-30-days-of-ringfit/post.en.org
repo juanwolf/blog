@@ -17,9 +17,12 @@ Who could have thought that one of the most selling game would be the new versio
 *** The Ring & co
     The ring is a device where you install your joycon and press it to trigger an action. At first,
 you might think that apart from pressing the ring, there's not much to do... However, the Nintendo team succeeded to include more than 40 different exercises
-to this device! As well, you need to couple the ring with a strap to your leg to detect running activities or if you're sit down on the floor etc... To be honest,
-I was a bit unsure on the recognition of your movement but it works really well! Most of the time I thought the game was not recognizing properly my movements
-were because I was doing the exercises wrong.
+to this device! As well, you need to couple the ring with a strap to your leg to detect running activities or if you're sit down on the floor etc... (**PRO TIP**: Wear a pair of leggings
+rather than a short so the strap does not move / fall). To be honest, I was a bit unsure on the recognition of your movement but it works really well!
+Most of the time I thought the game was not recognizing properly my movements were because I was doing the exercises wrong.
+As well, the game reward you by giving massive punches / hits to the ennemies if you do the exercises properly. The ring con will vibrate way harder, your avatar will turn into a super sayan and
+the hit given to the ennemy will sound like you broke his face in two. At the opposite, if you're not going down enough during squats for example, you'll do less damages and the hit will sound
+like a slap rather than a punch.
 
 # TODO: Add picture of the ring
 
@@ -69,8 +72,7 @@ to rotate to smash the robots around you)
     How could we speak about RPGs without speaking of farming/grinding?
 The game gets some mechanics of classic RPGs, as it's not open world, you
 would farm specific levels to gather ingredients to make smoothies. You can
-even grind XPs but the game will get easier and you'll loose the benefit
-of training.
+even grind XPs but the game and your training will get easier, do you really want that?
 
 
 ** Will I turn like Schwarzy?
