@@ -1,7 +1,7 @@
 #+TITLE: 30 days of Ring Fit Adventure
-#+DATE: 2019-12-03
+#+DATE: 2020-01-03
 #+TAGS[]: Sport Switch
-#+CATEGORIES[]: "Video Games"
+#+CATEGORIES[]: video-games
 #+DRAFT: true
 
 ** Introduction
@@ -10,7 +10,10 @@ One of the main selling point of the Switch was their amazing controller that co
 people were getting crazy about the accessories that could get released with this new system.
 Who could have thought that one of the most selling game would be the new version of the Wii Fit?
 
-# TODO: Add miniature
+
+#+CAPTION: Banner of the Ring Fit Adventure game
+#+NAME:   fig__unclickable_image
+[[/post_content/2019-12-30/ring-fit-adventure-banner.jpeg]]
 
 ** Mechanics
    As you might know already, the Ring Fit Adventure game can't be played without it's accessory the ring.
@@ -24,21 +27,28 @@ As well, the game reward you by giving massive punches / hits to the ennemies if
 the hit given to the ennemy will sound like you broke his face in two. At the opposite, if you're not going down enough during squats for example, you'll do less damages and the hit will sound
 like a slap rather than a punch.
 
-# TODO: Add picture of the ring
+To add with the "required" gear. I would highly recommend to get some good leggings as the leg strap
+can get annoying with shorts or loose cloth.
 
+#+CAPTION: The ring used in Ring Fit Adventure
+#+NAME:   fig__unclickable_image
+[[/post_content/2019-12-30/ring-fit-adventure-gear.png]]
 ** Story
    Let's be clear, the story is not main selling point of this game. The story starts with you waking up in strange lands. A ring is weirdly calling for your help.
 It apparently got sealed. You decide to break the seal with your massive muscles, when suddenly you realise that Dragaux, a dragon filled with _dark influence_ escaped from it.
 The ring starts suddenly talking to you, saying that Dragaux was defeated a long time ago by the Ring itself but to seal Dragaux it gave all its strength
  away and will need help from you to stop him from spreading his _dark influence_. That's where the guilt trip starts...
 
-# TODO: Add picture of Dragaux
+#+CAPTION: Starting a fight against the main character and the evil boss Dragaux a bodybuilder Dragon
+#+NAME:   fig__unclickable_image
+[[/post_content/2019-12-30/ring-fit-adventure-dragaux-and-co.jpg]]
+
 
 ** Gameplay
 *** RPG-like
 
-Apart from the cliche beginning, the world around the adventure is well thought,
-you make smoothies as you would make potions in a normal RPGs,
+Apart from the cliche beginning, the world around the adventure is well thought.
+You make smoothies as you would make potions in a normal RPGs,
 ennemies are gym accessories, your armor is nothing more than your training
 outfits... What's really good is that they adapted **ALL** the concept of a
  RPG.
@@ -52,7 +62,10 @@ attack will inflict more damages. So harder the exercise the more damage you do,
 and that's when the strategy comes in because you can't fire all those strong
 attack because your body can't take it. Does not fill like some heros on DBZ/Naruto/One Piece?
 
-# TODO: Add pictures of lvls
+#+CAPTION: A view of the outfits / armors available in game
+#+NAME:   fig:SED-HR4049
+[[/post_content/2019-12-30/ring-fit-adventure-outfits.jpg]]
+
 
 *** Mini Games
     To gamify even more physical activities, Nintendo went even further and
@@ -66,7 +79,10 @@ will want to play
 - Beat'em up like (Works your core by pressing the ring on your abs and you have
 to rotate to smash the robots around you)
 
-# TODO: Add picture of minigames
+
+#+CAPTION: One minigame of ring fit adventure where you need to break boxes
+#+NAME:   fig:SED-HR4049
+[[/post_content/2019-12-30/ring-fit-adventure-minigame.jpg]]
 
 *** Farming
     How could we speak about RPGs without speaking of farming/grinding?
@@ -103,10 +119,31 @@ crunch (TODO check)
 And Yoga, you'll be able to some warrior poses, chairs and trees. It was a
 really good introduction to it for me and really enjoy those exercises!
 
-# TODO: Add picture of all the exercises
+** The result
+
+I suppose that with this title, you're expecting to see some results.
+
+Unfortunately for you, I will not share any picture before/after but just tell you what happened.
+I seriously saw my body becoming sharper. Even if you do not loose a lot of calories per day,
+if you stick to it every single day, you can see that your body is getting use to it. As your moods,
+you're enjoying the exercise and it made me happier overall.
+As I run quite a lot, my legs are well defined at the opposite of my greasy trunk.
+In 30 days I could see my triceps getting more and more defined. Same for my abs where I got some lines back.
+A point that you might not consider is that you'll work a lot on your balance as well which was my nemesis.
+And I am now able to do the tree half of the time! It's quite a tough exercise and I am looking forward to
+master it :smile:!
+
+As well, as you start exercising more regularly, you look at bad habits differently.
+For example snacking. As I don't want to waste the pain I had in the morning, I get an apple rather than
+a moccha with a brownie. (no, no, there's no exageration). In case you have some doubts, you can
+find all my activities on [[Strava][https://www.strava.com/athletes/13218564]]
+
+To finish, if you plan to get the game to loose a lot of weight, I would recommend to setup one
+running session during the week to focus on loosing fat and the others building strength with the
+ring fit.
+
 
 ** Conclusion
-
 
 To be honest, I love this _game_. It literally brings the gym into your
 switch. It's the perfect mix between augmented reality with a nice accessory (I was not expecting sweating so much with
@@ -114,7 +151,8 @@ this bloody ring) and sports. You can adjust the difficulty to your fitness
 level and focus on getting better. Finally a RPG where you are actually
 the hero :champagne: (to drink with moderation, of course). So if you're
 new to fitness, an afficionado or just curious, I highly recommend you
-to get it! However, this post is not responsible for your daily addiction
-of dopamine.
+to get it! It will help you create habits and a daily routine which can
+change the shape of your body forever :smile:.
+However, this post is not responsible for your daily addiction of dopamine.
 
 Sur ce, jouez bien! xoxo.

@@ -1,16 +1,17 @@
 #+TITLE: 30 jours de Ring Fit Adventure
-#+DATE: 2019-12-03
+#+DATE: 2020-01-03
 #+TAGS[]: Sport Switch
 #+CATEGORIES[]: video-games
-#+DRAFT: true
+#+DRAFT: false
 
 ** Introduction
 Je n'ai pas joue a la switch depuis un certains temps... Nintendo: "On a gamifie l'industrie du sport, regarde !" Ok...
 Pour etre franc, l'un des gros points de vente de la switch etaient la possibilite de lier les joy-cons a different accessoires. Personellement,
 je ne pensais pas que le premier jeu a incorporer ca serait le successeur de Wii Fit.
 
-# TODO: Add miniature
-
+#+CAPTION: Banner of the Ring Fit Adventure game
+#+NAME:   fig__unclickable_image
+[[/post_content/2019-12-30/ring-fit-adventure-banner.jpeg]]
 
 ** Mechaniques
    Comme vous le savez surement deja, Ring Fit Adventure ne peut etre utilise sans son anneau. En meme temps, c'est un peu comme aller a la salle de sport en
@@ -23,7 +24,9 @@ le jeu lance, vous verrez que l'anneau peut etre utilise dans plus de 40 exercic
 pouvez attacher l'autre joy-con a votre jambe. De ce fait, le jeu couvre une grande partie de vos mouvements. Certes des fois le jeu va mal reconnaitre vos mouvements, surtout
 pendant les phases de courses et l'utilisation de l'anneau mais la plupart du temps, si le jeu a du mal a reconnaitre vos mouvements, c'est que vous faites mal l'exercice!
 
-# TODO: Add picture of the ring
+#+CAPTION: The ring used in Ring Fit Adventure
+#+NAME:   fig__unclickable_image
+[[/post_content/2019-12-30/ring-fit-adventure-gear.png]]
 
 ** L'histoire
    Soyons clair, l'histoire n'est pas ce qui a de plus original mais elle reste pas trop mal pour un jeu de fitness. Bon les quetes secondaires sont du niveau, j'ai besoin de ca peux-tu t'en occuper stp.
@@ -33,7 +36,10 @@ detruisez les chaines. Quand soudain, vous vous rendez compte que vous venez de 
 L'anneau se met alors a parler. Il vous raconte qu'il avait scelle Dragaux mais qu'il a perdu tous ses pouvoirs a cause de sa bataille contre le dragon. Il vous demande
 si vous pouvez l'aider dans sa tache de stopper Dragaux afin qu'il ne repend pas sa mauvaise aura au 4 coins du monde. C'est la que le voyage commence...
 
-# TODO: Add picture of Dragaux
+#+CAPTION: Starting a fight against the main character and the evil boss Dragaux a bodybuilder Dragon
+#+NAME:   fig__unclickable_image
+[[/post_content/2019-12-30/ring-fit-adventure-dragaux-and-co.jpg]]
+
 
 ** Gameplay
 *** RPG-like
@@ -54,7 +60,9 @@ Serieux, ca vous fait pas penser a une attaque finale a la DBZ/Naruto/One Piece?
 Ce qui devient vraiement interessant, c'est que comme votre corps est l'arme du jeu, vous devez apprendre a l'ecouter, connaitre ses limites et quand jongler
 entre les differents exercices.
 
-# TODO: Add pictures of lvls
+#+CAPTION: A view of the outfits / armors available in game
+#+NAME:   fig:SED-HR4049
+[[/post_content/2019-12-30/ring-fit-adventure-outfits.jpg]]
 
 *** Mini-Jeux
 Pour gamifier le jeu encore plus, Nintendo est alle encore plus loin et a ajoute des mini-jeux au mode histoire.
@@ -66,7 +74,10 @@ Dans la liste, vous aurez:
 - Un jeu de deltaplane ou vous controllez votre descente avec l'orientation de l'anneau
 - Beat'em up (travaille la ceinture)
 
-# TODO: Add picture of minigames
+#+CAPTION: One minigame of ring fit adventure where you need to break boxes
+#+NAME:   fig:SED-HR4049
+[[/post_content/2019-12-30/ring-fit-adventure-minigame.jpg]]
+
 
 *** Farming
 Comment pourrions-nous parler de RPGs sans parler de farming/grinding?
@@ -95,25 +106,7 @@ Les exercices se decomposent en 4 categories: bras, jambes, tronc et yoga.
 Les categories parlent d'elle meme mais le plus important est que ces categories couvrent toute la partie dont elle traite.
 Ne vous attendez pas a seulement faire la planche dans la partie tronc, vous allez travailler les obliques, les abdos (bien sur) mais aussi votre dos!
 
-# TODO: Add picture of all the exercises
-
-** Le resultat
-
-Je suppose qu'avec le titre de cet article, vous vous attendez a un avant / apres. Et bien pour vous messieurs, dames, je vais reveler mon identites.
-
-*** Avant
-# TODO: Add picture
-
-On peut voir sur cette photo, une personne lambda. Ventre surdimensionne, calvitie, sourire qui pue l'ignorance, respire l'echec. Quelqu'un qui vieillit tres mal.
-
-*** Apres
-
-# TODO Add picture
-
-Ici on peut voir le changement radical. Il respire le succes et le bonheur, des tablettes intersiderales, des bras de la taille de mes anciennes cuisses, des pecs qui feraient jalouser les bonnets A.
-
-*** Serieusement
-Blagues a part. En 30 jours, j'ai pu apprecier voir mon corps se definir lentement. Par example, mes triceps se sont  dessines.
+En 30 jours, j'ai pu apprecier voir mon corps se definir lentement. Par example, mes triceps se sont  dessines.
 Mes biceps ont grossi et j'ai aussi gagner en equilibre (ce qui etait pas gagne). Mais je pense le plus important, c'est comment le jeu change votre vie quotidienne.
 Par exmple, j'ai arrete les snacks des que je me sentais un peu fatigue (le petit paquet de chips quotidien :thumbsdown:) et le jeu s'infiltre dans
 vos habitudes. Personellement, je ne me vois pas faire une semaine sans faire 4/5 fois du Ring Fit. Si jamais vous avez des doutes, je publie mes activites sur Strava:
