@@ -2,7 +2,7 @@
 #+DATE: 2020-01-03
 #+TAGS[]: Sport Switch
 #+CATEGORIES[]: video-games
-#+DRAFT: true
+#+DRAFT: false
 
 ** Introduction
 I did not play the switch for quite a while, isn't it? Nintendo: "We gamified the sports industry, come have a look". Alright...
@@ -113,9 +113,9 @@ of the exercises you could find in the game:
 For the arms part, there's front press or even using the ring like a bow (
 pretty good for your triceps :smile:).
 The Legs will have the different kind of squats (wide/normal), mountain climber
-and some cardio exercises where you have to knee-lifting (TODO check term).
+and some cardio exercises where you have to knee lift.
 Core will have the famous and feared plank, some stretching of the core and
-crunch (TODO check)
+crunch.
 And Yoga, you'll be able to some warrior poses, chairs and trees. It was a
 really good introduction to it for me and really enjoy those exercises!
 
