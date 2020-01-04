@@ -239,7 +239,7 @@ Essayons, on verra après :
 
 Lol, pas de panique, tout va bien, docker a juste réagit comme ça:
 
-!["Spongebob](http://i.giphy.com/5YO4km322zuNy.gif)
+!["Spongebob](https://i.giphy.com/5YO4km322zuNy.gif)
 
 Bon... On a tout perdu. On vient de faire une "Gitlab". Mais bon
 c'est pas grave, "ça arrive".
@@ -307,7 +307,7 @@ de laisser une base données sans avoir d'applications connectées à
 celle-ci. Malheureusement, nous n'allons pas créer d'application
 spécifique pour cet exemple. Désolé.
 
-["A](http://i.giphy.com/hmE2rlinFM7fi.gif)
+["A](https://i.giphy.com/hmE2rlinFM7fi.gif)
 
 
 **MAIS!** Nous allons utiliser le client mongodb (dans un container)
@@ -582,4 +582,3 @@ tous vos containers comme Nomad ou Ansible ou Kubernete, mais tu devras
 attendre un prochain article pour ça jeune padawan !
 
 Sur ce, codez bien! Ciao!
-
