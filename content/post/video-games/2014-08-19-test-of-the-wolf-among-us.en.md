@@ -35,7 +35,7 @@ a key, so you'll write "Open door", right? But the game expected
 "insert key". Awesome to be blocked just for that isn't it? So it
 was a huge progress for the user experience!
 
-![](http://www.c64-wiki.com/images/c/c0/ManiacMansion_Animation3.gif)
+![](https://www.c64-wiki.com/images/c/c0/ManiacMansion_Animation3.gif)
 
 The story
 ---------

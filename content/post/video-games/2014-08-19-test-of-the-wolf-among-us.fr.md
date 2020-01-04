@@ -39,7 +39,7 @@ grande avancée dans l'expérience utilisateur.
 
 
 
-![](http://www.c64-wiki.com/images/c/c0/ManiacMansion_Animation3.gif)\
+![](https://www.c64-wiki.com/images/c/c0/ManiacMansion_Animation3.gif)\
 
 L'histoire
 -----------
@@ -195,4 +195,3 @@ histoire est à couper de souffle. J'ai dévoré les 5 épisodes en 8
 heures durant toute une journée voulant connaître le dénouement de cette
 histoire. Je conseille fortement ce jeu si vous aimez les thriller, les
 fables ou tout simplement les jeux vidéo.
-
