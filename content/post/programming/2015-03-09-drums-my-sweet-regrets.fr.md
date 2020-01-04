@@ -151,7 +151,7 @@ Baëli ([@dbaeli](https://twitter.com/dbaeli))), nous avions
 pris connaissance de l'importance d'un repository manager (Je vous
 invite à lire cet article, si vous vous demandez à quoi cela sert (en
 anglais)
-[http://maven.apache.org/repository-management.html](http://maven.apache.org/repository-management.html).
+[http://maven.apache.org/repository-management.html](https://maven.apache.org/repository-management.html).
 J'ai donc ajouté au serveur d'intégration, un repository manager
 (Nexus), qui a permis d'intégrer les API avec des dépendances maven
 (bien plus simple que d'effectuer des merges à chaque mise à jour des
@@ -289,7 +289,7 @@ commits de code ne respectant pas un certains checkstyle, n'aurait pas
 été un luxe. Le soucis des hooks, c'est qu'on aurait sûrement eu 70%
 des étudiants dans cette situation (pour le pre-commit bien sûr) :
 
-![Commic](http://www.commitstrip.com/wp-content/uploads/2015/03/Strip-Confession-650-final.jpg)
+![Commic](https://www.commitstrip.com/wp-content/uploads/2015/03/Strip-Confession-650-final.jpg)
 
 La mise en place de code review sur le code de chaque service, aurait
 été très utile. Malgré l'expertise de certains, certains étudiants
@@ -310,4 +310,3 @@ frayeurs que nous a donné ce projet, ce fut une très bonne expérience.
 le cadre du master 2 Génie de l'Informatique Logicielle à l'université
 de Rouen. N'hésitez pas à réagir, si certains points vous semble flous
 ou discutables ! Ciao, et codez bien !
-

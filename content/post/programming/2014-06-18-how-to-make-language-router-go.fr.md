@@ -48,7 +48,7 @@ définis par la même URL.
 
 Afin de limiter le temps d'exécution entre les requêtes, nous nous
 devons d'utiliser un langage permettant une parallélisation facile.
-J'ai choisi [Go](http://golang.org/) car 
+J'ai choisi [Go](https://golang.org/) car 
 
 > "Il est non seulement facile de paralléliser, mais en plus une
 > requète unique est elle même traitée très vite; le tout avec un
@@ -56,7 +56,7 @@ J'ai choisi [Go](http://golang.org/) car 
 > [Natsirtt](https://twitter.com/natsirtt)
 
 Nous utiliserons cette technologie dans la suite du tutoriel (avec le
-paquetage [gorilla mux](http://www.gorillatoolkit.org/pkg/mux)).
+paquetage [gorilla mux](https://www.gorillatoolkit.org/pkg/mux)).
 Cependant ce routeur est tout à fait réalisable avec une autre
 technologie (node.js par exemple).
 
@@ -201,7 +201,7 @@ OHHHHHHHHHH YEAAAAAAAAAAAAAAH.
 
 ### Moi je veux bien, mais comment qu'on fait ?
 
-Demandons à papy [W3C](http://www.w3.org/).
+Demandons à papy [W3C](https://www.w3.org/).
 
 > [For a first contact, using the Accept-Language value to infer
 > regional settings may be a good starting point, but be sure to allow
@@ -213,7 +213,7 @@ Demandons à papy [W3C](http://www.w3.org/).
 > 14px;"=""}[ ]{style=""font-size:" 17.5px;="" ="" 1.42857143;"=""}
 
 (Le lien vers l'article : [Accept-Language used for locale
-setting](http://www.w3.org/International/questions/qa-accept-lang-locales#answer))
+setting](https://www.w3.org/International/questions/qa-accept-lang-locales#answer))
 
 D'accord, faisons comme ça. Ravis de t'avoir revu l'ami ! 
 

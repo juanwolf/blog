@@ -323,7 +323,7 @@ one for the globality of the simulation and one detailed for each kind
 of requests.
 
 
-![Rapport](http://blog.juanwolf.fr/post_content/2015-10-23/2e7c0992-a166-4f10-9c0f-cdd21d92c205.png)
+![Rapport](https://blog.juanwolf.fr/post_content/2015-10-23/2e7c0992-a166-4f10-9c0f-cdd21d92c205.png)
 
 
 Here we can see that most of the requests failed :'( :'(
@@ -384,4 +384,3 @@ hesitate one second to post a comment, I'll be glad to respond to it.
 
 I hope to see you coding few scenarios, but I need to go, I have
 Rollerblades to try. Sur ce, codez bien.
-

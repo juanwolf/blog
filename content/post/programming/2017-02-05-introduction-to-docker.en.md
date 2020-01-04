@@ -203,7 +203,7 @@ docker rm mongodb
 
 Lol, don't worry, everything's fine, docker reacted just like that:
 
-![Spongebob](http://i.giphy.com/5YO4km322zuNy.gif)
+![Spongebob](https://i.giphy.com/5YO4km322zuNy.gif)
 
 Well, you just lost all your data.
 
@@ -274,7 +274,7 @@ database on its own without any application connecting to it, don't you
 think? We will not create a specific application for this section, I am
 sorry.
 
-!["A](http://i.giphy.com/hmE2rlinFM7fi.gif)
+!["A](https://i.giphy.com/hmE2rlinFM7fi.gif)
 
 **BUT!** We gonna use a mongodb client (inside a docker container) to
 connect to our database.
@@ -539,4 +539,3 @@ nomad or ansible or kubernete, but little padawan, you will need to wait
 for this topic in a future article!
 
 Sur ce, codez bien! Ciao!
-

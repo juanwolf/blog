@@ -83,16 +83,16 @@ about costumes\... Capcom cracked me up
 
 Here's Ken:
 
- !["Ken's](http://i.imgur.com/Gq0RPq7.jpg)
+ !["Ken's](https://i.imgur.com/Gq0RPq7.jpg)
 
 But thanks, Nash, Mika and Ryu are bloody awesome:
 
- !["Characters](http://i.imgur.com/MfNKLr3.png)
+ !["Characters](https://i.imgur.com/MfNKLr3.png)
 
 
 !["Characters](https://pbs.twimg.com/media/CerJgqQWsAATVa5.jpg)
 
- !["Mika](http://i.imgur.com/xebebLQ.jpg)
+ !["Mika](https://i.imgur.com/xebebLQ.jpg)
 
 However, I don't know if I went at a bad moment to play. But I had few
 problems with balanced. I'm a bad player of the game, so I don't
@@ -106,4 +106,3 @@ stay at 0PTS.
 This update (finally) release Street Fighter 5. But even with that the
 game is still lacking content. No Arcade mode, no proper story in the
 story mode\... All of that to say that this game does not worst 60€.
-
