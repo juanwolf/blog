@@ -11,7 +11,7 @@ PygmentsOptions = "linenos=table"
 hasCJKLanguage = false
 enableRobotsTXT = true
 enableEmoji = true
-theme = "jane"
+theme = "calva"
 
 paginate = 10
 copyright = ""
