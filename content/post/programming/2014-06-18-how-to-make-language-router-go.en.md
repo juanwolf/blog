@@ -1,4 +1,3 @@
-
 ---
 title: How to make a language router with Go?
 date: 2014-06-18
@@ -6,8 +5,7 @@ tags: ["Go"]
 categories: ["Programming"]
 slug: "how-to-make-language-router"
 aliases:
-  = /programming/how-to-make-language-router/
-
+  - /programming/how-to-make-language-router/
 draft: false
 author: "Jean-Loup Adde"
 ---
@@ -90,11 +88,13 @@ We will add gorilla/mux at our packages, and start to create our own router.
 
 ```go
 package main
+
 import (
  	"github.com/gorilla/mux"
  	"net/http"
  	"log"
 )
+
 func main() {
     router := mux.NewRouter()
     http.Handle("/", router)
@@ -108,6 +108,7 @@ Run the program (go run language-router). Start your browser and go to localhost
 
 ```go
 package main
+
 import (
 	"github.com/gorilla/mux"
  	"net/http"
@@ -144,6 +145,7 @@ So, as granpa' said, we'll take first the Accept Language inside the HTTP reques
 
 ```go
 package main
+
 import (
  	"github.com/gorilla/mux"
  	"net/http"
@@ -317,6 +319,7 @@ Now we have to read the cookie if it's available on the client machine.
 
 ```go
 package main
+
 import (
  	"github.com/gorilla/mux"
  	"net/http"

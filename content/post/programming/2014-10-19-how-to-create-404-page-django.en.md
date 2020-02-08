@@ -187,4 +187,3 @@ create the template as below:
 
 Tadam, you have your awesome 404 which shows all the articles titles
 with a link. Awesome isn't it?
-

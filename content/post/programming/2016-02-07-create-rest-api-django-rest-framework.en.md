@@ -391,8 +391,8 @@ To finish, we need to include swagger urls to our urls.py
 #juanwolf_s_blog/urls.py
 urlpatterns = [
     '',
-    r'^api/docs/', include('rest_framework_swagger.urls')),
-    r'^api/', include('api.urls'))
+    r'^api/docs/', include('rest_framework_swagger.urls'),
+    r'^api/', include('api.urls')
 ]
 ```
 
