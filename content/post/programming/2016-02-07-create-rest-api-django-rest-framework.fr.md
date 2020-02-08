@@ -39,7 +39,7 @@ supprimer, etc..
 
 Si jamais vous voulez en savoir plus sur l'architecture REST, je vous
 conseille [cet
-article](http://www.ibm.com/developerworks/library/ws-restful/index.html)
+article](https://www.ibm.com/developerworks/library/ws-restful/index.html)
 
 ### Pourquoi faire ?
 
@@ -258,7 +258,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 On reste dans le basique mais on pourra par exemple ajouter des champs
 spécifiques (des
-[SerializerMethodField](http://www.django-rest-framework.org/api-guide/fields/#serializermethodfield)
+[SerializerMethodField](https://www.django-rest-framework.org/api-guide/fields/#serializermethodfield)
 par exemple).
 
 
@@ -407,6 +407,5 @@ The End
 C'est terminé pour notre petit tour d'horizon du django rest
 framework, j'espère que ça vous a plu ! Si jamais vous voulez entrer
 plus en détail sur le sujet, je vous invite à vous rendre sur [le site
-du django rest framework](http://www.django-rest-framework.org/)
+du django rest framework](https://www.django-rest-framework.org/)
 qui est très bien documenté ! Sur ce, Codez bien !
-

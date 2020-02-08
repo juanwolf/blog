@@ -108,16 +108,16 @@ a encore craqué\...
 
 Voici le nouveau costume de Ken\...
 
- !["Nouveau](http://i.imgur.com/Gq0RPq7.jpg)
+ !["Nouveau](https://i.imgur.com/Gq0RPq7.jpg)
 
 Bon ça va que Nash, Mika et Ryu ont une putain de classe :
 
- !["Écran](http://i.imgur.com/MfNKLr3.png)
+ !["Écran](https://i.imgur.com/MfNKLr3.png)
 
 
 ![](https://pbs.twimg.com/media/CerJgqQWsAATVa5.jpg)
 
- ![](http://i.imgur.com/xebebLQ.jpg)
+ ![](https://i.imgur.com/xebebLQ.jpg)
 
 Cependant, je ne sais pas si je suis tombé sur une mauvaise période mais
 je viens d'avoir quelques petits soucis d'équilibrage. Étant un joueur
@@ -144,6 +144,3 @@ etc..). Vous pourrez l'avoir pour 30€, ce qui est tout de même plus
 correct.
 
 "
-
-
-

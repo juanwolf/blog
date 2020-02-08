@@ -139,7 +139,7 @@ Hopefully, we had a day to build a software factory (orchestretad by
 [Dimitri Baëli](https://twitter.com/dbaeli)), we learned during
 this module how important is a repository manager during a project (I
 invite you to read this article if you're asking yourself what's for)
-[http://maven.apache.org/repository-management.html](http://maven.apache.org/repository-management.html).
+[http://maven.apache.org/repository-management.html](https://maven.apache.org/repository-management.html).
 I added to the integration server this repository manager (Nexus) which
 allowed us to share and deploy easily every version of the different
 APIs (so simpler than do few merges for every update of the APIs).
@@ -264,12 +264,12 @@ We had some problem about the quality of some web services during this
 project (ex : no indentation LOL). Develop a hook to stop students
 commiting shitty code could be a good idea. But I didn't have time to
 develop a module for my pre-commit hooks (you can see that here :
-[http://blog.juanwolf.fr/2015/1/git-hooks/](http://blog.juanwolf.fr/2015/1/git-hooks/)).
+[http://blog.juanwolf.fr/2015/1/git-hooks/](https://blog.juanwolf.fr/post/programming/git-hooks/)).
 But the problem of the hooks is they are installed in the client (so in
 the machine of the developer), so the developer can avoid it :/. And
 I'm sure for more than 70%, the students will be in this situation :
 
-![Commit](http://www.commitstrip.com/wp-content/uploads/2015/03/Strip-Confession-650-finalenglish.jpg)
+![Commit](https://www.commitstrip.com/wp-content/uploads/2015/03/Strip-Confession-650-finalenglish.jpg)
 
 Setting up some code reviews on the code of every web services could be
 really useful to prevent every drift. Some students needs to be
@@ -288,4 +288,3 @@ times, this project was a really good experience. 5little time of
 advertising) This project was organised as part of the master 2 in
 Software engineering at the university of Rouen. Don't hesitate to
 react if at some point it's blurry or debatable! Ciao, et codez bien !
-

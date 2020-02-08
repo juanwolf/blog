@@ -33,7 +33,7 @@ request the API with simple HTTP request. GET requests will retrieve
 elements, POST requests will modify them, DELETE requests will delete
 them, etc... If you want to know more about the REST architecture I
 invite you to read [this
-article](http://www.ibm.com/developerworks/library/ws-restful/index.html).
+article](https://www.ibm.com/developerworks/library/ws-restful/index.html).
 
 
 
@@ -262,7 +262,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 What's useful with a nested serializer is that you can add specific
 rules for the serialization of the object such as adding specific fields
-(some [SerializerMethodField](http://www.django-rest-framework.org/api-guide/fields/#serializermethodfield) for example).
+(some [SerializerMethodField](https://www.django-rest-framework.org/api-guide/fields/#serializermethodfield) for example).
 
 
 
@@ -404,5 +404,5 @@ The End
 
 It's over for our little introduction of the django rest framework, I
 hope you liked it! If you want to go learn more about it, I invite you
-to go on [the website of the framework](http://www.django-rest-framework.org/) which is
+to go on [the website of the framework](https://www.django-rest-framework.org/) which is
 really well documented! Sur ce, Codez bien !
