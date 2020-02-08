@@ -1,0 +1,74 @@
+baseURL: "https://juanwolf.fr"
+languageCode: "en"
+defaultContentLanguage: "en"
+title: "juanwolf.fr"
+
+PygmentsCodeFences: true # Enable syntax highlighting with GitHub flavoured code fences
+PygmentsUseClasses: true # Use CSS classes to format highlighted code
+PygmentsCodefencesGuessSyntax: true
+PygmentsOptions: "linenos=table"
+
+hasCJKLanguage: false
+enableRobotsTXT: true
+enableEmoji: true
+theme: "calva"
+
+paginate: 10
+copyright: '<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>'
+
+author:
+  name: "Jean-Loup Adde"
+
+sitemap:
+  changefreq: "weekly"
+  priority: 0.5
+  filename: "sitemap.xml"
+
+params:
+  author: "Jean-Loup Adde"
+  description: "Personal website where I write about software engineering and video games"
+  githubUsername: "#juanwolf"
+  accent: "#009688"
+  showBorder: true
+  backgroundColor: "dark"
+  font: "Raleway" # should match the name on Google Fonts! TODO: Delete this
+  since: "2014"
+  rssFullContent: true
+  logoTitle: "juanwolf.fr"
+  keywords: ["video-games", "code", "python", "sre", "devops", "go", "golang"]
+  highlight: true
+  highlightStyle: "solarized-dark"
+  highlightLanguages: ["go", "python", "bash", "shell", "javascript", "scala"]
+  moreMeta: true
+  reward:
+    enable: false
+  social:
+    c-twitter: "https://twitter.com/juan__wolf"
+    g-github: "https://github.com/juanwolf"
+    n-gitlab: "http://gitlab.com/juanwolf"
+
+menu:
+  main:
+    - url: "/post/programming/"
+      name: "Programming"
+      weight: 1
+    - url: "/post/video-games/"
+      name: "Video Games"
+      weight: 2
+    - url: "/post/others/"
+      name: "Others"
+      weight: 3
+    - name: "Tags"
+      weight: 4
+      identifier: "tags"
+      url: "/tags/"
+
+languages:
+  en:
+    title: "juanwolf.fr - Jean-Loup Adde's website"
+    weight: 1
+    languageCode: "en"
+  fr:
+    title: "juanwolf.fr - Le site web de Jean-Loup Adde"
+    weight: 2
+    languageCode: "fr"
