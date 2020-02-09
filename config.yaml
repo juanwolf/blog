@@ -1,6 +1,7 @@
 baseURL: "https://juanwolf.fr"
 languageCode: "en"
 defaultContentLanguage: "en"
+defaultContentLanguageInSubdir: true
 title: "juanwolf.fr"
 
 PygmentsCodeFences: true # Enable syntax highlighting with GitHub flavoured code fences
