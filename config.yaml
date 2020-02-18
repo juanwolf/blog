@@ -1,8 +1,8 @@
-baseURL: "https://juanwolf.fr"
+baseURL: "https://blog.juanwolf.fr"
 languageCode: "en"
 defaultContentLanguage: "en"
 defaultContentLanguageInSubdir: true
-title: "juanwolf.fr"
+title: "blog.juanwolf.fr"
 
 PygmentsCodeFences: true # Enable syntax highlighting with GitHub flavoured code fences
 PygmentsUseClasses: true # Use CSS classes to format highlighted code
@@ -27,22 +27,12 @@ sitemap:
 
 params:
   author: "Jean-Loup Adde"
-  description: "Personal website where I write about software engineering and video games"
-  githubUsername: "#juanwolf"
-  accent: "#009688"
-  showBorder: true
   backgroundColor: "dark"
-  font: "Raleway" # should match the name on Google Fonts! TODO: Delete this
-  since: "2014"
   rssFullContent: true
-  logoTitle: "juanwolf.fr"
-  keywords: ["video-games", "code", "python", "sre", "devops", "go", "golang"]
   highlight: true
   highlightStyle: "solarized-dark"
   highlightLanguages: ["go", "python", "bash", "shell", "javascript", "scala"]
   moreMeta: true
-  reward:
-    enable: false
   social:
     c-twitter: "https://twitter.com/juan__wolf"
     g-github: "https://github.com/juanwolf"
@@ -50,13 +40,13 @@ params:
 
 menu:
   main:
-    - url: "/post/programming/"
+    - url: "/programming/"
       name: "Programming"
       weight: 1
-    - url: "/post/video-games/"
+    - url: "/video-games/"
       name: "Video Games"
       weight: 2
-    - url: "/post/others/"
+    - url: "/others/"
       name: "Others"
       weight: 3
     - name: "Tags"
@@ -66,10 +56,14 @@ menu:
 
 languages:
   en:
-    title: "juanwolf.fr - Jean-Loup Adde's website"
+    title: "Jean-Loup Adde's blog"
     weight: 1
     languageCode: "en"
+    description: "Personal website where I write about software engineering and video games"
+    keywords: ["video-games", "code", "python", "sre", "devops", "go", "golang"]
   fr:
-    title: "juanwolf.fr - Le site web de Jean-Loup Adde"
+    title: "Blog de Jean-Loup Adde"
     weight: 2
     languageCode: "fr"
+    description: "Site web personnel où j'écris à propos d'ingénierie logicielle et jeux-video"
+    keywords: ["jeux-video", "code", "python", "sre", "devops", "go", "golang", "programmation"]
