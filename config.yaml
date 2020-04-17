@@ -38,10 +38,14 @@ params:
   highlightLanguages: ["go", "python", "bash", "shell", "javascript", "scala"]
   moreMeta: true
   social:
-    c-twitter: "https://twitter.com/juan__wolf"
-    g-github: "https://github.com/juanwolf"
-    n-gitlab: "http://gitlab.com/juanwolf"
-
+    - name: GitHub
+      link: "https://github.com/juanwolf"
+    - name: GitLab
+      link: "http://gitlab.com/juanwolf"
+    - name: Twitch
+      link: "https://twitch.tv/juan__wolf"
+    - name: Twitter
+      link: "https://twitter.com/juan__wolf"
 menu:
   main:
     - url: "/programming/"
