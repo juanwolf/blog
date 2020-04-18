@@ -1,0 +1,73 @@
+baseURL: "https://blog.juanwolf.fr"
+languageCode: "en"
+defaultContentLanguage: "en"
+defaultContentLanguageInSubdir: true
+title: "blog.juanwolf.fr"
+
+PygmentsCodeFences: true # Enable syntax highlighting with GitHub flavoured code fences
+PygmentsUseClasses: true # Use CSS classes to format highlighted code
+PygmentsCodefencesGuessSyntax: true
+PygmentsOptions: "linenos=table"
+
+hasCJKLanguage: false
+enableRobotsTXT: true
+enableEmoji: true
+theme: "calva"
+
+paginate: 10
+copyright: '<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>'
+
+author:
+  name: "Jean-Loup Adde"
+
+sitemap:
+  changefreq: "weekly"
+  priority: 0.5
+  filename: "sitemap.xml"
+
+params:
+  rssFullContent: true
+  highlight: true
+  DateFormat: "02/01/2006"
+  highlightStyle: "solarized-dark"
+  highlightLanguages: ["go", "python", "bash", "shell", "javascript", "scala"]
+  moreMeta: true
+  social:
+    - name: GitHub
+      link: "https://github.com/juanwolf"
+    - name: GitLab
+      link: "http://gitlab.com/juanwolf"
+    - name: Twitch
+      link: "https://twitch.tv/juan__wolf"
+    - name: Twitter
+      link: "https://twitter.com/juan__wolf"
+
+menu:
+  main:
+    - url: "/programming/"
+      name: "Programming"
+      weight: 1
+    - url: "/video-games/"
+      name: "Video Games"
+      weight: 2
+    - url: "/others/"
+      name: "Others"
+      weight: 3
+    - name: "Tags"
+      weight: 4
+      identifier: "tags"
+      url: "/tags/"
+
+languages:
+  en:
+    title: "Jean-Loup Adde's blog"
+    weight: 1
+    languageCode: "en"
+    description: "Personal website where I write about software engineering and video games"
+    keywords: ["video-games", "code", "python", "sre", "devops", "go", "golang"]
+  fr:
+    title: "Blog de Jean-Loup Adde"
+    weight: 2
+    languageCode: "fr"
+    description: "Site web personnel où j'écris à propos d'ingénierie logicielle et jeux-video"
+    keywords: ["jeux-video", "code", "python", "sre", "devops", "go", "golang", "programmation"]

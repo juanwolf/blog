@@ -9,19 +9,19 @@ The website is built and deployed on [netlify](https://netlify.com)
 ## Run it
 
 ```bash
-hugo serve
+hugo server
 ```
 
 ## Add a post
 
 ```bash
-hugo new content/post/<section>/title.<short_language>.md
+hugo new content/posts/<section>/title.<short_language>.md
 ```
 
 Example:
 
 ```bash
-hugo new content/programming/2014-06-18-how-to-make-language-router-go.en.md
+hugo new content/posts/programming/2014-06-18-how-to-make-language-router-go.en.md
 ```
 
 ## LICENSE

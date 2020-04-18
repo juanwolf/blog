@@ -203,14 +203,11 @@ OHHHHHHHHHH YEAAAAAAAAAAAAAAH.
 
 Demandons à papy [W3C](https://www.w3.org/).
 
-> [For a first contact, using the Accept-Language value to infer
+> For a first contact, using the Accept-Language value to infer
 > regional settings may be a good starting point, but be sure to allow
 > them to change the language as needed and specify their cultural
 > settings more exactly if necessary. Store the results in a database or
-> a cookie for later visits.]{style=""font-family:" arial,=""
-> 'lucida="" grande',="" helvetica,="" sans-serif;="" =""
-> 21.600000381469727px;="" ="" justify;="" =""
-> 14px;"=""}[ ]{style=""font-size:" 17.5px;="" ="" 1.42857143;"=""}
+> a cookie for later visits.
 
 (Le lien vers l'article : [Accept-Language used for locale
 setting](https://www.w3.org/International/questions/qa-accept-lang-locales#answer))

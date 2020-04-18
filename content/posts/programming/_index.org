@@ -1,5 +1,3 @@
----
-mathjax: false
----
+#+title: Programming
 
 A nice collection of posts I wrote about software engineer / Site Reliability Engineering etc, etc.
