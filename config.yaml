@@ -20,17 +20,12 @@ copyright: '<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
 author:
   name: "Jean-Loup Adde"
 
-permalinks:
-  posts: /:sections/:slug
-
 sitemap:
   changefreq: "weekly"
   priority: 0.5
   filename: "sitemap.xml"
 
 params:
-  author: "Jean-Loup Adde"
-  backgroundColor: "dark"
   rssFullContent: true
   highlight: true
   DateFormat: "02/01/2006"
@@ -46,6 +41,7 @@ params:
       link: "https://twitch.tv/juan__wolf"
     - name: Twitter
       link: "https://twitter.com/juan__wolf"
+
 menu:
   main:
     - url: "/programming/"
