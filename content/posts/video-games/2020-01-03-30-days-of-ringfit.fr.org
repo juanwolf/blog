@@ -2,6 +2,7 @@
 #+DATE: 2020-01-03
 #+TAGS[]: Sport Switch
 #+CATEGORIES[]: video-games
+#+slug: 30-jours-de-ring-fit
 #+DRAFT: false
 
 Ça fait bien longtemps Nintendo! Ils me surprennent encore chez Nintendo à faire évoluer l'expérience vidéoludique et Ring Fit Adventure est un de ces paris que Nintendo a pris et qui fonctionne très très bien.
