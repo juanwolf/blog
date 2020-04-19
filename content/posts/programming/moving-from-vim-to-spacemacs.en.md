@@ -1,13 +1,15 @@
 +++
 title = "Moving from Vim to Spacemacs"
 author = ["Jean-Loup Adde"]
-lastmod = 2020-04-17T10:12:51+01:00
+lastmod = 2020-04-19T13:47:23+01:00
 tags = ["spacemacs", "vim"]
 draft = false
 +++
 
 It's been five years I am now in the "Software Engineering" industry and I've been playing with few editors. I have to admit it became quite a meme around me as I love playing around with the different type there's out there. VS Code, Vim, Emacs, IntelliJ, PyCharm & others. Seriously, it's time consuming. As you might have guessed, this post will be about my transition from 4 years (yeah I was one year on PyCharm even though the technical beast sitting next to me was praising the benefits of Vim every single day) of using Vim intensively to use Spacemacs for literally everything.
 I am sure you've seen few posts "_why I moved from X to Y and here's why you should do the same_". I don't agree with that. The good takes from posts like this are only if you experience the same issues with your current editor than the author. There's no "better" editor out there (sadly). They all come with trade offs so it's like any engineering solution you'll take. Just choose wisely. I'll spend a bit of time giving you the context then and hopefully you'll find this post helpful.
+
+{{< figure src="/post_content/moving-from-vim-to-emacs/spacemacs_logo.png" >}}
 
 
 ## Some context {#some-context}

@@ -1,13 +1,15 @@
 +++
 title = "Migrer de Vim à Spacemacs"
 author = ["Jean-Loup Adde"]
-lastmod = 2020-04-19T13:37:02+01:00
+lastmod = 2020-04-19T13:50:45+01:00
 tags = ["spacemacs", "vim"]
 draft = false
 +++
 
 Cela va faire 5 ans que je suis dans l'industrie et j'ai joué avec pas mal d'éditeurs de code. Je dois vous l'avouer, c'est devenu un _meme_ autour de moi vu que j'adore expérimenter tous les éditeurs qui existent. VS Code, Vim, Emacs, IntelliJ, PyCharm, etc... C'est chronophage. Comme le titre vous a sûrement mis la puce à l'oreille, cet article sera à propos de ma transition de Vim vers Spacemacs. J'ai passé 4 ans sur Vim avant de bouger sur Spacemacs. J'ai eu une année d'égarement où j'ai utilisé PyCharm malgrès les louanges quotidienne de la bête technique qui travaillait à côté de moi.
 Je suis sûr que vous avez déjà lu une multitude d'articles ayant comme sujet "_Pourquoi j'ai bougé de X à Y et voici pourquoi vous devriez faire de même._". Je ne suis pas d'accord avec la pratique et clairement, si vous n'avez pas les mêmes besoins que l'auteur, changer va-t-il en valoir la peine? Malheureusement, il n'y a pas de meilleurs éditeurs. **FIN**. Je vais vous donner quand même les raisons de pourquoi j'ai switché. Peut-être que vous vous y retrouverez.
+
+{{< figure src="/post_content/moving-from-vim-to-emacs/spacemacs_logo.png" >}}
 
 
 ## Un peu de contexte {#un-peu-de-contexte}
