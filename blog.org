@@ -1,0 +1,132 @@
+#+HUGO_BASE_DIR: .
+#+STARTUP: content
+#+AUTHOR: Jean-Loup Adde
+#+HUGO_AUTO_SET_LASTMOD: t
+
+* Posts
+  :PROPERTIES:
+  :EXPORT_HUGO_SECTION: posts
+  :END:
+** Programming
+   :PROPERTIES:
+   :EXPORT_HUGO_SECTION*: programming
+   :END:
+*** Moving from Vim to Spacemacs                              :spacemacs:vim:
+    :PROPERTIES:
+    :EXPORT_DATE: 19-04-2020
+    :EXPORT_FILE_NAME: moving-from-vim-to-spacemacs.en.md
+    :END:
+    It's been five years I am now in the "Software Engineering" industry and I've been playing with few editors. I have to admit it became quite a meme around me as I love playing around with the different type there's out there. VS Code, Vim, Emacs, IntelliJ, PyCharm & others. Seriously, it's time consuming. As you might have guessed, this post will be about my transition from 4 years (yeah I was one year on PyCharm even though the technical beast sitting next to me was praising the benefits of Vim every single day) of using Vim intensively to use Spacemacs for literally everything.
+    I am sure you've seen few posts "/why I moved from X to Y and here's why you should do the same/". I don't agree with that. The good takes from posts like this are only if you experience the same issues with your current editor than the author. There's no "better" editor out there (sadly). They all come with trade offs so it's like any engineering solution you'll take. Just choose wisely. I'll spend a bit of time giving you the context then and hopefully you'll find this post helpful.
+
+    [[/post_content/moving-from-vim-to-emacs/spacemacs_logo.png]]
+
+**** Some context
+     I moved from being a Web Developer to a Systems Engineer / Site Reliability Engineer / Platform Engineer (TL;DR; software engineering -> Infra / Cloud Architecture). During my year as a Web Developer, I used PyCharm as my main IDE. To be honest, it was a great experience. I loved live-debugging. As I was working on only one Django project all the time it was perfect. I learned a lot of Django by just digging into its mechanics and how it was dealing with the variables, views and all its goodness.
+     However, when I moved to a pluridisciplinary job, that's where I could feel this was not the right tool for everything. Even building python scripts. It was literally using an overpowered tool for a simple job. So I decided to move to Vim. I spent quite a lot of time to build a similar experience but with the tool that felt enough to have a confortable development experience.
+
+     Syntax highlighting, Syntax checkers, Linters and auto-completion when possible.
+
+**** Why?
+     If you move away from something, you better have a reason, right? Or I guess that would be called madness or boredom... My main problem was that my setup was really flaky and the time consumed to produce it was quite crazy. As well for a "simple editor", my vim was taking over 30/40 seconds to startup which can be quite irritating. So, I was still looking for a better alternative. I gave a shot to VS code, I just struggled as the navigation was not keyboard friendly. At the time, I was mainly in the terminal so having a dedicated app for the editor did not make sense *and* the editor is clearly made to be used with a mouse not keyboard first. So, I always ended up going back to vim. Until a colleague a year ago got a little bit pushy regarding emacs and spacemacs more particularly. I gave it a shot and after few times going back to vim, I finally moved over Spacemacs for good.
+
+     *Pros:*
+     1. Spacemacs is a crowd configured "Emacs setup"
+     2. Spacemacs is highly configurable
+     3. Spacemacs can be used with Vim bindings :heart:
+     4. Spacemacs bindings are mnemonic *and discoverable*
+     5. Proper programming language to configure the editor (even if it's Lisp /sigh/)
+
+     *Cons:*
+     1. Learn how Emacs works
+     2. Learn Lisp :sweat_smile:
+     3. Can get overwhelming with all the tools/packages Spacemacs provides
+
+**** How?
+     If you want to give it a try, it's fairly simple, install emacs on your machine and install the spacemacs config in `~/.emacs.d`.
+     You can then navigate through the shortcuts by just pressing "Space". You'll get a quick overview of shortcuts available: p for projects, w for window, b for buffer etc... And so on if you continue deep down. So you'll end up with smashing your space bar every time you want to do something with Spacemacs.
+     To be honest, I never thought I would memorise so easily all those shortcuts. The best one is space + space where you can search for functions like ctrl+P on VS Code. It's pretty neat.
+
+**** So... All good now?
+     Well... I still spend an awful time configuring Spacemacs. First the learning curve was a bit stiff. Then learning all the packages. Then reading the packages and the layers (yeah I like to know how it works).
+
+     I'll never go back to Vim though and that's for sure. Now I discovered org-mode and I am using it quite intensively, I don't feel I can move to any editor. I'll write a post later on org-mode especially which I find the best way to take notes and keep your productivity to the roof.
+
+     There's still some flaky elements like lsp integration, auto-completion which I am not quite about about but I started living without. It's not like I am writing complicated software and if I have to dig inside the doc, it's probably a good thing to force me read a bit.
+
+     So, should you stick to your massive IDE or try a simple text editor? Well.. If you want the later with the functionality of the first, you're signing to a long journey into discovering the innards of your editor, being part of a community and starting contributing to it. If you simply want to gain in productivity with your editor, just learn the shortcuts. Glad mine is only usable with those :joy:.
+
+*** Migrer de Vim à Spacemacs                                 :spacemacs:vim:
+    :PROPERTIES:
+    :EXPORT_DATE: 19-04-2020
+    :EXPORT_FILE_NAME: moving-from-vim-to-spacemacs.fr.md
+    :END:
+    Cela va faire 5 ans que je suis dans l'industrie et j'ai joué avec pas mal d'éditeurs de code. Je dois vous l'avouer, c'est devenu un /meme/ autour de moi vu que j'adore expérimenter tous les éditeurs qui existent. VS Code, Vim, Emacs, IntelliJ, PyCharm, etc... C'est chronophage. Comme le titre vous a sûrement mis la puce à l'oreille, cet article sera à propos de ma transition de Vim vers Spacemacs. J'ai passé 4 ans sur Vim avant de bouger sur Spacemacs. J'ai eu une année d'égarement où j'ai utilisé PyCharm malgrès les louanges quotidienne de la bête technique qui travaillait à côté de moi.
+    Je suis sûr que vous avez déjà lu une multitude d'articles ayant comme sujet "/Pourquoi j'ai bougé de X à Y et voici pourquoi vous devriez faire de même./". Je ne suis pas d'accord avec la pratique et clairement, si vous n'avez pas les mêmes besoins que l'auteur, changer va-t-il en valoir la peine? Malheureusement, il n'y a pas de meilleurs éditeurs. *FIN*. Je vais vous donner quand même les raisons de pourquoi j'ai switché. Peut-être que vous vous y retrouverez.
+
+    [[/post_content/moving-from-vim-to-emacs/spacemacs_logo.png]]
+
+**** Un peu de contexte
+     Je suis passé de Développeur Web à Ingénieur Systèmes / SRE / Ingénieur plateforme (bref sys. admin avec un peu de dev). Pendant mon année de Développeur web, j'ai utilisé PyCharm comme mon IDE principal. Pour être franc, j'ai eu une super expérience. J'ai adoré le debuggueur intégré. Comme je ne travaillais que sur un seul projet django, un IDE était parfait. J'ai appris énormément sur Django grâce à l'IDE en creusant comment Django fonctionnait.
+     Cependant quand j'ai migré vers un travail pluridisciplinaire, c'est là que j'ai senti que PyCharm n'était pas l'outil pour mon taf de tous les jours. Clairement, c'est une usine à gaz et pour écrire de simples scripts ou changer du YAML, pas besoin d'un IDE. J'ai donc décidé de bouger sur Vim vu que je passais ma vie dans le terminal. La transition de PyCharm / IDEs de JetBrains vers Vim n'a pas été sans effort, je vous rassure tout de suite. De plus, configurer l'éditeur pour avoir un confort similaire aux IDEs m'a pris énormément de temps.
+
+     Syntax highlighting, Syntax checkers, Linters et auto complétion quand c'est possible.
+
+**** Pourquoi ?
+     Si vous fuyez quelque chose, vous devez avoir une raison. Mon problème avec Vim était que ma config était instable. Genre 15 outils différents pour faire tourner l'éditeur donc 15 outils à supporter et maintenir, un peu galère. De plus, pour un "simple éditeur", Vim prennait quasiment 40 secondes pour démarrer. Donc je cherchais une alternative. À ce moment là, VS Code faisait pas mal de bruit, "/la nouvelle ère de Microsoft/", j'ai donc essayé l'éditeur. J'ai eu du mal. Avec Vim, j'avais pris l'habitude de naviguer un peu partout avec des raccourcis clavier. On ressent très vite que ce n'est pas le cas avec VS Code. Enfin oui, on peut. Mais avec l'intégration Vim, on est limité à naviguer seulement dans le code avec les raccourcis vim, pas l'éditeur entier. De plus, je passais mon temps dans le terminal, j'avais mon setup avec tmux + vim, je voulais juste un expérience similaire. Donc un éditeur qui peut tourner dans le terminal. Je suis resté sur Vim jusqu'à ce qu'un collègue, un peu *insistant*, me montre Spacemacs. J'ai essayé et après avoir retourné sur Vim plusieurs fois, j'ai enfin passé à Spacemacs pour de bon. Clairement la migration avait des avantages et inconvénients:
+
+     *Pour:*
+     1. Spacemacs est une configuration d'Emacs configuré par la communauté
+     2. Spacemacs est très configurable
+     3. Spacemacs peut être utilisé avec les raccourcis Vim :heart:
+     4. L'éditeur utilise un langage de programmation (même si c'est du Lisp... /sigh/)
+     5. Les raccourcis de Spacemacs sont mnémonic *et découvrable*
+
+     *Contre:*
+     1. Apprendre comment Emacs fonctionne
+     2. Apprendre Lisp :sweat_smile:
+     3. On peut être vite dépassé par le nombre d'intégration et d'outils que Spacemacs contient
+
+**** Comment ?
+     Si vous voulez essayer, c'est assez simple. Installez Emacs sur votre OS puis clonez [[https://github.com/syl20bnr/spacemacs][Spacemacs]] dans `~/.emacs.d`. Je vous invite à changer la branche utilisée dans .emacs.d pour "develop" comme cette branche est plus maintenue que master et contient bien plus de fonctionnalités.
+     Une fois emacs lancé, vous pouvez découvrir les raccourcis en pressant simplement "espace". Vous aurez une présentation de tous les raccourcis disponibles. p pour projet, w pour window, b pour buffer, etc... Les raccourcis s'apprennent très rapidement car la plupart ne sont que les initiales de l'action que vous voulez faire. Vous voulez voir l'arborescence de ficher de votre projet? "project -> tree": "Espace"+ "p"+ "t". Facile.
+
+**** Tout est pour le mieux donc ?
+     Hum... Je passe toujours autant de temps sur ma configuration de Spacemacs. L'apprentissage de l'éditeur était un peu long mais j'ai gagné énormément en productivité. J'ai aussi appris Lisp et lu les "packages" de Spacemacs. Contribué à certains. Ça a été un sacré voyage mais je ne le regrette pas une seconde. De plus, en utilisant emacs en mode serveur, votre éditeur démarre en 2 secondes, c'est impressionant.
+     Donc oui, c'est clairement mieux et je ne retournerai pas sur Vim, c'est sûr. De plus, j'ai découvert org-mode et je l'utilise avec ce blog et au taf. Je ne pense pas qu'un seul éditeur n'aura l'intégration qu'Emacs a pour org-mode. J'écrierai un article sur org-mode comme je commence à pas mal m'en servir.
+
+     Il y a toujours des éléments instables dans ma configuration comme l'intégration avec le Language Server Protocol. Je peux vivre de sans mais l'auto-complétion reste sympa à avoir. Ça me force à lire la documentation ce qui n'est probablement pas plus mal. Mais bon, n'oublions pas que la configuration de Spacemacs est toujours en "development" et que ce genre d'instabilité est attendue.
+
+     Donc devez-vous bouger sur Spacemacs ? Probablement pas, je suis quasiment sûr que votre éditeur peut être configuré pour vos besoins. Mon conseil à 2 francs: Apprenez les raccourcis clavier plutôt que de naviguer à la souris. Sinon, rejoingnez moi dans un voyage de configuration et de weekends perdus à maximiser votre productivité, genre perdre un dimanche aprem pour gagner 2 minutes la semaine. Non ? Personne ? Je comprends pas... :joy:
+
+*** TODO Introduction to org-mode                                       :org:
+    :PROPERTIES:
+    :EXPORT_FILE_NAME: introduction-to-org-mode.en.md
+    :END:
+    So you might never heard of it but there's an alternative to Markdown.
+*** TODO Introduction à org-mode                                        :org:
+    :PROPERTIES:
+    :EXPORT_FILE_NAME: introduction-to-org-mode.fr.md
+    :END:
+** Video Games
+** Others
+
+
+* About
+  :PROPERTIES:
+  :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :noauthor true :nocomment true :nodate true :nopaging true :noread true
+  :EXPORT_HUGO_MENU: :menu main
+  :EXPORT_FILE_NAME: about.en
+  :EXPORT_HUGO_WEIGHT: auto
+  :END:
+
+** Welcome dear Web:surfer: !
+   I'm Jean-Loup Adde (nice to meet you :smile:), a 27 year old software developer. I have a crush on all the technologies around the web, automation, and maybe too many others. I used to host all my stuff on specific VMs writting custom code. And recently I decided, screw that, why bothering with so many layers when you just want to write some posts in Markdown! So bye bye DBs, bye bye Web Frameworks, hello fully static generated website hosted on [netlify.com](https://netlify.com).
+
+   In case you're wondering what tech I use for this blog, everything's made with [hugo](https://gohugo.io/) using the [jane theme](https://en.xianmin.org/hugo-theme-jane/) that I changed a bit ([modifications here](https://github.com/juanwolf/hugo-theme-jane/tree/master)).
+
+*** History
+
+   You're currently at the v2 of my blog. At the beginning it was a django application that I wrote from scratch. To be honest it was an awesome challenge for me at the time (2014, student of master 1 in Software Engineering). I wrote everything from scratch, CSS, HTML, python. It was hard to say goodbye to the old version, it was like saying goodbye to an old friend or a younger version of myself. Weird, isn't it?
+
+   Anyway as I was getting worried about the future, the time I could spend looking about these apps, I decided to move this blog to something in the :cloud:, easy to add content to (which the django app was not) and where people would enjoy read articles (so nice UX experience). So here's the v2, I hope you'll enjoy it! If anything's wrong or you dislike, PLEASE, let me know via [twitter](https://twitter.com/juan__wolf/) or opening an issue in [github](https://github.com/juanwolf/juanwolf.github.io/)
