@@ -41,3 +41,9 @@ HUGO_ENABLEGITINFO = "true"
   to = "/fr/posts/:splat"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/en/*"
+  to = "/:splat"
+  status = 301
+  force = true
