@@ -28,3 +28,10 @@ HUGO_VERSION = "0.63.0"
 
 [context.next.environment]
 HUGO_ENABLEGITINFO = "true"
+
+
+[[redirects]]
+  from = "/post/*"
+  to = "/posts/:splat"
+  status = 301
+  force = true
