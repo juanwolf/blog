@@ -47,3 +47,9 @@ HUGO_ENABLEGITINFO = "true"
   to = "/:splat"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/feeds/posts/"
+  to = "/index.xml"
+  status = 301
+  force = true
