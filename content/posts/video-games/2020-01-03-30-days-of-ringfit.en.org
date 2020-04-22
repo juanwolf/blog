@@ -4,6 +4,7 @@
 #+CATEGORIES[]: video-games
 #+DRAFT: false
 #+slug: 30-days-of-ring-fit-adventure
+#+aliases[]: /posts/video-games/2020-01-03-30-days-of-ringfit
 
 Long time, no see Nintendo! It still surprises me by evolving the gaming experience and Ring Fit Adventure is one of those bet that Nintendo took and works amazingly well.
 One of the main selling point of the Switch was their amazing controller that could be fitted anywhere. I remember before the Switch got released, people were getting crazy about the accessories that could get created with this new system.
