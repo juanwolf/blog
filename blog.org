@@ -42,12 +42,7 @@
      2. Learn Lisp :sweat_smile:
      3. Can get overwhelming with all the tools/packages Spacemacs provides
 
-**** How?
-     If you want to give it a try, it's fairly simple, install emacs on your machine and install the spacemacs config in `~/.emacs.d`.
-     You can then navigate through the shortcuts by just pressing "Space". You'll get a quick overview of shortcuts available: p for projects, w for window, b for buffer etc... And so on if you continue deep down. So you'll end up with smashing your space bar every time you want to do something with Spacemacs.
-     To be honest, I never thought I would memorise so easily all those shortcuts. The best one is space + space where you can search for functions like ctrl+P on VS Code. It's pretty neat.
-
-**** So... All good now?
+All good now?
      Well... I still spend an awful time configuring Spacemacs. First the learning curve was a bit stiff. Then learning all the packages. Then reading the packages and the layers (yeah I like to know how it works).
 
      I'll never go back to Vim though and that's for sure. Now I discovered org-mode and I am using it quite intensively, I don't feel I can move to any editor. I'll write a post later on org-mode especially which I find the best way to take notes and keep your productivity to the roof.
@@ -99,17 +94,102 @@
 
      Donc devez-vous bouger sur Spacemacs ? Probablement pas, je suis quasiment sûr que votre éditeur peut être configuré pour vos besoins. Mon conseil à 2 francs: Apprenez les raccourcis clavier plutôt que de naviguer à la souris. Sinon, rejoingnez moi dans un voyage de configuration et de weekends perdus à maximiser votre productivité, genre perdre un dimanche aprem pour gagner 2 minutes la semaine. Non ? Personne ? Je comprends pas... :joy:
 
-*** TODO Introduction to org-mode                                       :org:
+*** Getting started with org-mode                      :org:intro:emacs:
     :PROPERTIES:
     :EXPORT_FILE_NAME: introduction-to-org-mode.en.md
     :END:
-    So you might never heard of it but there's an alternative to Markdown.
-*** TODO Introduction à org-mode                                        :org:
+    Markdown is clearly programmers preferred (or at least most used) text format. By moving to Emacs, I got a bit curious on the documentation format used by the majority of the packages. This format is /org/. I read a bit about it and was blown away by what people were able to do with it.
+
+    #+CAPTION: org-mode's logo
+    #+attr_html: :alt org-mode's logo
+    [[/post_content/introduction-to-org-mode/org-mode-logo.png]]
+
+**** Why org-mode?
+     So you might wonder, why bother creating a new markup / text format. The thing is Org mode has been around since the 2000. It has been created to follow some productivity workflow called [[https://gettingthingsdone.com/]["Get things done" by David Allen]].
+     I don't think it would make much sense for someone to jump on org-mode without using Emacs. A bit of technology locking here unfortunately. Its main strength comes with the tooling around the language itself. Think about Markdown but with strong integration in your editor, generating calendars, todo lists, remainders and others.
+
+So if you're more the kind of person that likes everything in one place, that's the way to go. If not, clearly not. Emacs will become a beast and you'll never get out of it. Your choice.
+
+**** How?
+     There's plenty of tutorial and guides to help you out. I don't think it's worth to repeat what's been done so here's some good links that helped me out:
+     - https://karl-voit.at/2020/01/20/start-using-orgmode/
+
+     My main advice to get started is to just create a all.org in a notes git repo and just start writing stuff you'll need for later. How-to-s, Documentation, Meeting notes etc... Once you'll get the syntax, you'll naturally check what you can do with some org plugins and discover some powerful stuff.
+
+     Org-mode itself is just a markup language so it should not be too complicated to learn. However, its ecosystem is so massive, it can be tough to know where to start.
+
+**** The ecosystem
+     We said org-mode strength is the tooling made around its markup language. For instance, in org-mode and emacs, I can write some snippets and make them executable easily thanks to org-babel. That allows you to have some executable documentation (a bit like a juniper playbook). Which can be quite powerful if everyone is using emacs. No need of Makefile if you can run each steps directly from your README.org!
+
+     I love to track how I spend my time at work so I tend to use the pomodoro technic to catch that. Guess what, there's an org extension for that, org-pomodoro. I put all my stuff to do in a all.org, run org-pomodoro, choose which task I am working on and bim, I have a timer set in Emacs and will get an alert once the pomodoro is finished.
+     As well, it logs the time spent on each task so you can have aggregated data on the time spent for a specific item, pretty neat.
+
+     Now the main question is "That looks really promising but at work we use X and Y and Z to log work so I can't introduce a new tool to the team!". I am in the same position! However, you can collect data and convert them in org-mode with a lot of "external providers". Using Jira? org-jira is there to grab the tasks you have to do. Using Trello? org-trello is there. There's a lot more but you can grab data mostly anywhere and import them in your org setup.
+
+**** The Cons
+     Obviously, every single technology comes with its caveats. As said before, org-mode is locked to Emacs unfortunately, so people having a org-mode workflow are quite locked to Emacs. And vice-versa, you want to play with it? Definitely better in the editor. There's some effort made to port the incredible Emacs ecosystem to other editors but it'll never be the real thing.
+
+     It's a bit problematic for the adoption of the technology. In my case, I can not use org-mode at work (or at least share my org stuff). No one is using emacs so no one will be able to parse those files / render them correctly and get any benefit from using that format.
+
+     Another point is that, you are adding layers / packages to your Emacs setup which means more configuration and testing which can be quite time consuming.
+
+     As well, the integrations are mainly single people side-projects and you can end up with outdated projects or not supporting your use case. If you're brave enough, it's your time to shine and implement what you want from those packages. Good luck with e-lisp though 😂.
+
+**** Conclusion
+     Org-mode is a beautiful piece of software. Its markup is similar to markdown but includes way more functionalities when used in Emacs. The ecosystem of that language turns a simple file into a playbook, a project planner, an habit tracker, encrypted data and anything else you would think of! However, the fact that the ecosystem is tightly coupled to Emacs makes the adoption quite difficult and low even though its incredible capabilities. If you're interested about org-mode, don't hesitate and send me a tweet, if I receive a few, I might even write how I use org-mode.
+
+*** Introduction à org-mode                                 :org:intro:emacs:
     :PROPERTIES:
     :EXPORT_FILE_NAME: introduction-to-org-mode.fr.md
     :END:
+    Markdown est clairement le langage préféré des développeurs. En migrant sur Emacs, j'ai été surpris de constater que la documentation de nombreux plugins est écrite en "org". J'ai lu rapidement à propos et été surpris par ce que l'on peut accomplir avec cette technologie.
+
+    #+CAPTION: Le logo d'org-mode
+    #+ATTR_HTML: :alt Le logo d'org-mode
+    [[/post_content/introduction-to-org-mode/org-mode-logo.png]]
+
+**** Pourquoi org-mode?
+     Il se peut que vous vous demandiez, pourquoi créer un autre langage tel que markdown qui est devenu la référence. Il faut savoir que org a été créé dans les années 2000 afin de pouvoir utiliser les principes et méthodologies introduits par [[https://gettingthingsdone.com/]["Get things done" de David Allen]].
+
+     De plus, je ne pense pas qu'il y ait beaucoup d'intérêts à bouger vers org-mode si vous n'utilisez pas Emacs. Toute la puissance de la technologie repose sur son ecosystème et intégration à Emacs. Il faut voir org-mode comme un markdown sous testostérones.
+
+Si vous êtes le genre de personne qui aime avoir un système tout-inclus, org-mode et Emacs vont être parfait pour vous. Sinon pas trop. Emacs va se transformer en usine à gaz et vous n'en sortirez jamais. Comme vous le sentez.
+
+**** Comment ?
+     Il y a beaucoup de tutos sur les internets qui vont vous expliquer mieux que moi comment écrire en org. Voici un tutoriel qui m'a beaucoup aidé:
+     - https://karl-voit.at/2020/01/20/start-using-orgmode/
+
+     Si je dois vous donner un conseil, commencez avec un seul fichier où vous regroupez toutes vos notes. Ça va vous permettre de découvrir l'écosystème d'org-mode. Rien que le besoin de créer des notes rapidement va vous introduire à org-capture (un systeme de template pour org-mode). Vouloir exécuter du code en local vous introduira à org-babel. Ajouter une sorte de gestion de projets vous incitera à utiliser les TODO et org-agenda.
+
+     Le langage en lui-même est équivalent à Markdown donc il ne devrait pas être trop compliqué à utiliser. Cependant son écosystème est tellement vaste qu'il peut être intimidant.
+
+**** L'écosystème
+     Comme dit précédemment, la force d'org-mode réside dans les outils construit autour du langage. Par exemple, avec org-mode et emacs, je peux écrire des snippets dans ma documentation et les exécuter directement depuis celle-ci. Plus besoin de Makefile quand on peut tout exécuter depuis la documentation.
+
+     Au travail, j'ai tendance à travailler sur 15 trucs en même temps et il peut être difficile de justifier pourquoi les tâches des gros projets n'ont pas avancées. Pour éviter ça et être productif au max, j'utilise principalement la technique pomodoro pour ça. Coup de bol, org-pomodoro me permet de choisir une des tâches que j'ai créé dans mes fichiers org et lancer un timer de 25min. Je recois une notification une fois fini et je peux faire une pause. De plus, je peux même aggréger les données de mes pomodoros sur une tâche pour voir le temps total passé dessus.
+
+     "Ok t'es gentil avec org-mode mais j'ai déjà X, Y et Z pour gérer mes projets, ma doc, mes notes, etc..." Je comprends, je suis dans la même situation. Il existe des "providers" qui vous permettent de synchroniser vos fichiers org depuis des sources externes. Trello, exchange, Jira, Google Calendar et bien d'autres. Ainsi vous pouvez tout modifier à partir de fichiers "org" et avoir, ainsi, un mode textuel pour tous ces éléments externes.
+
+**** Les limitations
+     Forcémment, chaque technologie vient avec ces limitations. Comme énoncé précédemment, org-mode est principalement utilisable dans Emacs. Certaines personnes essayent de porter les extensions disponibles sur d'autres éditeurs mais je n'ai rien vu d'équivalents à celles d'Emacs.
+
+     Cette limitation est problématique pour l'adoption de la technologie. Dans mon cas, je ne peux pas partager mes fichiers orgs au travail. Personne n'utilise Emacs et donc ne verront pas l'utilité d'utiliser un format différent de Markdown.
+
+     De plus, chaque extension ajoutée à votre config ajoute de la complexité à votre setup. Toutes ces extensions doivent (pour la majorité) être configurée. Ce qui peut prendre pas mal de temps.
+
+     Pour finir, les intégrations sont principalement des projets personnel qui ont grande chance de ne pas être à jour ou être abandonné. Si vous êtes vraiment chaud, vous pouvez toujours utiliser votre talent inné de programmeur Elisp et supporter les projets dont vous avez besoin. Gros respect si vous faites ça.
+
+**** Conclusion
+     Org-mode, c'est beau. Le langage en lui même ressemble à markdown mais ajoute bien plus de fonctionnalités une fois utilisé dans emacs avec son ecosystème. L'écosystème transforme un simple fichier en un playbook, un gestionnaire de projet, un gestionnaire d'habitudes, peut chiffrer vos fichiers et bien plus encore! Cependant, le fait que l'écosystème soit étroitement lié à Emacs fait que son adoption n'est pas si grande malgré toutes ces fonctionnalités. Si jamais, la techno vous intéresse, n'hésitez pas à me pinger sur twitter et si le besoin se fait ressentir, j'écrierai peut etre un article sur mon usage d'org-mode. Sur ce, codez-bien!
+
+*** TODO Linux Files & Folders Permissions                       :basics:ops:
+    This week I encountered an issue regarding some file permissions. As I feel I should have known this for a long time... So back to the basics.
+**** File permissions
+**** Folder permissions
 ** Video Games
+
 ** Others
+*** TODO Building profitable investments with crypto-trading :crypto:investment:
 
 
 * About
