@@ -1,7 +1,7 @@
 +++
 title = "Getting started with org-mode"
 author = ["Jean-Loup Adde"]
-lastmod = 2020-08-23T19:49:14+01:00
+lastmod = 2020-08-24T08:46:14+01:00
 tags = ["org", "intro", "emacs"]
 draft = false
 +++

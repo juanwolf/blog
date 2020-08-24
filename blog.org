@@ -96,7 +96,7 @@ All good now?
 
 *** Getting started with org-mode                      :org:intro:emacs:
     :PROPERTIES:
-    :EXPORT_FILE_NAME: introduction-to-org-mode.en.md
+    :EXPORT_FILE_NAME: getting-started-with-org-mode.en.md
     :END:
     Markdown is clearly programmers preferred (or at least most used) text format. By moving to Emacs, I got a bit curious on the documentation format used by the majority of the packages. This format is /org/. I read a bit about it and was blown away by what people were able to do with it.
 
@@ -140,7 +140,7 @@ So if you're more the kind of person that likes everything in one place, that's 
 
 *** Introduction à org-mode                                 :org:intro:emacs:
     :PROPERTIES:
-    :EXPORT_FILE_NAME: introduction-to-org-mode.fr.md
+    :EXPORT_FILE_NAME: getting-started-with-org-mode.fr.md
     :END:
     Markdown est clairement le langage préféré des développeurs. En migrant sur Emacs, j'ai été surpris de constater que la documentation de nombreux plugins est écrite en "org". J'ai lu rapidement à propos et été surpris par ce que l'on peut accomplir avec cette technologie.
 

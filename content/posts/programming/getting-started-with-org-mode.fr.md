@@ -1,14 +1,14 @@
 +++
 title = "Introduction à org-mode"
 author = ["Jean-Loup Adde"]
-lastmod = 2020-08-23T19:41:10+01:00
+lastmod = 2020-08-24T08:46:35+01:00
 tags = ["org", "intro", "emacs"]
 draft = false
 +++
 
 Markdown est clairement le langage préféré des développeurs. En migrant sur Emacs, j'ai été surpris de constater que la documentation de nombreux plugins est écrite en "org". J'ai lu rapidement à propos et été surpris par ce que l'on peut accomplir avec cette technologie.
 
-{{< figure src="/post_content/introduction-to-org-mode/org-mode-logo.png" >}}
+{{< figure src="/post_content/introduction-to-org-mode/org-mode-logo.png" alt="Le logo d'org-mode" caption="Figure 1: Le logo d'org-mode" >}}
 
 
 ## Pourquoi org-mode? {#pourquoi-org-mode}
