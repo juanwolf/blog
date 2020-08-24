@@ -1,7 +1,7 @@
 +++
 title = "Introduction à org-mode"
 author = ["Jean-Loup Adde"]
-lastmod = 2020-08-24T08:46:35+01:00
+lastmod = 2020-08-24T08:55:20+01:00
 tags = ["org", "intro", "emacs"]
 draft = false
 +++
@@ -53,4 +53,4 @@ Pour finir, les intégrations sont principalement des projets personnel qui ont 
 
 ## Conclusion {#conclusion}
 
-Org-mode, c'est beau. Le langage en lui même ressemble à markdown mais ajoute bien plus de fonctionnalités une fois utilisé dans emacs avec son ecosystème. L'écosystème transforme un simple fichier en un playbook, un gestionnaire de projet, un gestionnaire d'habitudes, peut chiffrer vos fichiers et bien plus encore! Cependant, le fait que l'écosystème soit étroitement lié à Emacs fait que son adoption n'est pas si grande malgré toutes ces fonctionnalités. Si jamais, la techno vous intéresse, n'hésitez pas à me pinger sur twitter et si le besoin se fait ressentir, j'écrierai peut etre un article sur mon usage d'org-mode. Sur ce, codez-bien!
+Org-mode, c'est beau. Le langage en lui même ressemble à markdown mais ajoute bien plus de fonctionnalités une fois utilisé dans emacs avec son ecosystème. L'écosystème transforme un simple fichier en un playbook, un gestionnaire de projet, un gestionnaire d'habitudes, peut chiffrer vos fichiers et bien plus encore! Cependant, le fait que l'écosystème soit étroitement lié à Emacs fait que son adoption n'est pas si grande malgré toutes ces fonctionnalités. Si jamais la techno vous intéresse, n'hésitez pas à me pinger sur twitter et si le besoin se fait ressentir, j'écrierai peut-être un article sur mon usage d'org-mode. Sur ce, codez-bien!
