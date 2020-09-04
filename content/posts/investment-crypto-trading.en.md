@@ -1,9 +1,9 @@
 +++
 title = "Building profitable investments with crypto-trading"
 author = ["Jean-Loup Adde"]
-lastmod = 2020-09-04T09:21:55+01:00
+lastmod = 2020-09-04T09:27:25+01:00
 tags = ["crypto", "investment"]
-draft = true
+draft = false
 +++
 
 An unusual post regarding crypto-trading and how to turn it into a profitable saving account. I am clearly not a trader and you have to be smart how much money you'll want to invest as there's fuck tons risks (consider this money lost). If there were alternatives to build a descent resource of income from "stationary" money I would highly recommend to use banks products but it's clearly a joke.

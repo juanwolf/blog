@@ -189,7 +189,7 @@ Si vous êtes le genre de personne qui aime avoir un système tout-inclus, org-m
 ** Video Games
 *** TODO Hades                                                   :hacknslash:
 ** Others
-*** TODO Building profitable investments with crypto-trading :crypto:investment:
+*** Building profitable investments with crypto-trading   :crypto:investment:
     :PROPERTIES:
     :EXPORT_DATE: 04-09-2020
     :EXPORT_FILE_NAME: investment-crypto-trading.en.md
